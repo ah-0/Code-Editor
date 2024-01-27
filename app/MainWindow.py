@@ -1,8 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from PythonEditor import Python_Editor
-from HtmlEditor import Html_Editor
+from Editors.PythonEditor import Python_Editor
+from Editors.HtmlEditor import Html_Editor
+from Editors.CssEditor import Css_Editor
 from TreeView import FileManager
 from TabWidget import TabWidget
 import pathlib
@@ -68,6 +69,14 @@ class MyApp(QMainWindow):
      
       elif pathlib.Path(path).suffix == ".html":
         editor = Html_Editor(self)
+        with open(path , "r") as f:
+          editor.setText(f.read())
+        self.tabwidget.addTab(editor,QIcon("./style/py.png"), name)
+        self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
+        
+        
+      elif pathlib.Path(path).suffix == ".css":
+        editor = Css_Editor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
         self.tabwidget.addTab(editor,QIcon("./style/py.png"), name)

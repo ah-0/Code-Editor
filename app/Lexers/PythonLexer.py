@@ -3,7 +3,6 @@ import keyword
 import builtins
 import types
 import json
-
 from PyQt5.Qsci import QsciLexerCustom, QsciScintilla
 from PyQt5.QtGui import QFont, QColor
 from PyQt5.QtCore import *
@@ -22,7 +21,7 @@ class NeutronLexer(QsciLexerCustom):
         self.editor = editor
         self.language_name = language_name
         
-        self.theme = "./style/theme.json"
+        self.theme = "./app/Lexers/theme.json"
         
 
         self.token_list: list[str, str] = []

@@ -1,9 +1,9 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
-from PythonLexer import PyCustomLexer
-from CallTips import CAllTIP
-from AutoC import AutoC
+from app.Lexers.PythonLexer import PyCustomLexer
+from app.CallTips import CAllTIP
+from app.AutoC import AutoC
 import os
 
 class Python_Editor(QsciScintilla):
