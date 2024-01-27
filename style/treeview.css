@@ -1,0 +1,11 @@
+QTreeView:branch::selected{
+    background-color:cornflowerblue;
+}
+QTreeView:item:selected{
+    background-color:cornflowerblue;
+}
+QTreeView{
+max-width:300px;
+background-color: #161B21;
+
+}

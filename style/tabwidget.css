@@ -1,0 +1,29 @@
+QTabWidget {
+
+    background-color: #161B21;
+
+    color: #d3d3d3;
+}
+QTabBar{
+  
+    background-color: #161B21;
+  
+  
+}
+
+QTabBar::tab {
+    background-color: rgb(36, 36, 36);
+    color: #d3d3d3;
+    min-width: 10ex;
+    min-height: 7ex;
+    padding: 10px 20px;
+    border-style: none;
+}
+
+
+QTabBar::tab::selected {
+    color: #d3d3d3;
+    border-style: none;
+    background-color: #2d2d2d;
+    border-bottom: 3px solid cornflowerblue;
+}

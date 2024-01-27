@@ -1,0 +1,22 @@
+python :
+
+
+black.format_str(code: str, mode)
+code : نمرر الكود الذي نرغب بترتيبه
+mode :
+1 - black.FileMode()
+
+
+css :
+
+
+cssbeautifier.beautify(code)
+code : نمرر المود الذي نرغب بترتيبه
+
+
+html :
+
+
+soup = BeautifulSoup(code, 'html.parser')
+code : الكود الذي نرغب ترتيبه
+output = soup.prettify()

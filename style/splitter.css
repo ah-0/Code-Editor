@@ -1,0 +1,9 @@
+QSplitter {
+
+    background-color: #161B21;
+
+}
+
+QSplitter::handle {
+    background-color: #161B21;
+}

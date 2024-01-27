@@ -1,0 +1,9 @@
+import subprocess
+
+try:
+    result = subprocess.run(["pylint", "fg.py"], stdout=subprocess.PIPE, text=True )
+    print(result.stdout)
+    print(result.stderr)
+except  :
+    print("You need to install pylint library")
+

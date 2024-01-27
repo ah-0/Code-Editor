@@ -1,0 +1,126 @@
+setBraceMatching
+مطابقة الأقواس
+
+1- StrictBraceMatch 
+2- SloppyBraceMatch
+3- NoBraceMatch
+
+
+setAutoCompletionSource
+تعين مصدر الإكمال التلقائي
+
+1- AcsAPIs
+2- AcsAll
+3- AcsDocument
+4- AcsNone
+
+setAutoCompletionUseSingle
+يحدد اذا كان الاكمال التلقائي يحتوي على عنصر واحد
+
+1- AcusNever
+2- AcusExplicit
+3- AcusAlways
+
+
+setAnnotationDisplay
+تحديد مظهر عرض الشرح
+
+1- AnnotationStandard
+2- AnnotationBoxed
+3- AnnotationIndented
+4- AnnotationHidden
+
+setCallTipsPosition
+مكان ظهور التلميح 
+
+1- CallTipsBelowText
+2- CallTipsAboveText
+
+setCallTipsStyle
+مظهر التلميح 
+
+1- CallTipsNone
+2- CallTipsNoContext
+3- CallTipsNoAutoCompletionContext
+4- CallTipsContext
+
+setFoldStyle   
+يحدد نوع طي النص
+
+1- PlainFoldStyle
+2- CircledFoldStyle
+3- BoxedFoldStyle
+4- CircledTreeFoldStyle
+5- BoxedTreeFoldStyle
+6- NoFoldStyle
+
+
+
+setEdgeMode
+تعين الحواف 
+
+1- EdgeNone
+2- EdgeLine
+3- EdgeBackground
+4- EdgeMultipleLines
+
+setEolMode
+وضع نهاية السطر 
+1- EolWindows
+2- EolUnix
+3- EolMac
+
+setWrapMode
+وضع التفاف النص
+
+1- WrapNone
+2- WrapWord
+3- WrapCharacter
+4- WrapWhitespace
+
+
+
+
+wordAtLineIndex(line , index)
+يجلب الكلمة عن المؤشر 
+
+line : السطر الذي يوجد فيه الكلمة 
+index : رقم الحرف الذي يوجد عنده الكلمة
+
+
+
+annotate (line , message:str , style:int)
+اعطاء امر اظهار الشرح 
+
+line :السطر الذي ترغب بظهور الشرح فيه
+message : النص الذي تريد ظهوره في الشرح
+style : شكل الكتابة
+    
+    
+    
+getSelection: برجع اربع قيم 
+line , index , line_to, index_to
+
+selectedText : يرجع النص المحدد
+
+setSelection : لكي نضيف تحديد ونمرر ثلاث قيم 
+line , index , line_to , index_to
+
+
+
+
+
+    
+SendScintilla(SCI_GETCURRENTPOS)
+يرجغ مكان المؤشر الحالي 
+
+
+
+SendScintilla(SCI_POINTXFROMPOSITION ,0 , pos)
+يجلب مكان المؤشر في المحرر بالنسبة للشاشة  على محور X
+    
+SendScintilla(SCI_POINTYFROMPOSITION ,0 , pos)
+يجلب مكان المؤشر في المحرر بالنسبة للشاشة على محور Y
+    
+SendScintilla(SCI_POSITIONFROMPOINT ,x ,y)
+يجلب مكان المؤشر في المحرر من محور X و Y
