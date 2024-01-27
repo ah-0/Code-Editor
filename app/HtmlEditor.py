@@ -36,7 +36,7 @@ class Html_Editor(QsciScintilla):
     
     self.setSelectionBackgroundColor(QColor("#333a46"))
     
-    self.html_lexer = QsciHtmlLexer(self)
+    self.html_lexer = QsciLexerHTML(self)
     
     self.api = QsciAPIs(self.html_lexer)
     
