@@ -1,8 +1,8 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
-from app.Lexers.PythonLexer import PyCustomLexer
-from app.AutoC import AutoC
+from Lexers.PythonLexer import PyCustomLexer
+from AutoC import AutoC
 import os
 
 class Python_Editor(QsciScintilla):

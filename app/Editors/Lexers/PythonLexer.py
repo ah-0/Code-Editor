@@ -21,7 +21,7 @@ class NeutronLexer(QsciLexerCustom):
         self.editor = editor
         self.language_name = language_name
         
-        self.theme = "./app/Lexers/theme.json"
+        self.theme = "./app/Editors/Lexers/theme.json"
         
 
         self.token_list: list[str, str] = []
