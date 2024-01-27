@@ -2,7 +2,6 @@ from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
 from app.Lexers.PythonLexer import PyCustomLexer
-from app.CallTips import CAllTIP
 from app.AutoC import AutoC
 import os
 
