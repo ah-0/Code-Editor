@@ -10,7 +10,7 @@
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
-                        "font-size": 14,
+                        "font-size": 13,
                         "font-weight": "",
                         "italic": false
                     }
@@ -22,7 +22,7 @@
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
-                        "font-size": 14,
+                        "font-size": 13,
                         "font-weight": "",
                         "italic": false
                     }
@@ -34,7 +34,7 @@
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
-                        "font-size": 14,
+                        "font-size": 13,
                         "font-weight": "",
                         "italic": false
                     }
@@ -46,7 +46,7 @@
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
-                        "font-size": 14,
+                        "font-size": 13,
                         "font-weight": "",
                         "italic": false
                     }
@@ -58,7 +58,7 @@
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
-                        "font-size": 14,
+                        "font-size": 13,
                         "font-weight": "",
                         "italic": true
                     }

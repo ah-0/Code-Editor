@@ -38,11 +38,18 @@ class Css_Editor(QsciScintilla):
     
     self.setSelectionBackgroundColor(QColor("#333a46"))
     
-    self.html_lexer = QsciLexerCss(self)
+    self.css_lexer = QsciLexerCss(self)
+    self.css_lexer.setDefaultColor(QColor("white"))
+    self.css_lexer.setDefaultPaper(QColor("#161B21"))
+    self.css_lexer.setDefaultFont(QFont("Consolas" , 13))
     
-    self.api = QsciAPIs(self.html_lexer)
     
-    with open("Code-Editor/autocompletion items/css.txt" , "r") as html:
+    self.css_lexer.setPaper(QColor("#161B21"))
+    self.css_lexer.setFont(QFont("Consolas" , 13))
+    
+    self.api = QsciAPIs(self.css_lexer)
+    
+    with open("./autocompletion items/css.txt" , "r") as html:
       auto_complete_list = html_lexer.readlines()
       
       for i in auto_complete_list:
@@ -50,7 +57,9 @@ class Css_Editor(QsciScintilla):
       self.api.prepare()
     
     
-    self.setLexer(self.html_lexer)
+    self.setLexer(self.css_lexer)
+    
+    self.setStyleSheet(open("./style/editor.css").read())
   
   
   

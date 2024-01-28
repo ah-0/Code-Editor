@@ -37,6 +37,13 @@ class Html_Editor(QsciScintilla):
     self.setSelectionBackgroundColor(QColor("#333a46"))
     
     self.html_lexer = QsciLexerHTML(self)
+    self.html_lexer.setDefaultColor(QColor("white"))
+    self.html_lexer.setDefaultPaper(QColor("#161B21"))
+    self.html_lexer.setDefaultFont(QFont("Consolas" , 13))
+    
+    
+    self.html_lexer.setPaper(QColor("#161B21"))
+    self.html_lexer.setFont(QFont("Consolas" , 13))
     
     self.api = QsciAPIs(self.html_lexer)
     
@@ -49,6 +56,8 @@ class Html_Editor(QsciScintilla):
     
     
     self.setLexer(self.html_lexer)
+    
+    self.setStyleSheet(open("./style/editor.css").read())
   
   
   
