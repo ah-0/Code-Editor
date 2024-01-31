@@ -2,7 +2,7 @@ from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
 from Lexers.PythonLexer import PyCustomLexer
-from AutoC import AutoC
+from Completers.PythonCompleter import AutoC
 import os
 
 class Python_Editor(QsciScintilla):
@@ -78,6 +78,7 @@ class Python_Editor(QsciScintilla):
     self.setSelectionBackgroundColor(QColor("#333a46"))
     
     self.lexerpython = PyCustomLexer(self)
+    
     self.api = QsciAPIs(self.lexerpython)
     
     self.AutoCompleter = AutoC(self.api)
@@ -126,30 +127,36 @@ class Python_Editor(QsciScintilla):
    
     line , index =  self.getCursorPosition()
     if e.text() == "(":
+      
       self.insert("()")
       self.setCursorPosition(line, index+1)
       self.callTip()
+      
       return
     
-    if e.text() == "'":
+    elif e.text() == "'":
+      
       self.insert("''")
       self.setCursorPosition(line ,index+1)
       
       return
     
-    if e.text() == '"':
+    elif e.text() == '"':
+      
       self.insert('""')
       self.setCursorPosition(line, index+1)
       
       return
     
-    if e.text() == "{":
+    elif e.text() == "{":
+      
       self.insert("{}")
       self.setCursorPosition(line ,index+1)
       
       return
     
-    if e.text() == "[":
+    elif e.text() == "[":
+      
       self.insert("[]")
       self.setCursorPosition(line ,index+1)
       

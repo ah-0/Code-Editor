@@ -38,7 +38,7 @@ class Css_Editor(QsciScintilla):
     
     self.setSelectionBackgroundColor(QColor("#333a46"))
     
-    self.css_lexer = QsciLexerCss(self)
+    self.css_lexer = QsciLexerCSS(self)
     self.css_lexer.setDefaultColor(QColor("white"))
     self.css_lexer.setDefaultPaper(QColor("#161B21"))
     self.css_lexer.setDefaultFont(QFont("Consolas" , 13))

@@ -124,3 +124,25 @@ SendScintilla(SCI_POINTYFROMPOSITION ,0 , pos)
     
 SendScintilla(SCI_POSITIONFROMPOINT ,x ,y)
 يجلب مكان المؤشر في المحرر من محور X و Y
+
+
+
+
+
+
+
+
+
+class PythonLexer(QsciLexerPython):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+      self.setHighlightSubidentifiers(False)
+
+    def keywords(self, flag):
+        if flag == 1:
+            kws = keyword.kwlist + ["self", "cls"]
+        elif flag == 2:
+            kws = __builtins__.keys()
+        else:
+            return None
+        return " ".join(kws)
