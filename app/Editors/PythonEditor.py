@@ -127,39 +127,29 @@ class Python_Editor(QsciScintilla):
    
     line , index =  self.getCursorPosition()
     if e.text() == "(":
-      
       self.insert("()")
       self.setCursorPosition(line, index+1)
       self.callTip()
-      
       return
     
     elif e.text() == "'":
-      
       self.insert("''")
       self.setCursorPosition(line ,index+1)
-      
       return
     
     elif e.text() == '"':
-      
       self.insert('""')
       self.setCursorPosition(line, index+1)
-      
       return
     
     elif e.text() == "{":
-      
       self.insert("{}")
       self.setCursorPosition(line ,index+1)
-      
       return
     
     elif e.text() == "[":
-      
       self.insert("[]")
       self.setCursorPosition(line ,index+1)
-      
       return
 
     
