@@ -49,11 +49,14 @@ class Css_Editor(QsciScintilla):
     
     self.api = QsciAPIs(self.css_lexer)
     
-    with open("./autocompletion items/css.txt" , "r") as html:
-      auto_complete_list = html_lexer.readlines()
+    self.completer_icon = QPixmap("./icons/class.png").scaled(12,12)
+    self.registerImage(0,self.completer_icon)
+    
+    with open("./autocompletion items/css.txt" , "r") as css:
+      auto_complete_list = css.readlines()
       
       for i in auto_complete_list:
-        self.api.add(f"{i}")
+        self.api.add(f"{i}?0")
       self.api.prepare()
     
     

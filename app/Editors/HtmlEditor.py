@@ -47,11 +47,14 @@ class Html_Editor(QsciScintilla):
     
     self.api = QsciAPIs(self.html_lexer)
     
+    self.completer_icon = QPixmap("./icons/class.png").scaled(12,12)
+    self.registerImage(0,self.completer_icon)
+    
     with open("./autocompletion items/html.txt" , "r") as html:
-      auto_complete_list = html_lexer.readlines()
+      auto_complete_list = html.readlines()
       
       for i in auto_complete_list:
-        self.api.add(f"{i}")
+        self.api.add(f"{i}?0")
       self.api.prepare()
     
     
