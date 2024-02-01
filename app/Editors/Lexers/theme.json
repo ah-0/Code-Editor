@@ -42,7 +42,7 @@
             },
             {
                 "functions": {
-                    "color": "#61afd1",
+                    "color": "#64D6E8",
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
@@ -54,7 +54,7 @@
             },
             {
                 "function_def": {
-                    "color": "#61afd1",
+                    "color": "#64D6E8",
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
