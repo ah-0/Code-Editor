@@ -124,6 +124,7 @@ class Python_Editor(QsciScintilla):
     
 
   def keyPressEvent(self, e: QKeyEvent) -> None:
+    
     if self.selectedText():
       selection = list(self.getSelection())
       if e.key() == Qt.Key.Key_QuoteDbl:

@@ -43,6 +43,18 @@ class Css_Editor(QsciScintilla):
     self.css_lexer.setDefaultPaper(QColor("#161B21"))
     self.css_lexer.setDefaultFont(QFont("Consolas" , 13))
     
+    self.css_lexer.setColor(QColor("white"))
+    self.css_lexer.setColor(QColor("white"), QsciLexerCSS.Default)
+    self.css_lexer.setColor(QColor("#64D6E8"), QsciLexerCSS.CSS3Property)
+    self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.Tag)
+    self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.ClassSelector)
+    self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.IDSelector)
+    self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.PseudoClass)
+    
+    self.css_lexer.setPaper(QFont("#161B21"))
+    self.css_lexer.setFont(QFont("Consolas" ,13))
+    
+    
     
     self.css_lexer.setPaper(QColor("#161B21"))
     self.css_lexer.setFont(QFont("Consolas" , 13))
