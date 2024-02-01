@@ -7,8 +7,8 @@ import os
 
 
 class AutoC(QThread):
-    def __init__(self, api):
-        super(AutoC, self).__init__(None)
+    def __init__(self, api , parent=None):
+        super(AutoC, self).__init__(parent)
         
         self.script: Script = None
         self.api: QsciAPIs = api
@@ -23,14 +23,24 @@ class AutoC(QThread):
         try:
             self.script = Script(self.text, path=os.getcwd())
             self.completions = self.script.complete(self.line, self.index)
-            self.load_autocomplete(self.completions)
+            # self.ana = self.script._analysis()
+            self.load_autocomplete(self.completions , None)
         except Exception as err:
             print(err)
 
         self.finished.emit() 
 
-    def load_autocomplete(self, completions):
+    def load_autocomplete(self, completions , analysis):
         self.api.clear()
+        # self.parent().markerDeleteAll(0)
+        # print(self.parent().lines())
+        # for i in range(self.parent().lines()):
+        #     self.parent().clearAnnotations(i)
+    
+        # for i in analysis:
+        #     self.parent().markerAdd(i.line-1 , 0)
+            #self.parent().annotate(i.line-1 , f"{i.message}" , 0)
+
         [self.api.add(f"{i.name}?0") for i in completions]
         
         self.api.prepare() 

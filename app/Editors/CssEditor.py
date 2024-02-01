@@ -38,6 +38,8 @@ class Css_Editor(QsciScintilla):
     
     self.setSelectionBackgroundColor(QColor("#333a46"))
     
+    self.setBraceMatching(QsciScintilla.BraceMatch.SloppyBraceMatch)
+    
     self.css_lexer = QsciLexerCSS(self)
     self.css_lexer.setDefaultColor(QColor("white"))
     self.css_lexer.setDefaultPaper(QColor("#161B21"))
@@ -46,6 +48,9 @@ class Css_Editor(QsciScintilla):
     self.css_lexer.setColor(QColor("white"))
     self.css_lexer.setColor(QColor("white"), QsciLexerCSS.Default)
     self.css_lexer.setColor(QColor("#64D6E8"), QsciLexerCSS.CSS3Property)
+    self.css_lexer.setColor(QColor("#64D6E8"), QsciLexerCSS.CSS2Property)
+    self.css_lexer.setColor(QColor("#64D6E8"), QsciLexerCSS.CSS1Property)
+    self.css_lexer.setColor(QColor("#64D6E8"), QsciLexerCSS.Value)
     self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.Tag)
     self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.ClassSelector)
     self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.IDSelector)

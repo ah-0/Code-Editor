@@ -35,8 +35,8 @@ class FileManager(QTreeView):
     self.setModel(self.Model)
     
     self.setRootIndex(self.Model.index(os.getcwd()))
-    
-    
+    self.setIndentation(20)
+    self.setAnimated(True)
     self.setDragEnabled(True)
     self.setHeaderHidden(True)
     self.setColumnHidden(1,True)

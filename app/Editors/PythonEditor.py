@@ -3,6 +3,8 @@ from PyQt5.Qsci import *
 from PyQt5.QtCore import *
 from .PythonLexer import PyCustomLexer
 from .PythonCompleter import AutoC
+from jedi import Script
+
 import os
 
 class Python_Editor(QsciScintilla):
@@ -18,12 +20,13 @@ class Python_Editor(QsciScintilla):
     self.setMarginsFont(QFont("Consolas", 13))
     self.setMarginWidth(0,"0000")
 
-    # self.setMarginType(1 , self.SymbolMargin)
-    # self.markerDefine(self.DownTriangle , 0)
-    # self.setMarginSensitivity(1,True)
-    # self.setMarginMarkerMask(1, 0b1111)
-    # self.setMarginWidth(1,"0000")
-    # self.marginClicked.connect(self.clickedmargins)  
+    self.merker_image = QPixmap("./icons/red_circle.png").scaled(12,12)
+    self.setMarginType(1 , self.SymbolMargin)
+    self.markerDefine(self.merker_image , 0)
+    self.setMarginSensitivity(1,True)
+    self.setMarginMarkerMask(1, 0b1111)
+    self.setMarginWidth(1,"0000")
+    self.marginClicked.connect(self.clickedmargins)  
 
     
     
@@ -81,7 +84,7 @@ class Python_Editor(QsciScintilla):
     
     self.api = QsciAPIs(self.lexerpython)
     
-    self.AutoCompleter = AutoC(self.api)
+    self.AutoCompleter = AutoC(self.api , self)
     
     self.classicon = QPixmap("./icons/class.png").scaled(12,12)
     self.registerImage(0,self.classicon)
@@ -103,23 +106,29 @@ class Python_Editor(QsciScintilla):
 
     
     
-    
+    # self.SendScintilla(self.SCI_STYLESETHOTSPOT, 1, True)
+    # self.SendScintilla(self.SCI_SETHOTSPOTACTIVEBACK, True, 0xaaaaaa)
+    # self.setHotspotUnderline(True)
+    # self.setHotspotBackgroundColor(QColor("red"))
+
     self.setAnnotationDisplay(self.AnnotationIndented)
-    
+  
     
     self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT , 7)
 
-  # def clickedmargins(self,margin , line , key):
-  #   if self.markersAtLine(line) == 0:
+  def clickedmargins(self,margin , line , key):
+    if self.markersAtLine(line) == 0:
 
-  #     self.markerAdd(line , 0)
-  #   else:
-  #     self.markerDelete(line)
+      self.markerAdd(line , 0)
+    else:
+      self.markerDelete(line)
     
   def _cursorPositionChanged(self , line:int , index:int)-> None:
     self.AutoCompleter.get_completions(line+1 , index , self.text()) 
     # self.clearAnnotations(line)
-    # self.annotate(line , "ahmet is king" , 0)
+    # self.annotate(line , "ahmet is king" , 0
+    
+
     
     
 

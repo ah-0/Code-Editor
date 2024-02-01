@@ -243,6 +243,12 @@ class PyCustomLexer(NeutronLexer):
                 else:
                     self.setStyling(tok_len, self.KEYWORD)
                     continue
+            
+            elif self.peek_tok()[0] == "(":
+                    self.setStyling(tok_len, self.FUNCTIONS)
+
+                
+                
             elif tok == "def":
                 name, ni = self.skip_spaces_peek()
                 if name[0].isidentifier():
