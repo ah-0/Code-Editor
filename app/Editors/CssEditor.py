@@ -51,8 +51,7 @@ class Css_Editor(QsciScintilla):
     self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.IDSelector)
     self.css_lexer.setColor(QColor("#CA2760"), QsciLexerCSS.PseudoClass)
     
-    self.css_lexer.setPaper(QFont("#161B21"))
-    self.css_lexer.setFont(QFont("Consolas" ,13))
+    
     
     
     
