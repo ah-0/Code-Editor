@@ -50,7 +50,7 @@ class Html_Editor(QsciScintilla):
     self.completer_icon = QPixmap("./icons/class.png").scaled(12,12)
     self.registerImage(0,self.completer_icon)
     
-    with open("./autocompletion items/html.txt" , "r") as html:
+    with open("./src/app/Editors/autocompletion items/html.txt" , "r") as html:
       auto_complete_list = html.readlines()
       
       for i in auto_complete_list:
@@ -60,7 +60,7 @@ class Html_Editor(QsciScintilla):
     
     self.setLexer(self.html_lexer)
     
-    self.setStyleSheet(open("./style/editor.css").read())
+    self.setStyleSheet(open("./src/style/editor.css").read())
   
   
   

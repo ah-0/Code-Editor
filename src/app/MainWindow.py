@@ -23,7 +23,7 @@ class MyApp(QMainWindow):
     
     
     self.spliter = QSplitter()
-    self.spliter.setStyleSheet(open("./style/splitter.css" , "r").read())
+    self.spliter.setStyleSheet(open("./src/style/splitter.css" , "r").read())
     self.spliter.setContentsMargins(0,0,0,0)
     self.spliter.setOrientation(Qt.Horizontal)
     
@@ -62,7 +62,7 @@ class MyApp(QMainWindow):
                
         with open(path , "r") as f:
           editor.setText(f.read())
-        self.tabwidget.addTab(editor,QIcon("./icons/py.png"), name)
+        self.tabwidget.addTab(editor,QIcon("./src/icons/py.png"), name)
       
       
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
@@ -72,7 +72,7 @@ class MyApp(QMainWindow):
         editor = Html_Editor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
-        self.tabwidget.addTab(editor,QIcon("./icons/py.png"), name)
+        self.tabwidget.addTab(editor,QIcon("./src/icons/py.png"), name)
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
         
         
@@ -80,7 +80,7 @@ class MyApp(QMainWindow):
         editor = Css_Editor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
-        self.tabwidget.addTab(editor,QIcon("./icons/css.png"), name)
+        self.tabwidget.addTab(editor,QIcon("./src/icons/css.png"), name)
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
         
         
@@ -91,7 +91,7 @@ class MyApp(QMainWindow):
   def appmenus(self):
         
     self.menubar2 = self.menuBar()
-    self.menubar2.setStyleSheet(open("./style/menubar.css" , "r").read())
+    self.menubar2.setStyleSheet(open("./src/style/menubar.css" , "r").read())
 
     
     filemenu = self.menubar2.addMenu("&File")

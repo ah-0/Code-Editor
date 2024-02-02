@@ -7,7 +7,7 @@ class TabWidget(QTabWidget):
     super().__init__(parent)
     
     
-    self.setStyleSheet(open("./style/tabwidget.css" , "r").read())   
+    self.setStyleSheet(open("./src/style/tabwidget.css" , "r").read())   
     self.setContentsMargins(0, 0, 0, 0)
     self.setMouseTracking(True)
     self.setMovable(True)

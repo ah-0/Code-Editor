@@ -1,6 +1,6 @@
 {
-
-  "Auto-Completion-Invisible": true,
+  
+  "Auto-Completion-visible": true,
   "Margin-Line-Number": true,
   "Caret-ForegroundColor": "royalblue",
   "Caret-Line-BackgroundColor": "#2c313c",
@@ -15,8 +15,9 @@
   "Matched-Brace-BackgroundColor": "#c678dd",
   "Matched-Brace-ForegroundColor": "#F2E3E3",
   "Selection-BackgroundColor": "#333a46",
+  "IndicatorForegroundColor": "red",
+  "Code-Analysis": true,
+  "Disply-Syntax-Errors" : true
   
   
-
-
 }

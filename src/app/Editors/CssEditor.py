@@ -68,7 +68,7 @@ class Css_Editor(QsciScintilla):
     self.completer_icon = QPixmap("./icons/class.png").scaled(12,12)
     self.registerImage(0,self.completer_icon)
     
-    with open("./autocompletion items/css.txt" , "r") as css:
+    with open("./src/app/Editors/autocompletion items/css.txt" , "r") as css:
       auto_complete_list = css.readlines()
       
       for i in auto_complete_list:
@@ -78,7 +78,7 @@ class Css_Editor(QsciScintilla):
     
     self.setLexer(self.css_lexer)
     
-    self.setStyleSheet(open("./style/editor.css").read())
+    self.setStyleSheet(open("./src/style/editor.css").read())
     
   def keyPressEvent(self, e: QKeyEvent) -> None:
       

@@ -9,15 +9,15 @@ class FileIconProvider(QFileIconProvider):
         if isinstance(parameter, QFileInfo):
             info = parameter
             if info.isDir():
-              return QIcon("./icons/folder.png")
+              return QIcon("./src/icons/folder.png")
             if parameter.suffix() == "py":
-              return QIcon("./icons/py.png")
+              return QIcon("./src/icons/py.png")
             if parameter.suffix() == "css":
-              return QIcon("./icons/css.png")
+              return QIcon("./src/icons/css.png")
             if parameter.suffix() == "json":
-              return QIcon("./icons/json.png")
+              return QIcon("./src/icons/json.png")
             if parameter.suffix() == "js":
-              return QIcon("./icons/py.js")
+              return QIcon("./src/icons/py.js")
               
                 
         return super(FileIconProvider, self).icon(parameter)
@@ -26,7 +26,7 @@ class FileManager(QTreeView):
     super().__init__(parent)
     
     
-    self.setStyleSheet(open("./style/treeview.css" ,"r").read())
+    self.setStyleSheet(open("./src/style/treeview.css" ,"r").read())
     self.Model = QFileSystemModel()
     self.Model.setIconProvider(FileIconProvider())
     self.Model.setRootPath(os.getcwd())
