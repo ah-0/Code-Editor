@@ -7,12 +7,13 @@ import os
 
 
 class AutoC(QThread):
-    def __init__(self, api , parent=None):
+    def __init__(self, api ,path, parent=None):
         super(AutoC, self).__init__(parent)
         
         self.script: Script = None
         self.api: QsciAPIs = api
         self.completions: list[Completion] = None
+        self.path = path
         
 
         self.line = 0
@@ -21,7 +22,7 @@ class AutoC(QThread):
 
     def run(self):
         try:
-            self.script = Script(self.text, path=os.getcwd())
+            self.script = Script(self.text, path=self.path)
             self.completions = self.script.complete(self.line, self.index)
             # self.ana = self.script._analysis()
             self.load_autocomplete(self.completions , None)

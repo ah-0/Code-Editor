@@ -59,9 +59,10 @@ class MyApp(QMainWindow):
           return
       if pathlib.Path(path).suffix == ".py":
         editor = Python_Editor(self)
+        editor.setFilePath(path)
         with open(path , "r") as f:
           editor.setText(f.read())
-        self.tabwidget.addTab(editor,QIcon("./style/py.png"), name)
+        self.tabwidget.addTab(editor,QIcon("./icons/py.png"), name)
       
       
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
@@ -71,7 +72,7 @@ class MyApp(QMainWindow):
         editor = Html_Editor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
-        self.tabwidget.addTab(editor,QIcon("./style/py.png"), name)
+        self.tabwidget.addTab(editor,QIcon("./icons/py.png"), name)
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
         
         
@@ -79,7 +80,7 @@ class MyApp(QMainWindow):
         editor = Css_Editor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
-        self.tabwidget.addTab(editor,QIcon("./style/py.png"), name)
+        self.tabwidget.addTab(editor,QIcon("./icons/css.png"), name)
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
         
         

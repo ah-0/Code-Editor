@@ -12,7 +12,7 @@ class Python_Editor(QsciScintilla):
     super().__init__(parent)
     
     
-    
+    self.FILE_PATH = ""
     self.setMarginType(0 , self.NumberMargin)
     self.setMarginsForegroundColor(QColor("#ff888888"))
     self.setMarginsBackgroundColor(QColor("#161B21"))
@@ -84,7 +84,7 @@ class Python_Editor(QsciScintilla):
     
     self.api = QsciAPIs(self.lexerpython)
     
-    self.AutoCompleter = AutoC(self.api , self)
+    self.AutoCompleter = AutoC(self.api,self.FILE_PATH, self)
     
     self.classicon = QPixmap("./icons/class.png").scaled(12,12)
     self.registerImage(0,self.classicon)
@@ -129,7 +129,8 @@ class Python_Editor(QsciScintilla):
     # self.annotate(line , "ahmet is king" , 0
     
 
-    
+  def setFilePath(self, path:str):
+    self.FILE_PATH = path
     
 
   def keyPressEvent(self, e: QKeyEvent) -> None:

@@ -79,6 +79,95 @@ class Css_Editor(QsciScintilla):
     self.setLexer(self.css_lexer)
     
     self.setStyleSheet(open("./style/editor.css").read())
+    
+  def keyPressEvent(self, e: QKeyEvent) -> None:
+      
+      if self.selectedText():
+        selection = list(self.getSelection())
+        if e.key() == Qt.Key.Key_QuoteDbl:
+          self.insertAt('"', selection[0], selection[1])
+          self.insertAt('"', selection[2], selection[3] + 1)
+          selection[1] += 1
+          selection[3] += 1
+          self.setSelection(*selection)
+          return
+        
+        elif e.key() == Qt.Key.Key_Apostrophe:
+          self.insertAt("'", selection[0], selection[1])
+          self.insertAt("'", selection[2], selection[3] + 1)
+          selection[1] += 1
+          selection[3] += 1
+          self.setSelection(*selection)
+          return
+        
+        elif e.key() == Qt.Key.Key_ParenLeft:
+          self.insertAt("(", selection[0],selection[1])
+          self.insertAt(")", selection[2], selection[3] + 1)
+          selection[1] += 1
+          selection[3] += 1
+          self.setSelection(*selection)
+          return
+          
+        elif e.key() == Qt.Key.Key_BracketLeft:
+          self.insertAt("[", selection[0], selection[1])
+          self.insertAt("]", selection[2], selection[3] + 1)
+          selection[1] += 1
+          selection[3] += 1
+          self.setSelection(*selection)
+          return
+        
+        elif e.key() == Qt.Key.Key_BraceLeft:
+          self.insertAt("{", selection[0], selection[1])
+          self.insertAt("}", selection[2], selection[3] + 1)
+          selection[1] += 1
+          selection[3] += 1
+          self.setSelection(*selection)
+          return
+        
+        elif e.key() == Qt.Key.Key_Tab and selection[0] == selection[2]:
+          tabWidth = self.tabWidth()
+          self.insertAt(" " * tabWidth, selection[0], 0)
+          selection[1] = selection[3] + tabWidth
+          selection[3] = 0
+          self.setSelection(*selection)
+          return
+        else:
+          super().keyPressEvent(e)
+      
+      
+      
+      else:
+        line , index =  self.getCursorPosition()
+        if e.text() == "(":
+          self.insert("()")
+          self.setCursorPosition(line, index+1)
+          self.callTip()
+          return
+        
+        elif e.text() == "'":
+          self.insert("''")
+          self.setCursorPosition(line ,index+1)
+          return
+        
+        elif e.text() == '"':
+          self.insert('""')
+          self.setCursorPosition(line, index+1)
+          return
+        
+        elif e.text() == "{":
+          self.insert("{}")
+          self.setCursorPosition(line ,index+1)
+          return
+        
+        elif e.text() == "[":
+          self.insert("[]")
+          self.setCursorPosition(line ,index+1)
+          return
+    
+        
+        return super().keyPressEvent(e)
+          
+    
   
   
   
