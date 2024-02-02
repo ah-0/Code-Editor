@@ -8,11 +8,12 @@ from jedi import Script
 import os
 
 class Python_Editor(QsciScintilla):
-  def __init__(self, parent):
+  def __init__(self , path="", parent=None):
     super().__init__(parent)
     
     
-    self.FILE_PATH = ""
+    self.FILE_PATH = path
+
     self.setMarginType(0 , self.NumberMargin)
     self.setMarginsForegroundColor(QColor("#ff888888"))
     self.setMarginsBackgroundColor(QColor("#161B21"))
@@ -28,8 +29,10 @@ class Python_Editor(QsciScintilla):
     self.setMarginWidth(1,"0000")
     self.marginClicked.connect(self.clickedmargins)  
 
+    self.indicatorDefine(QsciScintilla.PlainIndicator ,1)
+    self.setIndicatorForegroundColor(QColor("red") , 1)
     
-    
+
     self.setCaretForegroundColor(QColor("royalblue"))
     self.setCaretLineBackgroundColor(QColor("#2c313c"))
     self.setCaretLineVisible(True)
@@ -112,7 +115,8 @@ class Python_Editor(QsciScintilla):
     # self.setHotspotBackgroundColor(QColor("red"))
 
     self.setAnnotationDisplay(self.AnnotationIndented)
-  
+
+    self.
     
     self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT , 7)
 
@@ -129,8 +133,7 @@ class Python_Editor(QsciScintilla):
     # self.annotate(line , "ahmet is king" , 0
     
 
-  def setFilePath(self, path:str):
-    self.FILE_PATH = path
+
     
 
   def keyPressEvent(self, e: QKeyEvent) -> None:
@@ -184,6 +187,19 @@ class Python_Editor(QsciScintilla):
         selection[3] = 0
         self.setSelection(*selection)
         return
+      
+      elif e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "/":
+        lines = self.selectedText()
+        lines = lines.split("\n")
+
+        finally_ = []
+        for i in lines:
+          if i.startswith("#"):
+            finally_.append(i[1:])
+          else:
+            finally_.append(f"#{i}")
+
+        self.replaceSelectedText("\n".join(finally_))
       else:
         super().keyPressEvent(e)
     

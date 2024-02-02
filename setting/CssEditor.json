@@ -1,0 +1,22 @@
+{
+
+  "Auto-Completion-Invisible": true,
+  "Margin-Line-Number": true,
+  "Caret-ForegroundColor": "royalblue",
+  "Caret-Line-BackgroundColor": "#2c313c",
+  "Caret-Line-Visible": true,
+  "Caret-Width": 4,
+  "Indentations-Use-Tabs": false,
+  "Indentation-Guides": true,
+  "Tab-Width": 4,
+  "Auto-Indent": true,
+  "Tab-Indents": true,
+  "Eol-Visibility": false,
+  "Matched-Brace-BackgroundColor": "#c678dd",
+  "Matched-Brace-ForegroundColor": "#F2E3E3",
+  "Selection-BackgroundColor": "#333a46",
+  
+  
+
+
+}

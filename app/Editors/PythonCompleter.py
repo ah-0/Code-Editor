@@ -23,8 +23,9 @@ class AutoC(QThread):
     def run(self):
         try:
             self.script = Script(self.text, path=self.path)
+            print(self.path)
             self.completions = self.script.complete(self.line, self.index)
-            # self.ana = self.script._analysis()
+            
             self.load_autocomplete(self.completions , None)
         except Exception as err:
             print(err)
@@ -33,6 +34,8 @@ class AutoC(QThread):
 
     def load_autocomplete(self, completions , analysis):
         self.api.clear()
+        
+        # Code analysis
         # self.parent().markerDeleteAll(0)
         # print(self.parent().lines())
         # for i in range(self.parent().lines()):
@@ -41,6 +44,18 @@ class AutoC(QThread):
         # for i in analysis:
         #     self.parent().markerAdd(i.line-1 , 0)
             #self.parent().annotate(i.line-1 , f"{i.message}" , 0)
+        
+
+        # Syntax errors
+        # for i in range(self.parent().lines()):
+        #     try:
+        #         self.parent().clearIndicatorRange(i ,0 ,i , len(self.parent().text())-1 , 1)
+        #     except:
+        #         pass
+
+        # for i in analysis:
+        #     self.parent().fillIndicatorRange(i.line-1 , 0 ,i.line , len(self.parent().text())-1,1)
+
 
         [self.api.add(f"{i.name}?0") for i in completions]
         

@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QTabWidget
-
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 class TabWidget(QTabWidget):
   def __init__(self , parent=None):

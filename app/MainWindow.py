@@ -58,8 +58,8 @@ class MyApp(QMainWindow):
           self.tabwidget.setCurrentIndex(i)
           return
       if pathlib.Path(path).suffix == ".py":
-        editor = Python_Editor(self)
-        editor.setFilePath(path)
+        editor = Python_Editor( path,self)
+               
         with open(path , "r") as f:
           editor.setText(f.read())
         self.tabwidget.addTab(editor,QIcon("./icons/py.png"), name)

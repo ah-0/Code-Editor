@@ -21,14 +21,14 @@ class ConsoleWidget_embed(RichJupyterWidget,ConsoleWidget):
       self.kernel_client = self._kernel_manager.client()
       self.kernel_client.start_channels()
     
-     
+      self.print_text("ahmet")
     
    def stop(self):
       self.kernel_client.stop_channels()
       self.kernel_manager.                shutdown_kernel()
       self.guisupport.get_app_qt().exit()
     
-      self.exit_requested.connect(stop)
+      self.exit_requested.connect(self.stop)
     
     
    def push_vars(self, variableDict):
