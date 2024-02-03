@@ -1,8 +1,8 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
-from scr.app.Editors.PythonLexer import PyCustomLexer
-from scr.app.Editors.PythonCompleter import AutoC
+from src.app.Editors.PythonLexer import PyCustomLexer
+from src.app.Editors.PythonCompleter import AutoC
 from jedi import Script
 
 import os
