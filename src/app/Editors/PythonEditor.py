@@ -101,7 +101,7 @@ class Python_Editor(QsciScintilla):
     
  
     
-    self.setStyleSheet(open("./style/editor.css").read())
+    self.setStyleSheet(open("./src/style/editor.css").read())
     
     self.setLexer(self.lexerpython)
     
