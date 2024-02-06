@@ -1,7 +1,5 @@
 from PyQt5.QtCore import QThread
-from PyQt5.Qsci import QsciAPIs
 from jedi import Script
-from jedi.api import Completion
 import re
 import os
 

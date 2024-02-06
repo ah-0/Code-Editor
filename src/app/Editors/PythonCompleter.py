@@ -26,13 +26,13 @@ class AutoC(QThread):
             print(self.path)
             self.completions = self.script.complete(self.line, self.index)
             
-            self.load_autocomplete(self.completions , None)
+            self.load_autocomplete(self.completions)
         except Exception as err:
             print(err)
 
         self.finished.emit() 
 
-    def load_autocomplete(self, completions , analysis):
+    def load_autocomplete(self, completions):
         self.api.clear()
         [self.api.add(f"{i.name}?0") for i in completions]
         
