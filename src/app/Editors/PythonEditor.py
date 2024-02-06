@@ -4,7 +4,7 @@ from PyQt5.QtCore import *
 from src.app.Editors.PythonLexer import PyCustomLexer
 from src.app.Editors.PythonCompleter import AutoC
 from src.app.Editors.PythonSyntaxErrors import DisplaySyntaxErrors
-from src.app.Editors.PythonCodeAnalysis import
+from src.app.Editors.PythonCodeAnalysis import CodeAnalyzer
 from jedi import Script
 
 import os
