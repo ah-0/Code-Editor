@@ -3,6 +3,8 @@ from PyQt5.Qsci import *
 from PyQt5.QtCore import *
 from src.app.Editors.PythonLexer import PyCustomLexer
 from src.app.Editors.PythonCompleter import AutoC
+from src.app.Editors.PythonSyntaxErrors import DisplaySyntaxErrors
+from src.app.Editors.PythonCodeAnalysis import
 from jedi import Script
 
 import os
@@ -20,6 +22,7 @@ class Python_Editor(QsciScintilla):
     self.setMarginLineNumbers(0,True)
     self.setMarginsFont(QFont("Consolas", 13))
     self.setMarginWidth(0,"0000")
+
 
     self.merker_image = QPixmap("./icons/red_circle.png").scaled(12,12)
     self.setMarginType(1 , self.SymbolMargin)
@@ -89,6 +92,11 @@ class Python_Editor(QsciScintilla):
     
     self.AutoCompleter = AutoC(self.api,self.FILE_PATH, self)
     
+    self.Error_viewer = DisplaySyntaxErrors(self.FILE_PATH,self)
+    
+    self.code_analyzer = CodeAnalyzer(self.FILE_PATH, self)
+    
+    
     self.classicon = QPixmap("./icons/class.png").scaled(12,12)
     self.registerImage(0,self.classicon)
     
@@ -116,7 +124,7 @@ class Python_Editor(QsciScintilla):
 
     self.setAnnotationDisplay(self.AnnotationIndented)
 
-    self.
+    
     
     self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT , 7)
 
@@ -129,8 +137,9 @@ class Python_Editor(QsciScintilla):
     
   def _cursorPositionChanged(self , line:int , index:int)-> None:
     self.AutoCompleter.get_completions(line+1 , index , self.text()) 
-    # self.clearAnnotations(line)
-    # self.annotate(line , "ahmet is king" , 0
+    self.Error_viewer.display_errors(self.text())
+    self.display_errors(self.text())
+
     
 
 
