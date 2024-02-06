@@ -19,7 +19,7 @@ class CodeAnalyzer(QThread):
             self.script = Script(self.text, path=self.path)
             self.code_analysis = self.script._analysis()
             
-            self.load_autocomplete(self.code_analysis)
+            self.load_code_analysis(self.code_analysis)
         except Exception as err:
             print(err)
 
