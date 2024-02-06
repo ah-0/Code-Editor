@@ -34,18 +34,6 @@ class AutoC(QThread):
 
     def load_autocomplete(self, completions , analysis):
         self.api.clear()
-        
-        # Code analysis
-        # self.parent().markerDeleteAll(0)
-        # print(self.parent().lines())
-        # for i in range(self.parent().lines()):
-        #     self.parent().clearAnnotations(i)
-    
-        # for i in analysis:
-        #     self.parent().markerAdd(i.line-1 , 0)
-            #self.parent().annotate(i.line-1 , f"{i.message}" , 0)
- 
-
         [self.api.add(f"{i.name}?0") for i in completions]
         
         self.api.prepare() 
