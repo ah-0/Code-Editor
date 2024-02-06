@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from src.app.Editors.PythonEditor import Python_Editor
 from src.app.Editors.HtmlEditor import Html_Editor
 from src.app.Editors.CssEditor import Css_Editor
+from src.app.Editors.JsonEditor import Json_Editor
 from src.app.TreeView import FileManager
 from src.app.TabWidget import TabWidget
 import pathlib
@@ -83,6 +84,12 @@ class MyApp(QMainWindow):
         self.tabwidget.addTab(editor,QIcon("./src/icons/css.png"), name)
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
         
+      elif pathlib.Path(path).suffix == ".json":
+        editor = Json_Editor(self)
+        with open(path , "r") as f:
+          editor.setText(f.read())
+        self.tabwidget.addTab(editor,QIcon("./src/icons/json.png"), name)
+        self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
         
 
   

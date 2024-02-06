@@ -45,6 +45,9 @@ class Html_Editor(QsciScintilla):
     self.html_lexer.setPaper(QColor("#161B21"))
     self.html_lexer.setFont(QFont("Consolas" , 13))
     
+    self.html_lexer.setColor(QColor("white"))
+    
+    
     self.api = QsciAPIs(self.html_lexer)
     
     self.completer_icon = QPixmap("./icons/class.png").scaled(12,12)
