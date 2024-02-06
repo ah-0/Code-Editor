@@ -24,7 +24,7 @@ class Python_Editor(QsciScintilla):
     self.setMarginWidth(0,"0000")
 
 
-    self.merker_image = QPixmap("./icons/red_circle.png").scaled(12,12)
+    self.merker_image = QPixmap("./src/icons/warning.png").scaled(12,12)
     self.setMarginType(1 , self.SymbolMargin)
     self.markerDefine(self.merker_image , 0)
     self.setMarginSensitivity(1,True)

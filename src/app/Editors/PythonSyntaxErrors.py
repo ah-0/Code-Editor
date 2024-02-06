@@ -11,9 +11,6 @@ class DisplaySyntaxErrors(QThread):
         self.script: Script = None
         self.path = path
         self.text = ""
-        
-
-        
 
     def run(self):
         try:
@@ -28,18 +25,14 @@ class DisplaySyntaxErrors(QThread):
 
     def load_syntax_errors(self, _errors):
         
-        
         for i in range(self.parent().lines()):
-             try:
-                 self.parent().clearIndicatorRange(i ,0 ,i , len(self.parent().text(i))-1 , 1)
-             except:
-                 pass
+            try:
+               self.parent().clearIndicatorRange(i ,0 ,i , len(self.parent().text(i))-1 , 1)
+            except:
+                pass
 
         for i in _errors:
             self.parent().fillIndicatorRange(i.line-1 , 0 ,i.line-1 , len(self.parent().text(i.line-1))-1,1)
-
-
-        
 
     def display_errors(self,: text: str):
         self.text = text
