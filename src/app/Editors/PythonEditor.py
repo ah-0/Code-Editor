@@ -138,7 +138,7 @@ class Python_Editor(QsciScintilla):
   def _cursorPositionChanged(self , line:int , index:int)-> None:
     self.AutoCompleter.get_completions(line+1 , index , self.text()) 
     self.Error_viewer.display_errors(self.text())
-    self.display_errors(self.text())
+    self.code_analyzer.display_errors(self.text())
 
     
 
