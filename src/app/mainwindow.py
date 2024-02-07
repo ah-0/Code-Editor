@@ -59,7 +59,7 @@ class MyApp(QMainWindow):
           self.tabwidget.setCurrentIndex(i)
           return
       if pathlib.Path(path).suffix == ".py":
-        editor = Python_Editor( path,self)
+        editor = PythonEditor(path , self)
                
         with open(path , "r") as f:
           editor.setText(f.read())
@@ -70,7 +70,7 @@ class MyApp(QMainWindow):
      
      
       elif pathlib.Path(path).suffix == ".html":
-        editor = Html_Editor(self)
+        editor = HtmlEditor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
         self.tabwidget.addTab(editor,QIcon("./src/icons/py.png"), name)
@@ -78,14 +78,14 @@ class MyApp(QMainWindow):
         
         
       elif pathlib.Path(path).suffix == ".css":
-        editor = Css_Editor(self)
+        editor = CssEditor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
         self.tabwidget.addTab(editor,QIcon("./src/icons/css.png"), name)
         self.tabwidget.setCurrentIndex(self.tabwidget.count()-1)
         
       elif pathlib.Path(path).suffix == ".json":
-        editor = Json_Editor(self)
+        editor = JsonEditor(self)
         with open(path , "r") as f:
           editor.setText(f.read())
         self.tabwidget.addTab(editor,QIcon("./src/icons/json.png"), name)

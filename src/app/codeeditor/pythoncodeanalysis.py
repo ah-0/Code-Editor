@@ -6,7 +6,7 @@ import os
 
 class CodeAnalyzer(QThread):
     def __init__(self,path, parent=None):
-        super(AutoC, self).__init__(parent)
+        super(CodeAnalyzer, self).__init__(parent)
         
         self.script: Script = None
         self.path = path

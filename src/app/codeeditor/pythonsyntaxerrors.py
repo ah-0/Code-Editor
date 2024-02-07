@@ -5,7 +5,7 @@ import os
 
 
 class DisplaySyntaxErrors(QThread):
-    def __init__(self ،path, parent=None):
+    def __init__(self ,path, parent=None):
         super(AutoC, self).__init__(parent)
         
         self.script: Script = None
@@ -34,7 +34,7 @@ class DisplaySyntaxErrors(QThread):
         for i in _errors:
             self.parent().fillIndicatorRange(i.line-1 , 0 ,i.line-1 , len(self.parent().text(i.line-1))-1,1)
 
-    def display_errors(self,: text: str):
+    def display_errors(self,text: str):
         self.text = text
         self.start()
 
