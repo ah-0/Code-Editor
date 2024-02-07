@@ -6,7 +6,7 @@ import os
 
 class DisplaySyntaxErrors(QThread):
     def __init__(self ,path, parent=None):
-        super(AutoC, self).__init__(parent)
+        super(DisplaySyntaxErrors, self).__init__(parent)
         
         self.script: Script = None
         self.path = path
