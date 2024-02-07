@@ -3,7 +3,7 @@ from PyQt5.Qsci import *
 from PyQt5.QtCore import *
 
 
-class Json_Editor(QsciScintilla):
+class JsonEditor(QsciScintilla):
   def __init__(self, parent):
     super().__init__(parent)
     

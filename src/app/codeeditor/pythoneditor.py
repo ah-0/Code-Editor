@@ -1,20 +1,20 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
-from src.app.Editors.PythonLexer import PyCustomLexer
-from src.app.Editors.PythonCompleter import AutoC
-from src.app.Editors.PythonSyntaxErrors import DisplaySyntaxErrors
-from src.app.Editors.PythonCodeAnalysis import CodeAnalyzer
+from src.app.codeeditor.pythonlexer import PyCustomLexer
+from src.app.codeeditor.pythoncompleter import AutoC
+from src.app.codeeditor.pythonsyntaxerrors import DisplaySyntaxErrors
+from src.app.codeeditor.pythoncodeanalysis import CodeAnalyzer
 from jedi import Script
 
 import os
 
-class Python_Editor(QsciScintilla):
+class PythonEditor(QsciScintilla):
   def __init__(self , path="", parent=None):
     super().__init__(parent)
     
     
-    self.FILE_PATH = path
+    self.path = path
 
     self.setMarginType(0 , self.NumberMargin)
     self.setMarginsForegroundColor(QColor("#ff888888"))
@@ -90,11 +90,11 @@ class Python_Editor(QsciScintilla):
     
     self.api = QsciAPIs(self.lexerpython)
     
-    self.AutoCompleter = AutoC(self.api,self.FILE_PATH, self)
+    self.autocompleter = AutoC(self.api,self.path, self)
     
-    self.Error_viewer = DisplaySyntaxErrors(self.FILE_PATH,self)
+    self.errorviewer = DisplaySyntaxErrors(self.path,self)
     
-    self.code_analyzer = CodeAnalyzer(self.FILE_PATH, self)
+    self.codeanalyzer = CodeAnalyzer(self.path, self)
     
     
     self.classicon = QPixmap("./icons/class.png").scaled(12,12)
@@ -103,8 +103,8 @@ class Python_Editor(QsciScintilla):
     self.functionicon = QPixmap("./icons/function.png").scaled(12,12)
     self.registerImage(1,self.functionicon)
     
-    self.Other = QPixmap("./icons/multiply.png").scaled(12,12)
-    self.registerImage(2,self.Other)
+    self.other = QPixmap("./icons/multiply.png").scaled(12,12)
+    self.registerImage(2,self.other)
     
     
  
@@ -136,9 +136,9 @@ class Python_Editor(QsciScintilla):
       self.markerDelete(line)
     
   def _cursorPositionChanged(self , line:int , index:int)-> None:
-    self.AutoCompleter.get_completions(line+1 , index , self.text()) 
-    self.Error_viewer.display_errors(self.text())
-    self.code_analyzer.display_errors(self.text())
+    self.autocompleter.get_completions(line+1 , index , self.text()) 
+    self.errorviewer.display_errors(self.text())
+    self.codeanalyzer.display_errors(self.text())
 
     
 

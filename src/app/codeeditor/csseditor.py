@@ -3,7 +3,7 @@ from PyQt5.Qsci import *
 from PyQt5.QtCore import *
 
 
-class Css_Editor(QsciScintilla):
+class CssEditor(QsciScintilla):
   def __init__(self, parent):
     super().__init__(parent)
     
@@ -68,7 +68,7 @@ class Css_Editor(QsciScintilla):
     self.completer_icon = QPixmap("./icons/class.png").scaled(12,12)
     self.registerImage(0,self.completer_icon)
     
-    with open("./src/app/Editors/autocompletion items/css.txt" , "r") as css:
+    with open("./src/app/codeeditor/autocompletion items/css.txt" , "r") as css:
       auto_complete_list = css.readlines()
       
       for i in auto_complete_list:

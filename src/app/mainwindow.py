@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from src.app.Editors.PythonEditor import Python_Editor
-from src.app.Editors.HtmlEditor import Html_Editor
-from src.app.Editors.CssEditor import Css_Editor
-from src.app.Editors.JsonEditor import Json_Editor
-from src.app.TreeView import FileManager
-from src.app.TabWidget import TabWidget
+from src.app.codeeditor.pythoneditor import PythonEditor
+from src.app.codeeditor.htmleditor import HtmlEditor
+from src.app.codeeditor.csseditor import CssEditor
+from src.app.codeeditor.jsoneditor import JsonEditor
+from src.app.treeview import FileManager
+from src.app.tabwidget import TabWidget
 import pathlib
 import qdarkstyle
 import sys 

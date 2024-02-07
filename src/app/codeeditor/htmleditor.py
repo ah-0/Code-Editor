@@ -2,7 +2,7 @@ from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
 
-class Html_Editor(QsciScintilla):
+class HtmlEditor(QsciScintilla):
   def __init__(self, parent):
     super().__init__(parent)
     
@@ -53,7 +53,7 @@ class Html_Editor(QsciScintilla):
     self.completer_icon = QPixmap("./icons/class.png").scaled(12,12)
     self.registerImage(0,self.completer_icon)
     
-    with open("./src/app/Editors/autocompletion items/html.txt" , "r") as html:
+    with open("./src/app/codeeditor/autocompletion items/html.txt" , "r") as html:
       auto_complete_list = html.readlines()
       
       for i in auto_complete_list:
