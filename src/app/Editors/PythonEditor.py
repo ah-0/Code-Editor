@@ -198,6 +198,12 @@ class Python_Editor(QsciScintilla):
         return
       
       elif e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "/":
+        
+        start, srow, end, erow = self.getSelection()
+        self.setSelection(start, 0, end, self.lineLength(end)-1)
+        
+        
+ 
         lines = self.selectedText()
         lines = lines.split("\n")
 
@@ -209,6 +215,7 @@ class Python_Editor(QsciScintilla):
             finally_.append(f"#{i}")
 
         self.replaceSelectedText("\n".join(finally_))
+        self.setSelection(start, srow, end, erow)
       else:
         super().keyPressEvent(e)
     
