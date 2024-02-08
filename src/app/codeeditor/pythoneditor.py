@@ -223,7 +223,12 @@ class PythonEditor(QsciScintilla):
     
     else:
       line , index =  self.getCursorPosition()
-      if e.text() == "(":
+      if e.text() == ".":
+        self.insert(".")
+        self.setCursorPosition(line, index+1)
+        self.SendScintilla(self.SCI_AUTOCSHOW)
+        
+      elif e.text() == "(":
         self.insert("()")
         self.setCursorPosition(line, index+1)
         self.callTip()
@@ -253,14 +258,4 @@ class PythonEditor(QsciScintilla):
       return super().keyPressEvent(e)
         
   
-          
-          
-        
-      
-        
-        
-        
-      
-        
-    
     
