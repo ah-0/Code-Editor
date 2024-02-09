@@ -90,16 +90,18 @@ class FileManager(QTreeView):
              file_open_action.triggered.connect(lambda : self.openfile(ix))
              file_run_action.triggered.connect(lambda : self.runfile(ix))
              
-             
-        open_in_file_manager_action.triggered.connect(lambda : self.open_in_file_manager(ix))
-        copy_action.triggered.connect(lambda : self.copy(ix))
-        cut_action.triggered.connect(lambda : self.cut(ix))
-        copy_path_action.triggered.connect(lambda : self.copypath(ix))
-        rename_action.triggered.connect(lambda : self.rename(ix))
-        delete_action.triggered.connect(lambda : self.delete(ix))
+        try:     
+            open_in_file_manager_action.triggered.connect(lambda : self.open_in_file_manager(ix))
+            copy_action.triggered.connect(lambda : self.copy(ix))
+            cut_action.triggered.connect(lambda : self.cut(ix))
+            copy_path_action.triggered.connect(lambda : self.copypath(ix))
+            rename_action.triggered.connect(lambda : self.rename(ix))
+            delete_action.triggered.connect(lambda : self.delete(ix))
+        except:
+            pass
              
     
-        action = menu.exec_(self.viewport().mapToGlobal(pos))
+        menu.exec_(self.viewport().mapToGlobal(pos))
         
         
     def newfile(self, index):
