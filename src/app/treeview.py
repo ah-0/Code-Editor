@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+import pyperclip
 import os
 
 
@@ -66,6 +67,7 @@ class FileManager(QTreeView):
             new_folder_action = menu.addAction("New Folder")
             open_in_file_manager_action = menu.addAction("Open In File Manager")
             copy_action = menu.addAction("Copy")
+            paste_action = menu.addAction("Paste")
             cut_action = menu.addAction("Cut")
             copy_path_action = menu.addAction("Copy Path")
             rename_action = menu.addAction("Rename")
@@ -74,6 +76,7 @@ class FileManager(QTreeView):
            
             new_file_action.triggered.connect(lambda : self.newfile(ix))
             new_folder_action.triggered.connect(lambda : self.newfolder(ix))
+            paste_action.triggered.connect(lambda : self.paste(ix) )
            
            
            
@@ -107,31 +110,35 @@ class FileManager(QTreeView):
         
         
     def newfile(self, index):
-        pass
+        _path = self.Model.filePath(index)
     
     def newfolder(self, index):
-        pass
+        _path = self.Model.filePath(index)
     
     def open_in_file_manager(self , index):
-        pass
+        _path = self.Model.filePath(index)
     
     def copy(self, index):
+        _path = self.Model.filePath(index)
+        
+    def paste(self , index):
         pass
     
     def cut(self, index):
-        pass
-    
+        _path = self.Model.filePath(index)
+        
     def copypath(self, index):
-        pass
+        _path = self.Model.filePath(index)
+        pyperclip.copy(_path)
     
     def rename(self, index):
-        pass
+        _path = self.Model.filePath(index)
     
     def delete(self , index):
-        pass
+        _path = self.Model.filePath(index)
     
-    def runfile(self, index):
-        pass
+    def runfile(self , index):
+        _path = self.Model.filePath(index)
     
     def openfile(self, index):
         self.parent().newTab(index)
