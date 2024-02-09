@@ -1,9 +1,10 @@
-1 - PyQt5
-2 - QScintilla
-3 - QDarkStyle
-4 - jedi
-5 - black
-6 - pylint
-7 - qtconsole
-8 - cssbeautifier  
-9 - bs4
+- PyQt5
+- QScintilla
+- QDarkStyle
+- jedi
+- black
+- pylint
+- qtconsole
+- cssbeautifier  
+- bs4
+- pyperclip
