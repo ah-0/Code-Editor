@@ -56,5 +56,16 @@ class FileManager(QTreeView):
         self.setDropIndicatorShown(True)
         self.setDragDropMode(QAbstractItemView.DragDrop)
 
-    def show_context_menu(self):
-        pass
+    def show_context_menu(self, pos: QPoint):
+        ix = self.indexAt(pos)
+        menu =  QMenu()
+        menu.addAction("New File")
+        menu.addAction("New Folder")
+        menu.addAction("Open In File Manager")
+    
+        if ix.column() == 0:
+           menu.addAction("Rename")
+           menu.addAction("Delete")
+    
+        action = menu.exec_(self.viewport().mapToGlobal(pos))
+    
