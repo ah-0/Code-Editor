@@ -133,6 +133,8 @@ class FileManager(QTreeView):
     
     def rename(self, index):
         _path = self.Model.filePath(index)
+        _oldname = self.Model.fileName(index)
+        
     
     def delete(self , index):
         _path = self.Model.filePath(index)
