@@ -63,7 +63,7 @@ class FileManager(QTreeView):
         if self.Model.isDir(ix):
            new_file_action = menu.addAction("New File")
            new_folder_action = menu.addAction("New Folder")
-           open_in_file_manager_action = menu.addAction("Open In File Manager")
+           folder_open_in_file_manager_action = menu.addAction("Open In File Manager")
            folder_copy_action = menu.addAction("Copy")
            folder_cut_action = menu.addAction("Cut")
            folder_copy_path_action = menu.addAction("Copy Path")
@@ -76,7 +76,7 @@ class FileManager(QTreeView):
              file_run_action = menu.addAction("Run")
              file_copy_action = menu.addAction("Copy")
              file_cut_action = menu.addAction("Cut")
-             open_in_file_manager_action = menu.addAction("Open In File Manager")
+             file_open_in_file_manager_action = menu.addAction("Open In File Manager")
              file_rename_action = menu.addAction("Rename")
              file_delete_action = menu.addAction("Delete")
              
