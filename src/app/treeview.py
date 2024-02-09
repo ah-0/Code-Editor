@@ -111,9 +111,26 @@ class FileManager(QTreeView):
         
     def newfile(self, index):
         _path = self.Model.filePath(index)
+        
+        _name, ok = QInputDialog.getText(self, 'Create file', 'Enter the file name:')
+        if ok:
+            f = Path(_path) / _name
+            count = 1
+            while f.exists():
+                f = Path(f.parent / f"{_name}{count}")
+                count += 1
+            f.touch()
+            
+                    
     
     def newfolder(self, index):
         _path = self.Model.filePath(index)
+        
+        _name, ok = QInputDialog.getText(self, 'Create folder', 'Enter the folder name:')
+        if ok:
+            self.Model.mkdir(index , _name)
+            
+        
     
     def open_in_file_manager(self , index):
         _path = self.Model.filePath(index)
@@ -134,11 +151,21 @@ class FileManager(QTreeView):
     def rename(self, index):
         _path = self.Model.filePath(index)
         _oldname = self.Model.fileName(index)
+        self.edit(index)
         
     
     def delete(self , index):
         _path = self.Model.filePath(index)
-    
+        _name = self.Model.fileName(index)
+        if self.Model.isDir(index):
+            self.rmdir(index)
+        else:
+            self.remove(index)
+            _tabwidget = self.parent().tabwidget()
+            for i in range(_tabwidget.count()):
+                if _tabwidget.tabText(i) == _name:
+                    _tabwidget.removeTab(i)
+            
     def runfile(self , index):
         _path = self.Model.filePath(index)
     
