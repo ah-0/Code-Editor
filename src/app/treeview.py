@@ -59,13 +59,27 @@ class FileManager(QTreeView):
     def show_context_menu(self, pos: QPoint):
         ix = self.indexAt(pos)
         menu =  QMenu()
-        menu.addAction("New File")
-        menu.addAction("New Folder")
-        menu.addAction("Open In File Manager")
-    
-        if ix.column() == 0:
-           menu.addAction("Rename")
-           menu.addAction("Delete")
+        
+        if self.Model.isDir(ix):
+           new_file_action = menu.addAction("New File")
+           new_folder_action = menu.addAction("New Folder")
+           open_in_file_manager_action = menu.addAction("Open In File Manager")
+           folder_copy_action = menu.addAction("Copy")
+           folder_cut_action = menu.addAction("Cut")
+           folder_copy_path_action = menu.addAction("Copy Path")
+           folder_rename_action = menu.addAction("Rename")
+           folder_delete_action = menu.addAction("Delete")
+           
+        elif self.Model.fileInfo(ix).isFile():
+             file_open_action = menu.addAction("Open")
+             file_copy_path_action = menu.addAction("Copy Path")
+             file_run_action = menu.addAction("Run")
+             file_copy_action = menu.addAction("Copy")
+             file_cut_action = menu.addAction("Cut")
+             open_in_file_manager_action = menu.addAction("Open In File Manager")
+             file_rename_action = menu.addAction("Rename")
+             file_delete_action = menu.addAction("Delete")
+             
     
         action = menu.exec_(self.viewport().mapToGlobal(pos))
     
