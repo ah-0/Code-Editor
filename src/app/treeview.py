@@ -8,16 +8,16 @@ class FileIconProvider(QFileIconProvider):
     def icon(self, parameter):
 
         if isinstance(parameter, QFileInfo):
-            info = parameter
+            info : QFileInfo = parameter
             if info.isDir():
                 return QIcon("./src/icons/folder.png")
-            if parameter.suffix() == "py":
+            if info.suffix() == "py":
                 return QIcon("./src/icons/python_icon.png")
-            if parameter.suffix() == "css":
+            if info.suffix() == "css":
                 return QIcon("./src/icons/css.png")
-            if parameter.suffix() == "json":
+            if info.suffix() == "json":
                 return QIcon("./src/icons/json.png")
-            if parameter.suffix() == "js":
+            if info.suffix() == "js":
                 return QIcon("./src/icons/py.js")
 
         return super(FileIconProvider, self).icon(parameter)
@@ -61,34 +61,36 @@ class FileManager(QTreeView):
         menu =  QMenu()
         
         if self.Model.isDir(ix):
-           new_file_action = menu.addAction("New File")
-           new_folder_action = menu.addAction("New Folder")
-           open_in_file_manager_action = menu.addAction("Open In File Manager")
-           copy_action = menu.addAction("Copy")
-           cut_action = menu.addAction("Cut")
-           copy_path_action = menu.addAction("Copy Path")
-           rename_action = menu.addAction("Rename")
-           delete_action = menu.addAction("Delete")
+            
+            new_file_action = menu.addAction("New File")
+            new_folder_action = menu.addAction("New Folder")
+            open_in_file_manager_action = menu.addAction("Open In File Manager")
+            copy_action = menu.addAction("Copy")
+            cut_action = menu.addAction("Cut")
+            copy_path_action = menu.addAction("Copy Path")
+            rename_action = menu.addAction("Rename")
+            delete_action = menu.addAction("Delete")
            
            
-           new_file_action.triggered.connect(lambda : self.newfile(ix))
-           new_folder_action.triggered.connect(lambda : self.newfolder(ix))
+            new_file_action.triggered.connect(lambda : self.newfile(ix))
+            new_folder_action.triggered.connect(lambda : self.newfolder(ix))
            
            
            
         elif self.Model.fileInfo(ix).isFile():
-             file_open_action = menu.addAction("Open")
-             copy_path_action = menu.addAction("Copy Path")
-             file_run_action = menu.addAction("Run")
-             copy_action = menu.addAction("Copy")
-             cut_action = menu.addAction("Cut")
-             open_in_file_manager_action = menu.addAction("Open In File Manager")
-             rename_action = menu.addAction("Rename")
-             delete_action = menu.addAction("Delete")
+            
+            file_open_action = menu.addAction("Open")
+            copy_path_action = menu.addAction("Copy Path")
+            file_run_action = menu.addAction("Run")
+            copy_action = menu.addAction("Copy")
+            cut_action = menu.addAction("Cut")
+            open_in_file_manager_action = menu.addAction("Open In File Manager")
+            rename_action = menu.addAction("Rename")
+            delete_action = menu.addAction("Delete")
              
              
-             file_open_action.triggered.connect(lambda : self.openfile(ix))
-             file_run_action.triggered.connect(lambda : self.runfile(ix))
+            file_open_action.triggered.connect(lambda : self.openfile(ix))
+            file_run_action.triggered.connect(lambda : self.runfile(ix))
              
         try:     
             open_in_file_manager_action.triggered.connect(lambda : self.open_in_file_manager(ix))
@@ -132,4 +134,8 @@ class FileManager(QTreeView):
         pass
     
     def openfile(self, index):
-        pass
+        self.parent().newTab(index)
+        
+                
+                
+                
