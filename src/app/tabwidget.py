@@ -6,8 +6,8 @@ from PyQt5.QtCore import *
 class TabWidget(QTabWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-
-        self.setStyleSheet(open("./src/style/tabwidget.css", "r").read())
+    
+        
         self.setContentsMargins(0, 0, 0, 0)
         self.setMouseTracking(True)
         self.setMovable(True)

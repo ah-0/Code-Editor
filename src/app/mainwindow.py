@@ -16,14 +16,15 @@ import os
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+        
+        with open("./src/style/app.css" , "r") as f:
+            self.setStyleSheet(f.read())
 
         self.appmenus()
 
         self.layoutv = QVBoxLayout()
 
         self.spliter = QSplitter()
-        self.spliter.setStyleSheet(open("./src/style/splitter.css", "r").read())
         self.spliter.setContentsMargins(0, 0, 0, 0)
         self.spliter.setOrientation(Qt.Horizontal)
 
@@ -86,7 +87,6 @@ class MyApp(QMainWindow):
     def appmenus(self):
 
         self.menubar2 = self.menuBar()
-        self.menubar2.setStyleSheet(open("./src/style/menubar.css", "r").read())
 
         filemenu = self.menubar2.addMenu("&File")
         editmenu = self.menubar2.addMenu("Edit")

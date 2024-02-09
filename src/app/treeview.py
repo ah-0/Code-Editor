@@ -27,8 +27,10 @@ class FileIconProvider(QFileIconProvider):
 class FileManager(QTreeView):
     def __init__(self, parent=None):
         super().__init__(parent)
+        
+        with open("./src/style/treeview.css" , "r") as f:
+            self.setStyleSheet(f.read())
 
-        self.setStyleSheet(open("./src/style/treeview.css", "r").read())
         self.Model = QFileSystemModel()
         self.Model.setIconProvider(FileIconProvider())
         self.Model.setRootPath(os.getcwd())
