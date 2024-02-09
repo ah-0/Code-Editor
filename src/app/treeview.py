@@ -63,23 +63,71 @@ class FileManager(QTreeView):
         if self.Model.isDir(ix):
            new_file_action = menu.addAction("New File")
            new_folder_action = menu.addAction("New Folder")
-           folder_open_in_file_manager_action = menu.addAction("Open In File Manager")
-           folder_copy_action = menu.addAction("Copy")
-           folder_cut_action = menu.addAction("Cut")
-           folder_copy_path_action = menu.addAction("Copy Path")
-           folder_rename_action = menu.addAction("Rename")
-           folder_delete_action = menu.addAction("Delete")
+           open_in_file_manager_action = menu.addAction("Open In File Manager")
+           copy_action = menu.addAction("Copy")
+           cut_action = menu.addAction("Cut")
+           copy_path_action = menu.addAction("Copy Path")
+           rename_action = menu.addAction("Rename")
+           delete_action = menu.addAction("Delete")
+           
+           
+           new_file_action.triggered.connect(lambda : self.newfile(ix))
+           new_folder_action.triggered.connect(lambda : self.newfolder(ix))
+           
+           
            
         elif self.Model.fileInfo(ix).isFile():
              file_open_action = menu.addAction("Open")
-             file_copy_path_action = menu.addAction("Copy Path")
+             copy_path_action = menu.addAction("Copy Path")
              file_run_action = menu.addAction("Run")
-             file_copy_action = menu.addAction("Copy")
-             file_cut_action = menu.addAction("Cut")
-             file_open_in_file_manager_action = menu.addAction("Open In File Manager")
-             file_rename_action = menu.addAction("Rename")
-             file_delete_action = menu.addAction("Delete")
+             copy_action = menu.addAction("Copy")
+             cut_action = menu.addAction("Cut")
+             open_in_file_manager_action = menu.addAction("Open In File Manager")
+             rename_action = menu.addAction("Rename")
+             delete_action = menu.addAction("Delete")
+             
+             
+             file_open_action.triggered.connect(lambda : self.openfile(ix))
+             file_run_action.triggered.connect(lambda : self.runfile(ix))
+             
+             
+        open_in_file_manager_action.triggered.connect(lambda : self.open_in_file_manager(ix))
+        copy_action.triggered.connect(lambda : self.copy(ix))
+        cut_action.triggered.connect(lambda : self.cut(ix))
+        copy_path_action.triggered.connect(lambda : self.copypath(ix))
+        rename_action.triggered.connect(lambda : self.rename(ix))
+        delete_action.triggered.connect(lambda : self.delete(ix))
              
     
         action = menu.exec_(self.viewport().mapToGlobal(pos))
+        
+        
+    def newfile(self, index):
+        pass
     
+    def newfolder(self, index):
+        pass
+    
+    def open_in_file_manager(self , index):
+        pass
+    
+    def copy(self, index):
+        pass
+    
+    def cut(self, index):
+        pass
+    
+    def copypath(self, index):
+        pass
+    
+    def rename(self, index):
+        pass
+    
+    def delete(self , index):
+        pass
+    
+    def runfile(self, index):
+        pass
+    
+    def openfile(self, index):
+        pass
