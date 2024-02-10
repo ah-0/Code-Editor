@@ -29,7 +29,7 @@ class DisplaySyntaxErrors(QThread):
                     0,
                     0,
                     self.parent().lines(),
-                    self.parent().lineLength(self.parent().lines()-1),
+                    self.parent().lineLength(self.parent().lines())-1),
                     1
                 )
                 
