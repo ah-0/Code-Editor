@@ -28,8 +28,8 @@ class DisplaySyntaxErrors(QThread):
         self.parent().clearIndicatorRange(
                     0,
                     0,
-                    self.lines(),
-                    self.lineLength(self.lines()-1),
+                    self.parent().lines(),
+                    self.parent().lineLength(self.lines()-1),
                     1
                 )
                 
