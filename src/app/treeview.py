@@ -150,7 +150,7 @@ class FileManager(QTreeView):
             while f.exists():
                 f = Path(f.parent / f"{_name}{count}")
                 count += 1
-            self.Model.mkdir(index , _name)
+            self.Model.mkdir(index , f.name)
             
         
     
