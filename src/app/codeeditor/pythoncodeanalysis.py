@@ -5,7 +5,7 @@ import os
 
 
 class CodeAnalyzer(QThread):
-    def __init__(self,path, parent=None):
+    def __init__(self,path="", parent=None):
         super(CodeAnalyzer, self).__init__(parent)
         
         self.script: Script = None
@@ -14,7 +14,7 @@ class CodeAnalyzer(QThread):
 
     def run(self):
         try:
-            self.script = Script(self.text, path=self.path)
+            self.script = Script(self.parent().text() , path=self.path)
             self.code_analysis = self.script._analysis()
             
             self.load_code_analysis(self.code_analysis)
@@ -27,16 +27,12 @@ class CodeAnalyzer(QThread):
         
        
         self.parent().markerDeleteAll(0)
-        self.parent().sendScintilla(self.parent().SCI_ANNOTATIONCLEARALL)
-    
         for i in analysis:
             self.parent().markerAdd(i.line-1 , 0)
-            self.parent().annotate(i.line-2, f"{i.message}" , 0)
-     
+            break
 
 
-    def display_errors(self, text: str):
-        self.text = text
+    def display_errors(self):
         self.start()
 
 

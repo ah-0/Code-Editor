@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from src.app.codeeditor.pythoneditor import PythonEditor
-from src.app.codeeditor.htmleditor import HtmlEditor
-from src.app.codeeditor.csseditor import CssEditor
-from src.app.codeeditor.jsoneditor import JsonEditor
-from src.app.treeview import FileManager
-from src.app.tabwidget import TabWidget
+from codeeditor.pythoneditor import PythonEditor
+from codeeditor.htmleditor import HtmlEditor
+from codeeditor.csseditor import CssEditor
+from codeeditor.jsoneditor import JsonEditor
+from treeview import FileManager
+from tabwidget import TabWidget
 import pathlib
 import qdarkstyle
 import sys
@@ -17,14 +17,26 @@ class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
         
-        with open("./src/style/app.css" , "r") as f:
-            self.setStyleSheet(f.read())
+        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
 
         self.appmenus()
 
         self.layoutv = QVBoxLayout()
 
         self.spliter = QSplitter()
+        self.spliter.setStyleSheet("""
+        QSplitter {
+        
+            background-color: #161B21;
+        
+        }
+        
+        QSplitter::handle {
+            background-color: #161B21;
+        }
+        
+        
+        """)
         self.spliter.setContentsMargins(0, 0, 0, 0)
         self.spliter.setOrientation(Qt.Horizontal)
 
@@ -87,6 +99,18 @@ class MyApp(QMainWindow):
     def appmenus(self):
 
         self.menubar2 = self.menuBar()
+        self.menubar2.setStyleSheet("""
+        QMenuBar{
+            background-color: 161B21;
+        }
+        QMenuBar::item{
+            padding: 10px;
+            
+            
+            padding-right: 20px;
+        }
+        
+        """)
 
         filemenu = self.menubar2.addMenu("&File")
         editmenu = self.menubar2.addMenu("Edit")

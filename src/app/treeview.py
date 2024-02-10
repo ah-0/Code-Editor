@@ -218,13 +218,10 @@ class FileManager(QTreeView):
         if self.selectionModel().selectedRows():
             for i in self.selectionModel().selectedRows():
                 if self.Model.isDir(i):
-                    self.rmdir(i)
+                    self.Model.rmdir(i)
                 else:
-                    self.remove(i)
-                    _tabwidget = self.parent().tabwidget()
-                    for n in range(_tabwidget.count()):
-                        if _tabwidget.tabText(n) == self.Model.fileName(i):
-                            _tabwidget.removeTab(n)
+                    self.Model.remove(i)
+                   
                 
         
         

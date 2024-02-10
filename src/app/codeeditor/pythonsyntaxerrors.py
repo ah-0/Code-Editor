@@ -17,21 +17,23 @@ class DisplaySyntaxErrors(QThread):
             self.script = Script(self.text, path=self.path)
             self.syntax_errora = self.script.get_syntax_errors()
             
-            self.load_syntax_errors(self.syntax_errors)
+            self.load_syntax_errors(self.syntax_errora)
         except Exception as err:
             print(err)
 
         self.finished.emit() 
 
     def load_syntax_errors(self, _errors):
-        
-        self.parent().clearIndicatorRange(
+        try:
+            self.parent().clearIndicatorRange(
                     0,
                     0,
                     self.parent().lines(),
-                    self.parent().lineLength(self.parent().lines())-1),
-                    1
-                )
+                    self.parent().lineLength(self.parent().lines())-1,
+                    1)
+        except:
+            pass
+                
                 
 
         for i in _errors:

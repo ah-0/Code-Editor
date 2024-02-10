@@ -1,10 +1,10 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
-from src.app.codeeditor.pythonlexer import PyCustomLexer
-from src.app.codeeditor.pythoncompleter import AutoC
-from src.app.codeeditor.pythonsyntaxerrors import DisplaySyntaxErrors
-from src.app.codeeditor.pythoncodeanalysis import CodeAnalyzer
+from .pythonlexer import PyCustomLexer
+from .pythoncompleter import AutoC
+from .pythonsyntaxerrors import DisplaySyntaxErrors
+from .pythoncodeanalysis import CodeAnalyzer
 from jedi import Script
 import black
 import os
@@ -78,20 +78,16 @@ class PythonEditor(QsciScintilla):
 
         self.api = QsciAPIs(self.lexerpython)
 
-        self.autocompleter = AutoC(self.api, self.path, self)
+        self.autocompleter = AutoC(self.api, self.path)
 
         self.errorviewer = DisplaySyntaxErrors(self.path, self)
 
         self.codeanalyzer = CodeAnalyzer(self.path, self)
 
-        self.classicon = QPixmap("./icons/class.png").scaled(12, 12)
+        self.classicon = QPixmap("./src/icons/class.png").scaled(12, 12)
         self.registerImage(0, self.classicon)
 
-        self.functionicon = QPixmap("./icons/function.png").scaled(12, 12)
-        self.registerImage(1, self.functionicon)
 
-        self.other = QPixmap("./icons/multiply.png").scaled(12, 12)
-        self.registerImage(2, self.other)
 
         self.setStyleSheet(open("./src/style/editor.css").read())
 
@@ -117,14 +113,11 @@ class PythonEditor(QsciScintilla):
 
     def _cursorPositionChanged(self, line: int, index: int) -> None:
         self.autocompleter.get_completions(line + 1, index, self.text())
-        self.errorviewer.display_errors(self.text())
-        self.codeanalyzer.display_errors(self.text())
+        # self.errorviewer.display_errors(self.text())
+        self.codeanalyzer.display_errors()
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
-        if  e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "r":
-            format_text = black.format_str(code: str, mode=black.FileMode())
-            self.setText(format_text)
-            return
+
 
         if self.selectedText():
             selection = list(self.getSelection())
@@ -200,12 +193,8 @@ class PythonEditor(QsciScintilla):
 
         if not self.selectedText():
             line, index = self.getCursorPosition()
-            if e.text() == ".":
-                self.insert(".")
-                self.setCursorPosition(line, index + 1)
-                self.SendScintilla(self.SCI_AUTOCSHOW)
 
-            elif e.text() == "(":
+            if e.text() == "(":
                 self.insert("()")
                 self.setCursorPosition(line, index + 1)
                 self.callTip()
