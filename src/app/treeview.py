@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from pathlib import Path
+import subprocess
 import pyperclip
 import os
 
@@ -143,12 +145,39 @@ class FileManager(QTreeView):
         
         _name, ok = QInputDialog.getText(self, 'Create folder', 'Enter the folder name:')
         if ok:
+            f = Path(_path) / _name
+            count = 1
+            while f.exists():
+                f = Path(f.parent / f"{_name}{count}")
+                count += 1
             self.Model.mkdir(index , _name)
             
         
     
     def open_in_file_manager(self , index):
-        _path = self.Model.filePath(index)
+        _path = os.path.abspath(self.model.filePath(index))
+        is_dir = self.model.isDir(index)
+        if os.name == "nt":
+            # Windows
+            if is_dir:
+                subprocess.Popen(f'explorer "{_path}"')
+            else:
+                subprocess.Popen(f'explorer /select,"{_path}"')
+        elif os.name == "posix":
+            # Linux or Mac OS
+            if sys.platform == "darwin":
+                # macOS
+                if is_dir:
+                    subprocess.Popen(["open", _path])
+                else:
+                    subprocess.Popen(["open", "-R", _path])
+            else:
+                # Linux
+                subprocess.Popen(["xdg-open", os.path.dirname(_path)])
+        else:
+            raise OSError(f"Unsupported platform {os.name}")
+
+    # drag and drop functionality
     
     def copy(self, index):
         _path = self.Model.filePath(index)
