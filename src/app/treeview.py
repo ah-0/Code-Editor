@@ -197,7 +197,14 @@ class FileManager(QTreeView):
     def rename(self, index):
         _path = self.Model.filePath(index)
         _oldname = self.Model.fileName(index)
-        self.edit(index)
+        newname , ok = QInputDialog.getText(self, 'Rename', 'Enter the new name:')
+        
+        if ok:
+            new_path = _path.split("/")[:-1]
+            new_path = new_path + [newname]
+            new_path = "/".join(new_path)
+            os.rename(_path, new_path)
+            
         
     
     def delete(self , index):
