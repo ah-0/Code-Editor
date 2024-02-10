@@ -4,6 +4,8 @@ from PyQt5.QtCore import *
 from pathlib import Path
 import subprocess
 import pyperclip
+import shutil
+import sys
 import os
 
 
@@ -216,6 +218,3 @@ class FileManager(QTreeView):
     def openfile(self, index):
         self.parent().newTab(index)
         
-                
-                
-                
