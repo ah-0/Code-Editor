@@ -6,7 +6,7 @@ from src.app.codeeditor.pythoncompleter import AutoC
 from src.app.codeeditor.pythonsyntaxerrors import DisplaySyntaxErrors
 from src.app.codeeditor.pythoncodeanalysis import CodeAnalyzer
 from jedi import Script
-
+import black
 import os
 
 
@@ -121,6 +121,10 @@ class PythonEditor(QsciScintilla):
         self.codeanalyzer.display_errors(self.text())
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
+        if  e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "r":
+            format_text = black.format_str(code: str, mode=black.FileMode())
+            self.setText(format_text)
+            return
 
         if self.selectedText():
             selection = list(self.getSelection())
@@ -194,7 +198,7 @@ class PythonEditor(QsciScintilla):
             else:
                 super().keyPressEvent(e)
 
-        else:
+        if not self.selectedText():
             line, index = self.getCursorPosition()
             if e.text() == ".":
                 self.insert(".")
