@@ -215,16 +215,19 @@ class FileManager(QTreeView):
         
     
     def delete(self , index):
-        _path = self.Model.filePath(index)
-        _name = self.Model.fileName(index)
-        if self.Model.isDir(index):
-            self.rmdir(index)
-        else:
-            self.remove(index)
-            _tabwidget = self.parent().tabwidget()
-            for i in range(_tabwidget.count()):
-                if _tabwidget.tabText(i) == _name:
-                    _tabwidget.removeTab(i)
+        if self.selectionModel().selectedRows():
+            for i in self.selectionModel().selectedRows():
+                if self.Model.isDir(i):
+                    self.rmdir(i)
+                else:
+                    self.remove(i)
+                    _tabwidget = self.parent().tabwidget()
+                    for n in range(_tabwidget.count()):
+                        if _tabwidget.tabText(n) == self.Model.fileName(i):
+                            _tabwidget.removeTab(n)
+                
+        
+        
             
     def runfile(self , index):
         _path = self.Model.filePath(index)
