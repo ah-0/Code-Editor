@@ -4,8 +4,10 @@ from PyQt5.QtCore import *
 
 
 class HtmlEditor(QsciScintilla):
-    def __init__(self, parent):
+    def __init__(self, path, parent):
         super().__init__(parent)
+        
+        self.path = path
 
         self.setMarginType(0, self.NumberMargin)
         self.setMarginsForegroundColor(QColor("#ff888888"))
