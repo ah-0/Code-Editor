@@ -27,9 +27,11 @@ class CodeAnalyzer(QThread):
         
        
         self.parent().markerDeleteAll(0)
+        self.parent().sendScintilla(self.parent().SCI_ANNOTATIONCLEARALL)
     
         for i in analysis:
             self.parent().markerAdd(i.line-1 , 0)
+            self.parent().annotate(i.line-2, f"{i.message}" , 0)
      
 
 
