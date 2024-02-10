@@ -25,11 +25,14 @@ class DisplaySyntaxErrors(QThread):
 
     def load_syntax_errors(self, _errors):
         
-        for i in range(self.parent().lines()):
-            try:
-               self.parent().clearIndicatorRange(i ,0 ,i , len(self.parent().text(i))-1 , 1)
-            except:
-                pass
+        self.parent().clearIndicatorRange(
+                    0,
+                    0,
+                    self.lines(),
+                    self.lineLength(self.lines()-1),
+                    1
+                )
+                
 
         for i in _errors:
             self.parent().fillIndicatorRange(i.line-1 , 0 ,i.line-1 , len(self.parent().text(i.line-1))-1,1)
