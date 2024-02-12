@@ -138,19 +138,6 @@ class FileManager(QTreeView):
         dialog.setIcon(QMessageBox.Warning)
         return dialog.exec_()
         
-        
-    def newfile(self, index):
-        _path = self.Model.filePath(index)
-        
-        _name, ok = QInputDialog.getText(self, 'Create file', 'Enter the file name:')
-        if ok:
-            f = Path(_path) / _name
-            count = 1
-            while f.exists():
-                f = Path(f.parent / f"{_name}{count}")
-                count += 1
-            f.touch()
-            
                     
     
     def newfolder(self, index):
@@ -165,7 +152,18 @@ class FileManager(QTreeView):
                 count += 1
             self.Model.mkdir(index , f.name)
             
+    def newfile(self, index):
+        _path = self.Model.filePath(index)
         
+        _name, ok = QInputDialog.getText(self, 'Create file', 'Enter the file name:')
+        if ok:
+            f = Path(_path) / _name
+            count = 1
+            while f.exists():
+                f = Path(f.parent / f"{_name}{count}")
+                count += 1
+            f.touch()
+            
     
     def open_in_file_manager(self , index):
         _path = os.path.abspath(self.model.filePath(index))
