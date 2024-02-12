@@ -224,12 +224,17 @@ class FileManager(QTreeView):
         
     
     def delete(self , index):
-        if self.selectionModel().selectedRows():
-            for i in self.selectionModel().selectedRows():
-                if self.Model.isDir(i):
-                    self.Model.rmdir(i)
-                else:
-                    self.Model.remove(i)
+    
+        dialog = self.show_dialog(
+            "Delete", f"Are you sure you want to delete"
+        )
+        if dialog == QMessageBox.Yes:
+           if self.selectionModel().selectedRows():
+              for i in self.selectionModel().selectedRows():
+                  if self.Model.isDir(i):
+                      self.Model.rmdir(i)
+                  else:
+                      self.Model.remove(i)
                    
                 
         
