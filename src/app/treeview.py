@@ -126,7 +126,6 @@ class FileManager(QTreeView):
              
     
         menu.exec_(self.viewport().mapToGlobal(pos))
-
     def show_dialog(self, title, msg) -> int:
         dialog = QMessageBox(self)
         dialog.setFont(QFont("Consolas")
