@@ -214,7 +214,7 @@ class FileManager(QTreeView):
             new_path = "/".join(new_path)
             os.rename(_path, new_path)
             
-            _tabwidget = self.parent().tabwidget()
+            _tabwidget = self.parent().parent().parent().tabwidget()
             for i in range(_tabwidget.count()):
                 if _tabwidget.tabText(i) == _oldname:
                     _tabwidget.setTabText(i, newname)
@@ -244,5 +244,5 @@ class FileManager(QTreeView):
         _path = self.Model.filePath(index)
     
     def openfile(self, index):
-        self.parent().newTab(index)
+        self.parent().parent().parent().newTab(index)
         
