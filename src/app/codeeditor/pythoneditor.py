@@ -7,6 +7,7 @@ from .pythonsyntaxerrors import DisplaySyntaxErrors
 from .pythoncodeanalysis import CodeAnalyzer
 from jedi import Script
 import black
+import json
 import os
 
 
@@ -15,17 +16,24 @@ class PythonEditor(QsciScintilla):
         super().__init__(parent)
 
         self.path = path
-
-        self.setMarginType(0, self.NumberMargin)
+        setting_file_path = "./src/setting/PythonEditor.json"
+        
+        with open(setting_file_path , "r") as f:
+            self.setting = json.load(f)
+        
+        
+        if self.setting["Margin-Line-Number"]:
+            self.setMarginType(0, self.NumberMargin)
+            self.setMarginLineNumbers(0, True)
+            self.setMarginWidth(0, "0000")
+            
+        self.setMarginsFont(QFont("Consolas", 13))
         self.setMarginsForegroundColor(QColor("#ff888888"))
         self.setMarginsBackgroundColor(QColor("#161B21"))
-        self.setMarginLineNumbers(0, True)
-        self.setMarginsFont(QFont("Consolas", 13))
-        self.setMarginWidth(0, "0000")
-
-        self.merker_image = QPixmap("./src/icons/warning.png").scaled(12, 12)
+        
+        self.marker_image = QPixmap("./src/icons/warning.png").scaled(12, 12)
         self.setMarginType(1, self.SymbolMargin)
-        self.markerDefine(self.merker_image, 0)
+        self.markerDefine(self.marker_image, 0)
         self.setMarginSensitivity(1, True)
         self.setMarginMarkerMask(1, 0b1111)
         self.setMarginWidth(1, "0000")
@@ -34,21 +42,22 @@ class PythonEditor(QsciScintilla):
         self.indicatorDefine(QsciScintilla.PlainIndicator, 1)
         self.setIndicatorForegroundColor(QColor("red"), 1)
 
-        self.setCaretForegroundColor(QColor("royalblue"))
-        self.setCaretLineBackgroundColor(QColor("#2c313c"))
-        self.setCaretLineVisible(True)
-        self.setCaretWidth(4)
-
-        self.setAutoCompletionSource(QsciScintilla.AcsAPIs)
-        self.setAutoCompletionThreshold(1)
-        self.setAutoCompletionCaseSensitivity(False)
-        self.setAutoCompletionUseSingle(QsciScintilla.AcusNever)
-        self.setAutoCompletionFillupsEnabled(True)
+        self.setCaretForegroundColor(QColor(self.setting["Caret-ForegroundColor"]))
+        self.setCaretLineBackgroundColor(QColor(self.setting["Caret-Line-BackgroundColor"]))
+        self.setCaretLineVisible(self.setting["Caret-Line-Visible"])
+        self.setCaretWidth(self.setting["Caret-Width"])
+        
+        if self.setting["Auto-Completion-visible"]:
+            self.setAutoCompletionSource(QsciScintilla.AcsAPIs)
+            self.setAutoCompletionThreshold(1)
+            self.setAutoCompletionCaseSensitivity(False)
+            self.setAutoCompletionUseSingle(QsciScintilla.AcusNever)
+            
 
         self.setIndentationGuides(True)
-        self.setTabWidth(4)
+        self.setTabWidth(self.setting["Tab-Width"])
         self.setIndentationsUseTabs(False)
-        self.setAutoIndent(True)
+        self.setAutoIndent(self.setting["Auto-Indent"])
 
         self.setCallTipsStyle(QsciScintilla.CallTipsNoContext)
         self.setCallTipsVisible(0)
@@ -58,7 +67,7 @@ class PythonEditor(QsciScintilla):
         self.setCallTipsHighlightColor(QColor(0xFF, 0x00, 0x00, 0xFF))
 
         self.setEolMode(QsciScintilla.EolWindows)
-        self.setEolVisibility(False)
+        self.setEolVisibility(self.setting["Eol-Visibility"])
 
         self.setBraceMatching(QsciScintilla.StrictBraceMatch)
         self.setMatchedBraceBackgroundColor(QColor("#c678dd"))
