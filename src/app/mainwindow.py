@@ -142,8 +142,8 @@ class MyApp(QMainWindow):
                             editor.setText(rr.read())
                             self.tabwidget.addTab(editor , os.path.basename(i))
                             
-                            self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
-                            self.tabwidget.widget(setting["Current-Tab-Number"]).setCursorPosition(setting["Current-Tab-Editor-Current-Line"] , setting["Current-Tab-Editor-Current-Index"])
+                    self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
+                    self.tabwidget.widget(setting["Current-Tab-Number"]).setCursorPosition(setting["Current-Tab-Editor-Current-Line"] , setting["Current-Tab-Editor-Current-Index"])
                             
         
         
