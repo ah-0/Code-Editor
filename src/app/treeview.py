@@ -41,20 +41,40 @@ class FileIconProvider(QFileIconProvider):
         return super(FileIconProvider, self).icon(parameter)
 
 
+class FileProxyModel(QSortFilterProxyModel):
+    def setIndexPath(self, index):
+        self._index_path = index
+        self.invalidateFilter()
+
+    def filterAcceptsRow(self, sourceRow, sourceParent):
+        if hasattr(self, "_index_path"):
+            ix = self.sourceModel().index(sourceRow, 0, sourceParent)
+            if self._index_path.parent() == sourceParent and self._index_path != ix:
+                return False
+        return super(FileProxyModel, self).filterAcceptsRow(sourceRow, sourceParent)
+
+
 class FileManager(QTreeView):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self,tabwidget):
+        super().__init__(None)
+        self.tabwidget = tabwidget
         
         with open("./src/style/treeview.css" , "r") as f:
             self.setStyleSheet(f.read())
 
-        self.Model = QFileSystemModel()
+        
+        
+        path = os.getcwd()
+        parent_dir = os.path.abspath(os.path.join(path, os.pardir))
+        self.Model = QFileSystemModel(self)
         self.Model.setIconProvider(FileIconProvider())
-        self.Model.setRootPath(os.getcwd())
-
-        self.setModel(self.Model)
-
-        self.setRootIndex(self.Model.index(os.getcwd()))
+        self.Model.setRootPath(path)
+        proxy = FileProxyModel(self)
+        proxy.setSourceModel(self.Model)
+        proxy.setIndexPath(QPersistentModelIndex(self.Model.index(path)))
+        self.setModel(proxy)
+        self.setRootIndex(proxy.mapFromSource(self.Model.index(parent_dir)))
+        
 
         self.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.setSelectionBehavior(QTreeView.SelectRows)
@@ -214,7 +234,7 @@ class FileManager(QTreeView):
             new_path = "/".join(new_path)
             os.rename(_path, new_path)
             
-            _tabwidget = self.parent().parent().parent().tabwidget()
+            _tabwidget = self.tabwidget()
             for i in range(_tabwidget.count()):
                 if _tabwidget.tabText(i) == _oldname:
                     _tabwidget.setTabText(i, newname)
