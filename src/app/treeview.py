@@ -69,11 +69,11 @@ class FileManager(QTreeView):
         self.Model = QFileSystemModel(self)
         self.Model.setIconProvider(FileIconProvider())
         self.Model.setRootPath(path)
-        proxy = FileProxyModel(self)
-        proxy.setSourceModel(self.Model)
-        proxy.setIndexPath(QPersistentModelIndex(self.Model.index(path)))
-        self.setModel(proxy)
-        self.setRootIndex(proxy.mapFromSource(self.Model.index(parent_dir)))
+        self.proxy = FileProxyModel(self)
+        self.proxy.setSourceModel(self.Model)
+        self.proxy.setIndexPath(QPersistentModelIndex(self.Model.index(path)))
+        self.setModel(self.proxy)
+        self.setRootIndex(self.proxy.mapFromSource(self.Model.index(parent_dir)))
         
 
         self.setSelectionMode(QAbstractItemView.ExtendedSelection)
