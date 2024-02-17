@@ -148,7 +148,7 @@ class FileManager(QTreeView):
         menu.exec_(self.viewport().mapToGlobal(pos))
     def show_dialog(self, title, msg) -> int:
         dialog = QMessageBox(self)
-        dialog.setFont(QFont("Consolas")
+        dialog.setFont(QFont("Consolas"))
         dialog.font().setPointSize(14)
         dialog.setWindowTitle(title)
         dialog.setWindowIcon(QIcon("./src/icons/warning.png"))
