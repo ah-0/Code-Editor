@@ -1,8 +1,9 @@
 import os
-from PySide import QtCore, QtGui
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 # display a root directory QFileSystemModel
 
-class FileProxyModel(QtGui.QSortFilterProxyModel):
+class FileProxyModel(QSortFilterProxyModel):
     def setIndexPath(self, index):
         self._index_path = index
         self.invalidateFilter()
@@ -16,17 +17,17 @@ class FileProxyModel(QtGui.QSortFilterProxyModel):
 
 if __name__ == '__main__':
     import sys
-    app = QtGui.QApplication(sys.argv)
-    path = # ...
+    app = QApplication(sys.argv)
+    path = os.getcwd()
     parent_dir = os.path.abspath(os.path.join(path, os.pardir))
-    treeview = QtGui.QTreeView()
-    model = QtGui.QFileSystemModel(treeview)
-    model.setRootPath(QtCore.QDir.rootPath())
+    treeview = QTreeView()
+    model = QFileSystemModel(treeview)
+    model.setRootPath(path)
     proxy = FileProxyModel(treeview)
     proxy.setSourceModel(model)
-    proxy.setIndexPath(QtCore.QPersistentModelIndex(model.index(path)))
+    proxy.setIndexPath(QPersistentModelIndex(model.index(path)))
     treeview.setModel(proxy)
     treeview.setRootIndex(proxy.mapFromSource(model.index(parent_dir)))
     treeview.expandAll()
     treeview.show()
-    sys.exit(app.exec_()
+    sys.exit(app.exec_())
