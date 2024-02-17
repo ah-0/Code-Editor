@@ -122,7 +122,26 @@ class MyApp(QMainWindow):
         toolsmenu = self.menubar2.addMenu("Tools")
         gomenu = self.menubar2.addMenu("Go")
         Terminalmneu = self.menubar2.addMenu("Terminal")
-        filemenu.addAction("&new File                                     ")
+        filemenu.addAction("&New Project")
+        open_project_action = filemenu.addAction("&Open Project")
+        filemenu.addAction("&Rename Project")
+        filemenu.addAction("&Save as")
+        filemenu.addAction("&Exit")
+        
+        open_project_action.triggered.connect(self.new_Project)
+        
+    def new_Project(self):
+        dialog = QFileDialog.getExistingDirectory(self , "Open a folder ","" , QFileDialog.Options)
+        
+        if diglog:
+            parent_dir = os.path.abspath(os.path.join(dialog, os.pardir))
+            self.treeview.Model.setRootPath(dialog)
+            self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
+            
+            for i in range(self.tabwidget.count()):
+                self.tabwidget.removeTab(i)
+        
+        
     def openEvnt_(self):
         setting_file_path = "./src/setting/App.json"
         with open(setting_file_path , "r") as f:
