@@ -40,9 +40,10 @@ class MyApp(QMainWindow):
         self.spliter.setContentsMargins(0, 0, 0, 0)
         self.spliter.setOrientation(Qt.Horizontal)
 
-        self.treeview = FileManager(self)
+        
 
         self.tabwidget = TabWidget(self)
+        self.treeview = FileManager(self.tabwidget)
 
         self.spliter.addWidget(self.treeview)
         self.spliter.addWidget(self.tabwidget)
