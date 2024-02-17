@@ -45,11 +45,10 @@ class PythonEditor(QsciScintilla):
         self.setAutoCompletionUseSingle(QsciScintilla.AcusNever)
         self.setAutoCompletionFillupsEnabled(True)
 
-        self.setIndentationsUseTabs(False)
         self.setIndentationGuides(True)
-        self.setAutoIndent(True)
         self.setTabWidth(4)
-        self.setTabIndents(True)
+        self.setIndentationsUseTabs(False)
+        self.setAutoIndent(True)
 
         self.setCallTipsStyle(QsciScintilla.CallTipsNoContext)
         self.setCallTipsVisible(0)
