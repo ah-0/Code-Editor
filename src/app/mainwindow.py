@@ -9,6 +9,7 @@ from treeview import FileManager
 from tabwidget import TabWidget
 import pathlib
 import qdarkstyle
+import json
 import sys
 import os
 
