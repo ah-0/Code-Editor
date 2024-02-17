@@ -25,15 +25,17 @@ class FileIconProvider(QFileIconProvider):
             if info.suffix() == "js":
                 return QIcon("./src/icons/js.png")
             if info.suffix() == "java":
-                return QIcon("./src/icons/...")
+                return QIcon("./src/icons/java.png")
             if info.suffix() == "cpp":
-                return QIcon("./src/icons/...")
+                return QIcon("./src/icons/cpp_icon.png")
             if info.suffix() == "c":
-                return QIcon("./src/icons/...")  
-            if info.suffix() == "png" or info.suffix() == "jpg":
-                return QIcon("./src/icons/...")
+                return QIcon("./src/icons/c_icon.png")  
+            if info.suffix() == "png":  
+                return QIcon("./src/icons/png_file.png")
+            if info.suffix() == "jpg":
+                return QIcon("./src/icons/jpg_file.png")
             if info.suffix() == "c#":
-                return QIcon("./src/icons/...")  
+                return QIcon("./src/icons/c_sharp.png")  
                 
               
                 
