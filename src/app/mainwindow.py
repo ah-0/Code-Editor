@@ -45,6 +45,7 @@ class MyApp(QMainWindow):
 
         self.tabwidget = TabWidget(self)
         self.treeview = FileManager(self.tabwidget)
+        self.openEvnt_()
 
         self.spliter.addWidget(self.treeview)
         self.spliter.addWidget(self.tabwidget)
@@ -122,6 +123,31 @@ class MyApp(QMainWindow):
         gomenu = self.menubar2.addMenu("Go")
         Terminalmneu = self.menubar2.addMenu("Terminal")
         filemenu.addAction("&new File                                     ")
+    def openEvnt_(self):
+        setting_file_path = "./src/setting/App.json"
+        with open(setting_file_path , "r") as f:
+            setting = json.load(f)
+            
+            if setting["Last-Project"] != "":
+                
+                self.treeview.Model.setRootPath(setting["Last-Project"])
+                
+                parent_dir = os.path.abspath(os.path.join(setting["Last-Project"], os.pardir))
+                self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self
+                treeview.Model.index(parent_dir)))
+                
+                if setting["Paths-List-Of-Opened-Tabs"]:
+                    for i in setting["Paths-List-Of-Opened-Tabs"]:
+                        with open(i , "r") as rr:
+                            editor = PythonEditor(i , self)
+                            editor.setText(rr.read())
+                            self.tabwidget.addTab(editor , os.path.basename(i))
+                            
+                            self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
+                            self.tabwidget.widget(setting["Current-Tab-Number"]).setCursorPosition(setting["Current-Tab-Editor-Current-Line"] , setting["Current-Tab-Editor-Current-Index"])
+                            
+        
+        
     def closeEvent(self,event):
         setting_file_path = "./src/setting/App.json"
         with open(setting_file_path , "r") as f:
