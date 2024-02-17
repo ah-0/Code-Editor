@@ -1,8 +1,8 @@
 QTreeView:branch::selected{
-    background-color:cornflowerblue;
+    background-color:#28739a;
 }
 QTreeView:item:selected{
-    background-color:cornflowerblue;
+    background-color:#28739a;
 }
 QTreeView{
 max-width:300px;
