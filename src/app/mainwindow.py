@@ -121,6 +121,32 @@ class MyApp(QMainWindow):
         gomenu = self.menubar2.addMenu("Go")
         Terminalmneu = self.menubar2.addMenu("Terminal")
         filemenu.addAction("&new File                                     ")
+    def closeEvent(self,event):
+        setting_file_path = "./src/setting/App.json"
+        with open(setting_file_path , "r") as f:
+            setting = json.load(f)
+            
+            setting["Last-Project"] = self.treeview.Model.rootPath()
+            
+            _path_list = []
+            for i in range(self.tabwidget.count()):
+                path = self.tabwidget.widget(i).path
+                _path_list.append(path)
+                
+            setting["Paths-List-Of-Opened-Tabs"] = _path_list
+            setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
+            setting["Current-Tab-Editor-Current-Line"] = self.tabwidget.currentWidget().getCursorPosition()[0]
+            setting["Current-Tab-Editor-Current-Index"] = self.tabwidget.currentWidget().getCursorPosition()[1]
+        
+        init_setting = json.dumps(setting , indent=4)
+        
+        with open(setting_file_path, "w") as fr:
+            fr.write(init_setting)
+            
+                
+        
+        
+        event.accept()
 
 
 if __name__ == "__main__":
