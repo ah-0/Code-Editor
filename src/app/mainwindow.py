@@ -133,8 +133,7 @@ class MyApp(QMainWindow):
                 self.treeview.Model.setRootPath(setting["Last-Project"])
                 
                 parent_dir = os.path.abspath(os.path.join(setting["Last-Project"], os.pardir))
-                self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self
-                treeview.Model.index(parent_dir)))
+                self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
                 
                 if setting["Paths-List-Of-Opened-Tabs"]:
                     for i in setting["Paths-List-Of-Opened-Tabs"]:
