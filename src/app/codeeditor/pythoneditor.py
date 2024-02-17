@@ -54,7 +54,7 @@ class PythonEditor(QsciScintilla):
             self.setAutoCompletionUseSingle(QsciScintilla.AcusNever)
             
 
-        self.setIndentationGuides(True)
+        self.setIndentationGuides(self.setting["Indentation-Guides"])
         self.setTabWidth(self.setting["Tab-Width"])
         self.setIndentationsUseTabs(False)
         self.setAutoIndent(self.setting["Auto-Indent"])
