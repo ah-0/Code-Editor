@@ -12,7 +12,6 @@ import os
 
 
 class PythonEditor(QsciScintilla):
-    
     def __init__(self, path="", parent=None):
         super().__init__(parent)
 
@@ -59,7 +58,8 @@ class PythonEditor(QsciScintilla):
         self.setTabWidth(self.setting["Tab-Width"])
         self.setIndentationsUseTabs(False)
         self.setAutoIndent(self.setting["Auto-Indent"])
-
+        self.setBackspaceUnindents(True)
+        
         self.setCallTipsStyle(QsciScintilla.CallTipsNoContext)
         self.setCallTipsVisible(0)
         self.setCallTipsPosition(QsciScintilla.CallTipsAboveText)
@@ -84,13 +84,9 @@ class PythonEditor(QsciScintilla):
         self.setSelectionBackgroundColor(QColor("#333a46"))
 
         self.lexerpython = PyCustomLexer(self)
-
         self.api = QsciAPIs(self.lexerpython)
-
         self.autocompleter = AutoC(self.api, self.path)
-
         self.errorviewer = DisplaySyntaxErrors(self.path, self)
-
         self.codeanalyzer = CodeAnalyzer(self.path, self)
 
         self.classicon = QPixmap("./src/icons/class.png").scaled(12, 12)
@@ -104,16 +100,16 @@ class PythonEditor(QsciScintilla):
 
         self.cursorPositionChanged.connect(self._cursorPositionChanged)
 
-        # self.SendScintilla(self.SCI_STYLESETHOTSPOT, 1, True)
-        # self.SendScintilla(self.SCI_SETHOTSPOTACTIVEBACK, True, 0xaaaaaa)
-        # self.setHotspotUnderline(True)
-        # self.setHotspotBackgroundColor(QColor("red"))
 
         self.setAnnotationDisplay(self.AnnotationIndented)
         
 
         self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT, 7)
         self.SendScintilla(self.SCI_AUTOCSETIGNORECASE , False)
+        self.SendScintilla(self.SCI_SETMULTIPLESELECTION, True)
+        self.SendScintilla(self.SCI_SETMULTIPASTE, 1)
+        self.SendScintilla(self.SCI_SETADDITIONALSELECTIONTYPING, True)
+        
 
     def clickedmargins(self, margin, line, key):
         if self.markersAtLine(line) == 0:
