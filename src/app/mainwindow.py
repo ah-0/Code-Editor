@@ -131,15 +131,14 @@ class MyApp(QMainWindow):
         filemenu.addAction("&Save as")
         filemenu.addAction("&Exit")
         
-        open_project_action.triggered.connect(self.new_Project)
+        open_project_action.triggered.connect(self.open_project)
         
-    def new_Project(self):
-        dialog = QFileDialog.getExistingDirectory(self , "Open a folder ","" , QFileDialog.Options)
+    def open_project(self):
+        dialog = QFileDialog.getExistingDirectory(self , "Open a folder ","" ,options= QFileDialog.Options())
         
         if dialog:
-            parent_dir = os.path.abspath(os.path.join(dialog, os.pardir))
             self.treeview.Model.setRootPath(dialog)
-            self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
+            self.treeview.setRootIndex(self.treeview.Model.index(dialog))
             
             for i in range(self.tabwidget.count()):
                 self.tabwidget.removeTab(i)
