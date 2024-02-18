@@ -67,17 +67,12 @@ class FileManager(QTreeView):
         
         
         path = os.getcwd()
-        parent_dir = os.path.abspath(os.path.join(path, os.pardir))
         self.Model = QFileSystemModel(self)
         self.Model.setIconProvider(FileIconProvider())
         self.Model.setRootPath(path)
-        self.proxy = FileProxyModel(self)
-        self.proxy.setSourceModel(self.Model)
-        self.proxy.setIndexPath(QPersistentModelIndex(self.Model.index(path)))
-        self.setModel(self.proxy)
-        self.setRootIndex(self.proxy.mapFromSource(self.Model.index(parent_dir)))
-        
 
+        self.setModel(self.Model)
+        self.setRootIndex(self.Model.index(path))
         self.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.setSelectionBehavior(QTreeView.SelectRows)
         self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
@@ -100,6 +95,8 @@ class FileManager(QTreeView):
 
     def show_context_menu(self, pos: QPoint):
         ix = self.indexAt(pos)
+        print(ix)
+        print(self.Model.filePath(ix))
         menu =  QMenu()
         
         if self.Model.isDir(ix):

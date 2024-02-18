@@ -7,6 +7,7 @@ from codeeditor.csseditor import CssEditor
 from codeeditor.jsoneditor import JsonEditor
 from treeview import FileManager
 from tabwidget import TabWidget
+from PyQt5.Qsci import QsciScintilla
 import pathlib
 import qdarkstyle
 import json
@@ -61,6 +62,8 @@ class MyApp(QMainWindow):
         self.treeview.clicked.connect(self.newTab)
 
     def newTab(self, index):
+        print(index)
+        print(self.treeview.Model.filePath(index))
         path = self.treeview.Model.filePath(index)
         name = self.treeview.Model.fileName(index)
         if os.path.isfile(path):
@@ -133,7 +136,7 @@ class MyApp(QMainWindow):
     def new_Project(self):
         dialog = QFileDialog.getExistingDirectory(self , "Open a folder ","" , QFileDialog.Options)
         
-        if diglog:
+        if dialog:
             parent_dir = os.path.abspath(os.path.join(dialog, os.pardir))
             self.treeview.Model.setRootPath(dialog)
             self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
@@ -151,8 +154,8 @@ class MyApp(QMainWindow):
                 
                 self.treeview.Model.setRootPath(setting["Last-Project"])
                 
-                parent_dir = os.path.abspath(os.path.join(setting["Last-Project"], os.pardir))
-                self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
+                
+                self.treeview.setRootIndex(self.treeview.Model.index(setting["Last-Project"]))
                 
                 if setting["Paths-List-Of-Opened-Tabs"]:
                     for i in setting["Paths-List-Of-Opened-Tabs"]:
@@ -162,7 +165,9 @@ class MyApp(QMainWindow):
                             self.tabwidget.addTab(editor , os.path.basename(i))
                             
                     self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
+                    
                     self.tabwidget.widget(setting["Current-Tab-Number"]).setCursorPosition(setting["Current-Tab-Editor-Current-Line"] , setting["Current-Tab-Editor-Current-Index"])
+                    self.tabwidget.widget(setting["Current-Tab-Number"]).SendScintilla(QsciScintilla.SCI_SCROLLTOSTART)
                             
         
         
@@ -177,12 +182,14 @@ class MyApp(QMainWindow):
             for i in range(self.tabwidget.count()):
                 path = self.tabwidget.widget(i).path
                 _path_list.append(path)
+            try:    
+                setting["Paths-List-Of-Opened-Tabs"] = _path_list
+                setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
                 
-            setting["Paths-List-Of-Opened-Tabs"] = _path_list
-            setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
-            setting["Current-Tab-Editor-Current-Line"] = self.tabwidget.currentWidget().getCursorPosition()[0]
-            setting["Current-Tab-Editor-Current-Index"] = self.tabwidget.currentWidget().getCursorPosition()[1]
-        
+                setting["Current-Tab-Editor-Current-Line"] = self.tabwidget.currentWidget().getCursorPosition()[0]
+                setting["Current-Tab-Editor-Current-Index"] = self.tabwidget.currentWidget().getCursorPosition()[1]
+            except:
+                pass
         init_setting = json.dumps(setting , indent=4)
         
         with open(setting_file_path, "w") as fr:

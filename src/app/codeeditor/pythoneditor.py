@@ -12,6 +12,7 @@ import os
 
 
 class PythonEditor(QsciScintilla):
+    
     def __init__(self, path="", parent=None):
         super().__init__(parent)
 
@@ -109,12 +110,13 @@ class PythonEditor(QsciScintilla):
         # self.setHotspotBackgroundColor(QColor("red"))
 
         self.setAnnotationDisplay(self.AnnotationIndented)
+        
 
         self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT, 7)
+        self.SendScintilla(self.SCI_AUTOCSETIGNORECASE , False)
 
     def clickedmargins(self, margin, line, key):
         if self.markersAtLine(line) == 0:
-
             self.markerAdd(line, 0)
         else:
             self.markerDelete(line)
@@ -122,7 +124,7 @@ class PythonEditor(QsciScintilla):
     def _cursorPositionChanged(self, line: int, index: int) -> None:
         self.autocompleter.get_completions(line + 1, index, self.text())
         # self.errorviewer.display_errors(self.text())
-        self.codeanalyzer.display_errors()
+        # self.codeanalyzer.display_errors()
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
 
