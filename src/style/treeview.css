@@ -1,15 +1,22 @@
-
-QTreeView:branch::selected{
-    background-color:#28739a;
-}
-QTreeView:item:selected{
-    background-color:#28739a;
-}
 QTreeView{
-max-width:300px;
-background-color: #161B21;
+    max-width:300px;
+    background-color: #161B21;
 
 }
+QTreeView:branch:selected:active{
+    background-color:#346792;
+}
+QTreeView:branch:selected:!active{
+  color: #DFE1E2;
+  background-color: #37414F;
+}
+QTreeView:branch:!selected:hover
+{
+  outline: 0;
+  color: #DFE1E2;
+  background-color: #37414F;
+}
+
 QTreeView:branch:has-siblings:!adjoins-item {
   border-image: url(none) 0;
 }
@@ -21,3 +28,7 @@ QTreeView:branch:has-siblings:adjoins-item {
 QTreeView:branch:!has-children:!has-siblings:adjoins-item {
   border-image: url(none) 0;
 }
+
+
+
+
