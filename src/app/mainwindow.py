@@ -21,7 +21,7 @@ class MyApp(QMainWindow):
         
         self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
 
-        self.appmenus()
+        self.init_menubar()
 
         self.layoutv = QVBoxLayout()
 
@@ -102,7 +102,7 @@ class MyApp(QMainWindow):
                 self.tabwidget.addTab(editor, QIcon("./src/icons/json.png"), name)
                 self.tabwidget.setCurrentIndex(self.tabwidget.count() - 1)
 
-    def appmenus(self):
+    def init_menubar(self):
 
         self.menubar2 = self.menuBar()
         self.menubar2.setStyleSheet("""
@@ -165,7 +165,6 @@ class MyApp(QMainWindow):
                             
                     self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
                     
-                    self.tabwidget.widget(setting["Current-Tab-Number"]).setCursorPosition(setting["Current-Tab-Editor-Current-Line"] , setting["Current-Tab-Editor-Current-Index"])
                     self.tabwidget.widget(setting["Current-Tab-Number"]).SendScintilla(QsciScintilla.SCI_SCROLLTOSTART)
                             
         
@@ -183,10 +182,9 @@ class MyApp(QMainWindow):
                 _path_list.append(path)
             try:    
                 setting["Paths-List-Of-Opened-Tabs"] = _path_list
-                setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
+                if self.tabwidget.count() > 0:
+                    setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
                 
-                setting["Current-Tab-Editor-Current-Line"] = self.tabwidget.currentWidget().getCursorPosition()[0]
-                setting["Current-Tab-Editor-Current-Index"] = self.tabwidget.currentWidget().getCursorPosition()[1]
             except:
                 pass
         init_setting = json.dumps(setting , indent=4)
