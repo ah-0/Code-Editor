@@ -202,8 +202,8 @@ class FileManager(QTreeView):
             
     
     def open_in_file_manager(self , index):
-        _path = os.path.abspath(self.model.filePath(index))
-        is_dir = self.model.isDir(index)
+        _path = os.path.abspath(self.Model.filePath(index))
+        is_dir = self.Model.isDir(index)
         if os.name == "nt":
             # Windows
             if is_dir:
@@ -261,20 +261,18 @@ class FileManager(QTreeView):
     
     def delete(self , index):
     
-        dialog = self.show_dialog(
-            "Delete", f"Are you sure you want to delete"
-        )
+        dialog = self.show_dialog("Delete", f"Are you sure you want to delete")
         _tabwidget = self.tabwidget
         if dialog == QMessageBox.Yes:
            if self.selectionModel().selectedRows():
-              for i in self.selectionModel().selectedRows():
-                  if self.Model.isDir(i):
-                      self.Model.rmdir(i)
-                  else:
-                       for co in range(_tabwidget.count()):
-                          if _tabwidget.tabText(co) == self.Model.fileName(i):
-                              _tabwidget.removeTab(co)
-                        self.Model.remove(i)
+                for i in self.selectionModel().selectedRows():
+                    if self.Model.isDir(i):
+                        self.Model.rmdir(i)
+                    else:
+                        for co in range(_tabwidget.count()):
+                            if _tabwidget.tabText(co) == self.Model.fileName(i):
+                                 _tabwidget.removeTab(co)
+                       self.Model.remove(i)
                       
                    
                 
