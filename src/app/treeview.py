@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import pyperclip
 import shutil
+import json
 import sys
 import os
 
@@ -51,8 +52,9 @@ class FileManager(QTreeView):
         
         with open("./src/style/treeview.css" , "r") as f:
             self.setStyleSheet(f.read())
-
-        
+            
+        with open("./src/setting/App.json" , "r") as s:
+            setting = json.load(s)
         
         path = os.getcwd()
         self.Model = QFileSystemModel(self)
@@ -68,10 +70,10 @@ class FileManager(QTreeView):
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.show_context_menu)
 
-        self.setIndentation(20)
-        self.setAnimated(True)
+        self.setIndentation(setting["File-Manager-Indentation"])
+        self.setAnimated(setting["File-Manager-Animated"])
 
-        self.setHeaderHidden(True)
+        self.setHeaderHidden(setting["File-Manager-Header-Hidden"])
         self.setColumnHidden(1, True)
         self.setColumnHidden(2, True)
         self.setColumnHidden(3, True)
