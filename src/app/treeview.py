@@ -43,18 +43,6 @@ class FileIconProvider(QFileIconProvider):
         return super(FileIconProvider, self).icon(parameter)
 
 
-class FileProxyModel(QSortFilterProxyModel):
-    def setIndexPath(self, index):
-        self._index_path = index
-        self.invalidateFilter()
-
-    def filterAcceptsRow(self, sourceRow, sourceParent):
-        if hasattr(self, "_index_path"):
-            ix = self.sourceModel().index(sourceRow, 0, sourceParent)
-            if self._index_path.parent() == sourceParent and self._index_path != ix:
-                return False
-        return super(FileProxyModel, self).filterAcceptsRow(sourceRow, sourceParent)
-
 
 class FileManager(QTreeView):
     def __init__(self,tabwidget):
@@ -95,9 +83,38 @@ class FileManager(QTreeView):
 
     def show_context_menu(self, pos: QPoint):
         ix = self.indexAt(pos)
-        print(ix)
-        print(self.Model.filePath(ix))
         menu =  QMenu()
+        menu.setStyleSheet("""
+        QMenu {
+          min-width: 300px;
+          color: #DFE1E2;
+          background-color: #37414F;
+          selection-background-color: #1A72BB;
+        }
+        
+        QMenu::separator {
+          height: 1px;
+          background-color: #60798B;
+          color: #DFE1E2;
+        }
+        
+        QMenu::item {
+          background-color: #37414F;
+          padding: 4px 24px 4px 28px;
+          /* Reserve space for selection border */
+          border: 1px transparent #455364;
+        }
+        
+        QMenu::item:selected {
+          color: #DFE1E2;
+          background-color: #1A72BB;
+        }
+        
+        QMenu::item:pressed {
+          background-color: #1A72BB;
+        }
+        
+        """)
         
         if self.Model.isDir(ix):
             
@@ -233,7 +250,7 @@ class FileManager(QTreeView):
             new_path = "/".join(new_path)
             os.rename(_path, new_path)
             
-            _tabwidget = self.tabwidget()
+            _tabwidget = self.tabwidget
             for i in range(_tabwidget.count()):
                 if _tabwidget.tabText(i) == _oldname:
                     _tabwidget.setTabText(i, newname)
@@ -247,13 +264,18 @@ class FileManager(QTreeView):
         dialog = self.show_dialog(
             "Delete", f"Are you sure you want to delete"
         )
+        _tabwidget = self.tabwidget
         if dialog == QMessageBox.Yes:
            if self.selectionModel().selectedRows():
               for i in self.selectionModel().selectedRows():
                   if self.Model.isDir(i):
                       self.Model.rmdir(i)
                   else:
-                      self.Model.remove(i)
+                       for co in range(_tabwidget.count()):
+                          if _tabwidget.tabText(co) == self.Model.fileName(i):
+                              _tabwidget.removeTab(co)
+                        self.Model.remove(i)
+                      
                    
                 
         

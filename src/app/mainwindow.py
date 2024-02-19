@@ -115,6 +115,9 @@ class MyApp(QMainWindow):
             
             padding-right: 20px;
         }
+        QMenu{
+            min-width : 300px;
+        }
         
         """)
 
