@@ -272,6 +272,8 @@ class FileManager(QTreeView):
                         for co in range(_tabwidget.count()):
                             if _tabwidget.tabText(co) == self.Model.fileName(i):
                                  _tabwidget.removeTab(co)
+                                 break
+                                
                         self.Model.remove(i)
                       
                    
