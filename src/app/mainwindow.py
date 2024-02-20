@@ -173,6 +173,7 @@ class MyApp(QMainWindow):
                     self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
                     
                     self.tabwidget.widget(setting["Current-Tab-Number"]).SendScintilla(QsciScintilla.SCI_SCROLLTOSTART)
+                self.treeview.setCurrentIndex(self.treeview.Model.index(setting["File-Manager-Current-File"]))
                             
         
         
@@ -187,13 +188,16 @@ class MyApp(QMainWindow):
             for i in range(self.tabwidget.count()):
                 path = self.tabwidget.widget(i).path
                 _path_list.append(path)
-            try:    
-                setting["Paths-List-Of-Opened-Tabs"] = _path_list
-                if self.tabwidget.count() > 0:
-                    setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
+               
+            setting["Paths-List-Of-Opened-Tabs"] = _path_list
+            if self.tabwidget.count() > 0:
+                setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
+            current_file_index = self treeview.currentIndex()
+            current_file_path = self.treeview.Model.filePath(current_file_path)
+            setting["File-Manager-Current-File"] = current_file_path
                 
-            except:
-                pass
+            
+              
         init_setting = json.dumps(setting , indent=4)
         
         with open(setting_file_path, "w") as fr:
