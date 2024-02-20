@@ -60,10 +60,14 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.centerw)
 
         self.treeview.clicked.connect(self.newTab)
+        self.tabwidget.currentChanged.connect(self._tab_widget_current_change)
+        
+    def _tab_widget_current_change(self, index):
+        current_tab_path = self.tabwidget.widget(index).path
+        file_index = self.treeview.Model.index(current_tab_path)
+        self.treeview.setCurrentIndex(file_index)
 
     def newTab(self, index):
-        print(index)
-        print(self.treeview.Model.filePath(index))
         path = self.treeview.Model.filePath(index)
         name = self.treeview.Model.fileName(index)
         if os.path.isfile(path):
