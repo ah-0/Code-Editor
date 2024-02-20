@@ -289,3 +289,34 @@ class FileManager(QTreeView):
     def openfile(self, index):
         self.parent().parent().parent().newTab(index)
         
+    def dragEnterEvent(self, e: QDragEnterEvent) -> None:
+            if e.mimeData().hasUrls():
+                e.accept()
+            else:
+                e.ignore()
+    
+    def dropEvent(self, e: QDropEvent) -> None:
+        ix = self.indexAt(e.pos())
+        
+        if e.mimeData().hasUrls():
+            if self.Model.isDir(ix):
+                index_path = Path(self.Model.filePath(ix))
+                for url in e.mimeData().urls():
+                    path = Path(url.toLocalFile())
+                    if os.path.isdir(path):
+                        shutil.copytree(path, index_path / path.name)
+                    elif os.path.isfile(path):
+                        shutil.copy(path, index_path / path.name)
+            elif self.Model.fileInfo(ix).isFile():
+                index_path = Path("/".join(index_path.split("/")[:-1]))
+                for url in e.mimeData().urls():
+                    path = Path(url.toLocalFile())
+                    if os.path.isdir(path):
+                        shutil.copytree(path, index_path / path.name)
+                    elif os.path.isfile(path):
+                        shutil.copy(path, index_path / path.name)
+                
+                
+        e.accept()
+    
+            
