@@ -1,6 +1,7 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
+from bs4 import BeautifulSoup
 
 
 class HtmlEditor(QsciScintilla):
@@ -60,3 +61,10 @@ class HtmlEditor(QsciScintilla):
         self.setLexer(self.html_lexer)
 
         self.setStyleSheet(open("./src/style/editor.css").read())
+        
+    def keyPressEvent(self, e: QKeyEvent) -> None:
+        if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
+            soup = BeautifulSoup(self.text(), 'html.parser')
+            format = soup.prettify()
+            self.setText(format)
+            return
