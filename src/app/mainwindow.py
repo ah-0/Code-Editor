@@ -163,8 +163,8 @@ class MyApp(QMainWindow):
                 
                 self.treeview.setRootIndex(self.treeview.Model.index(setting["Last-Project"]))
                 
-                if setting["Paths-List-Of-Opened-Tabs"]:
-                    for i in setting["Paths-List-Of-Opened-Tabs"]:
+                if setting["List-Of-Opened-Tabs-Paths"]:
+                    for i in setting["List-Of-Opened-Tabs-Paths"]:
                         with open(i , "r") as rr:
                             editor = PythonEditor(i , self)
                             editor.setText(rr.read())
@@ -190,7 +190,7 @@ class MyApp(QMainWindow):
                 path = self.tabwidget.widget(i).path
                 _path_list.append(path)
                
-            setting["Paths-List-Of-Opened-Tabs"] = _path_list
+            setting["List-Of-Opened-Tabs-Paths"] = _path_list
             if self.tabwidget.count() > 0:
                 setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
                 
