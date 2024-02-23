@@ -127,7 +127,7 @@ class MyApp(QMainWindow):
 
         filemenu = self.menubar2.addMenu("&File")
         editmenu = self.menubar2.addMenu("Edit")
-        selectionmenu = self.menubar2.addMenu("Selection")
+  
         viewmenu = self.menubar2.addMenu("View")
         toolsmenu = self.menubar2.addMenu("Tools")
         gomenu = self.menubar2.addMenu("Go")
