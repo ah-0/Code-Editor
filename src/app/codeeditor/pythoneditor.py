@@ -123,7 +123,10 @@ class PythonEditor(QsciScintilla):
         # self.codeanalyzer.display_errors()
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
-
+        if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
+            format = black.format_str(self.text() , mode=black.FileMode())
+            self.setText(format)
+            return
 
         if self.selectedText():
             selection = list(self.getSelection())
