@@ -37,14 +37,24 @@ class FileIconProvider(QFileIconProvider):
                 return QIcon("./src/icons/jpg_file.png")
             if info.suffix() == "c#":
                 return QIcon("./src/icons/c_sharp.png")  
-                
-              
-                
 
         return super(FileIconProvider, self).icon(parameter)
+        
+        
+class FileProxyModel(QSortFilterProxyModel):
+    def setIndexPath(self, index):
+        self._index_path = index
+        self.invalidateFilter()
 
-
-
+    def filterAcceptsRow(self, sourceRow, sourceParent):
+        if hasattr(self, "_index_path"):
+            ix = self.sourceModel().index(sourceRow, 0, sourceParent)
+            if self._index_path.parent() == sourceParent and self._index_path != ix:
+                return False
+        return super(FileProxyModel, self).filterAcceptsRow(sourceRow, sourceParent)
+        
+        
+        
 class FileManager(QTreeView):
     def __init__(self,tabwidget):
         super().__init__(None)
@@ -57,12 +67,17 @@ class FileManager(QTreeView):
             setting = json.load(s)
         
         path = os.getcwd()
+        parent_dir = os.path.abspath(os.path.join(path, os.pardir))
         self.Model = QFileSystemModel(self)
         self.Model.setIconProvider(FileIconProvider())
         self.Model.setRootPath(path)
-
-        self.setModel(self.Model)
-        self.setRootIndex(self.Model.index(path))
+        self.proxy = FileProxyModel(self)
+        self.proxy.setSourceModel(self.Model)
+        self.proxy.setIndexPath(QPersistentModelIndex(self.Model.index(path)))
+        self.setModel(self.proxy)
+        self.setRootIndex(self.proxy.mapFromSource(self.Model.index(parent_dir)))
+        
+        
         self.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.setSelectionBehavior(QTreeView.SelectRows)
         self.setEditTriggers(QTreeView.EditTrigger.NoEditTriggers)
@@ -84,7 +99,8 @@ class FileManager(QTreeView):
         self.setDragDropMode(QAbstractItemView.DragDrop)
 
     def show_context_menu(self, pos: QPoint):
-        ix = self.indexAt(pos)
+        index = self.indexAt(pos)
+        ix = self.proxy.mapToSource(index)
         menu =  QMenu()
         menu.setStyleSheet("""
         QMenu {

@@ -31,3 +31,9 @@ if __name__ == '__main__':
     treeview.expandAll()
     treeview.show()
     sys.exit(app.exec_())
+    
+    
+    QModelIndex index2=proxymodel->mapToSource(index); 
+//Returns the source model index (In my case it was QFileSystemModel)
+QString selectedrow=filemodel->fileInfo(index2).absoluteFilePath();
+//

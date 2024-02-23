@@ -67,7 +67,8 @@ class MyApp(QMainWindow):
         file_index = self.treeview.Model.index(current_tab_path)
         self.treeview.setCurrentIndex(file_index)
 
-    def newTab(self, index):
+    def newTab(self, ix):
+        index = self.treeview.proxy.mapToSource(ix)
         path = self.treeview.Model.filePath(index)
         name = self.treeview.Model.fileName(index)
         if os.path.isfile(path):
@@ -144,8 +145,9 @@ class MyApp(QMainWindow):
         dialog = QFileDialog.getExistingDirectory(self , "Open a folder ","" ,options= QFileDialog.Options())
         
         if dialog:
+            parent_dir = os.path.abspath(os.path.join(dialog, os.pardir))
             self.treeview.Model.setRootPath(dialog)
-            self.treeview.setRootIndex(self.treeview.Model.index(dialog))
+            self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
             
             for i in range(self.tabwidget.count()):
                 self.tabwidget.removeTab(i)
@@ -157,11 +159,11 @@ class MyApp(QMainWindow):
             setting = json.load(f)
             
             if setting["Last-Project"] != "":
-                
+                parent_dir = os.path.abspath(os.path.join(setting["Last-Project"], os.pardir))
                 self.treeview.Model.setRootPath(setting["Last-Project"])
                 
                 
-                self.treeview.setRootIndex(self.treeview.Model.index(setting["Last-Project"]))
+                self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
                 
                 if setting["List-Of-Opened-Tabs-Paths"]:
                     for i in setting["List-Of-Opened-Tabs-Paths"]:
@@ -173,8 +175,7 @@ class MyApp(QMainWindow):
                     self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
                     
                     self.tabwidget.widget(setting["Current-Tab-Number"]).SendScintilla(QsciScintilla.SCI_SCROLLTOSTART)
-                    
-                self.treeview.setCurrentIndex(self.treeview.Model.index(setting["File-Manager-Current-File"]))
+
                             
         
         
