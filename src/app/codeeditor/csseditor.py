@@ -74,7 +74,7 @@ class CssEditor(QsciScintilla):
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
-            format = cssbeautifier.beautify(code)
+            format = cssbeautifier.beautify(self.text())
             self.setText(format)
             return
 
