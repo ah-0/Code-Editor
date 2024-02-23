@@ -312,7 +312,8 @@ class FileManager(QTreeView):
                 e.ignore()
     
     def dropEvent(self, e: QDropEvent) -> None:
-        ix = self.indexAt(e.pos())
+        index = self.indexAt(e.pos())
+        ix = self.proxy.mapToSource(index)
         
         if e.mimeData().hasUrls():
             if self.Model.isDir(ix):
