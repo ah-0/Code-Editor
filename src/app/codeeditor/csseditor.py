@@ -1,7 +1,7 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
-
+import cssbeautifier
 
 class CssEditor(QsciScintilla):
     def __init__(self, path , parent):
@@ -73,6 +73,10 @@ class CssEditor(QsciScintilla):
         self.setStyleSheet(open("./src/style/editor.css").read())
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
+        if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
+            format = cssbeautifier.beautify(code)
+            self.setText(format)
+            return
 
         if self.selectedText():
             selection = list(self.getSelection())
