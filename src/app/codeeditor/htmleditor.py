@@ -68,3 +68,5 @@ class HtmlEditor(QsciScintilla):
             format = soup.prettify()
             self.setText(format)
             return
+        return super().keyPressEvent(e)
+
