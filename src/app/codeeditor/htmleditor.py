@@ -64,9 +64,11 @@ class HtmlEditor(QsciScintilla):
         
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
+            line , index = self.getCursorPosition()
             soup = BeautifulSoup(self.text(), 'html.parser')
             format = soup.prettify()
             self.setText(format)
+            self.setCursorPosition(line , index)
             return
         return super().keyPressEvent(e)
 
