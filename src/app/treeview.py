@@ -12,7 +12,6 @@ import os
 
 class FileIconProvider(QFileIconProvider):
     def icon(self, parameter):
-
         if isinstance(parameter, QFileInfo):
             info : QFileInfo = parameter
             if info.isDir():
