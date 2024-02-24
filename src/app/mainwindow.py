@@ -196,7 +196,8 @@ class MyApp(QMainWindow):
             if self.tabwidget.count() > 0:
                 setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
                 
-            current_file_index = self treeview.currentIndex()
+            current_file_index = self.treeview.currentIndex()
+            current_file_index = self.treeview.proxy.mapToSource(current_file_index)
             current_file_path = self.treeview.Model.filePath(current_file_path)
             
             setting["File-Manager-Current-File"] = current_file_path
