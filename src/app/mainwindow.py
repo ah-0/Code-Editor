@@ -65,6 +65,7 @@ class MyApp(QMainWindow):
     def _tab_widget_current_change(self, index):
         current_tab_path = self.tabwidget.widget(index).path
         file_index = self.treeview.Model.index(current_tab_path)
+        file_index = self.treeview.proxy.mapFromSource(file_index)
         self.treeview.setCurrentIndex(file_index)
 
     def newTab(self, ix):
