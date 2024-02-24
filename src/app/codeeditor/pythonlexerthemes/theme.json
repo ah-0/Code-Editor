@@ -6,7 +6,7 @@
         "syntax": [
             {
                 "default": {
-                    "color": "#b4b69b",
+                    "color": "#abb2bf",
                     "paper-color": "#161B21",
                     "font": { 
                         "family": "consolas",
