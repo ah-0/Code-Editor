@@ -1,7 +1,6 @@
 QListView{
   
   min-width: 500px;
-  min-height: 100px;
 
 }
 QListView::item{
