@@ -2,10 +2,10 @@ QTreeView{
     max-width:300px;
     background-color: #161B21;
     font-size: 16px;
-    font-family: Consolas;
+    font-family: Arial, Helvetica, sans-serif;
 }
 QTreeView::item{
-    height: 30px;
+    height: 27px;
 }
 
 
