@@ -119,7 +119,6 @@ class FileManager(QTreeView):
         QMenu::item {
           background-color: #37414F;
           padding: 4px 24px 4px 28px;
-          /* Reserve space for selection border */
           border: 1px transparent #455364;
         }
         
