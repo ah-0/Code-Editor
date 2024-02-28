@@ -84,9 +84,10 @@ class MyApp(QMainWindow):
 
                 with open(path, "r") as f:
                     editor.setText(f.read())
-                self.tabwidget.addTab(editor, QIcon("./src/icons/py.png"), name)
+                self.tabwidget.addTab(editor, QIcon("./src/icons/python_icon.png"), name)
 
                 self.tabwidget.setCurrentIndex(self.tabwidget.count() - 1)
+                
 
             elif pathlib.Path(path).suffix == ".html":
                 editor = HtmlEditor(path,self)
@@ -94,6 +95,7 @@ class MyApp(QMainWindow):
                     editor.setText(f.read())
                 self.tabwidget.addTab(editor, QIcon("./src/icons/py.png"), name)
                 self.tabwidget.setCurrentIndex(self.tabwidget.count() - 1)
+                
 
             elif pathlib.Path(path).suffix == ".css":
                 editor = CssEditor(path,self)
@@ -101,6 +103,7 @@ class MyApp(QMainWindow):
                     editor.setText(f.read())
                 self.tabwidget.addTab(editor, QIcon("./src/icons/css.png"), name)
                 self.tabwidget.setCurrentIndex(self.tabwidget.count() - 1)
+                
 
             elif pathlib.Path(path).suffix == ".json":
                 editor = JsonEditor(path,self)
@@ -173,6 +176,8 @@ class MyApp(QMainWindow):
                             editor = PythonEditor(i , self)
                             editor.setText(rr.read())
                             self.tabwidget.addTab(editor , os.path.basename(i))
+                            
+                            self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
                             
                     
                     
