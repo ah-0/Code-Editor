@@ -132,53 +132,41 @@ class FileManager(QTreeView):
         }
         
         """)
+        if index.column() == 0:
+            if self.Model.isDir(ix):
+                new_file_action = menu.addAction("New File")
+                new_folder_action = menu.addAction("New Folder")
+            
+                new_file_action.triggered.connect(lambda : self.newfile(ix))
+                new_folder_action.triggered.connect(lambda : self.newfolder(ix))
         
-        if self.Model.isDir(ix):
+            elif self.Model.fileInfo(ix).isFile():
             
-            new_file_action = menu.addAction("New File")
-            new_folder_action = menu.addAction("New Folder")
-            open_in_file_manager_action = menu.addAction("Open In File Manager")
-            copy_action = menu.addAction("Copy")
-            paste_action = menu.addAction("Paste")
-            cut_action = menu.addAction("Cut")
+                file_open_action = menu.addAction("Open")
+                file_run_action = menu.addAction("Run")
+                
+                file_open_action.triggered.connect(lambda : self.openfile(ix))
+                file_run_action.triggered.connect(lambda : self.runfile(ix))
+                
+                
             copy_path_action = menu.addAction("Copy Path")
-            rename_action = menu.addAction("Rename")
-            delete_action = menu.addAction("Delete")
-           
-           
-            new_file_action.triggered.connect(lambda : self.newfile(ix))
-            new_folder_action.triggered.connect(lambda : self.newfolder(ix))
-            paste_action.triggered.connect(lambda : self.paste(ix) )
-           
-           
-           
-        elif self.Model.fileInfo(ix).isFile():
-            
-            file_open_action = menu.addAction("Open")
-            copy_path_action = menu.addAction("Copy Path")
-            file_run_action = menu.addAction("Run")
             copy_action = menu.addAction("Copy")
             cut_action = menu.addAction("Cut")
             open_in_file_manager_action = menu.addAction("Open In File Manager")
             rename_action = menu.addAction("Rename")
             delete_action = menu.addAction("Delete")
              
-             
-            file_open_action.triggered.connect(lambda : self.openfile(ix))
-            file_run_action.triggered.connect(lambda : self.runfile(ix))
-             
-        try:     
             open_in_file_manager_action.triggered.connect(lambda : self.open_in_file_manager(ix))
             copy_action.triggered.connect(lambda : self.copy(ix))
             cut_action.triggered.connect(lambda : self.cut(ix))
             copy_path_action.triggered.connect(lambda : self.copypath(ix))
             rename_action.triggered.connect(lambda : self.rename(ix))
             delete_action.triggered.connect(lambda : self.delete(ix))
-        except:
-            pass
+ 
              
     
         menu.exec_(self.viewport().mapToGlobal(pos))
+        
     def show_dialog(self, title, msg) -> int:
         dialog = QMessageBox(self)
         dialog.setFont(QFont("Consolas"))
@@ -283,15 +271,16 @@ class FileManager(QTreeView):
         if dialog == QMessageBox.Yes:
            if self.selectionModel().selectedRows():
                 for i in self.selectionModel().selectedRows():
-                    if self.Model.isDir(i):
-                        self.Model.rmdir(i)
+                    ixx = self.proxy.mapToSource(i)
+                    if self.Model.isDir(ixx):
+                        self.Model.rmdir(ixx)
                     else:
                         for co in range(_tabwidget.count()):
-                            if _tabwidget.tabText(co) == self.Model.fileName(i):
+                            if _tabwidget.tabText(co) == self.Model.fileName(ixx):
                                  _tabwidget.removeTab(co)
                                  break
                                 
-                        self.Model.remove(i)
+                        self.Model.remove(ixx)
                       
                    
                 
