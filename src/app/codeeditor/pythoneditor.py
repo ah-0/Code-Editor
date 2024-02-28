@@ -109,6 +109,7 @@ class PythonEditor(QsciScintilla):
         self.SendScintilla(self.SCI_SETMULTIPLESELECTION, True)
         self.SendScintilla(self.SCI_SETMULTIPASTE, 1)
         self.SendScintilla(self.SCI_SETADDITIONALSELECTIONTYPING, True)
+        self.zoomTo(3)
         
 
     def clickedmargins(self, margin, line, key):

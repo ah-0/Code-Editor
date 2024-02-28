@@ -63,10 +63,11 @@ class MyApp(QMainWindow):
         self.tabwidget.currentChanged.connect(self._tab_widget_current_change)
         
     def _tab_widget_current_change(self, index):
-        current_tab_path = self.tabwidget.widget(index).path
-        file_index = self.treeview.Model.index(current_tab_path)
-        file_index = self.treeview.proxy.mapFromSource(file_index)
-        self.treeview.setCurrentIndex(file_index)
+        if self.tabwidget.count() > 0:
+            current_tab_path = self.tabwidget.widget(index).path
+            file_index = self.treeview.Model.index(current_tab_path)
+            file_index = self.treeview.proxy.mapFromSource(file_index)
+            self.treeview.setCurrentIndex(file_index)
 
     def newTab(self, ix):
         index = self.treeview.proxy.mapToSource(ix)
@@ -173,7 +174,7 @@ class MyApp(QMainWindow):
                             editor.setText(rr.read())
                             self.tabwidget.addTab(editor , os.path.basename(i))
                             
-                    self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
+                    
                     
                     self.tabwidget.widget(setting["Current-Tab-Number"]).SendScintilla(QsciScintilla.SCI_SCROLLTOSTART)
 
@@ -195,12 +196,9 @@ class MyApp(QMainWindow):
             setting["List-Of-Tab-Paths"] = _path_list
             if self.tabwidget.count() > 0:
                 setting["Current-Tab-Number"] = self.tabwidget.currentIndex()
-                
-            current_file_index = self.treeview.currentIndex()
-            current_file_index = self.treeview.proxy.mapToSource(current_file_index)
-            current_file_path = self.treeview.Model.filePath(current_file_path)
+        
             
-            setting["File-Manager-Current-File"] = current_file_path
+            
                 
             
               

@@ -96,6 +96,7 @@ class FileManager(QTreeView):
         self.setAcceptDrops(True)
         self.setDropIndicatorShown(True)
         self.setDragDropMode(QAbstractItemView.DragDrop)
+        self.expandAll()
 
     def show_context_menu(self, pos: QPoint):
         index = self.indexAt(pos)
