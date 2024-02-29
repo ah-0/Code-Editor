@@ -29,7 +29,7 @@ class PythonEditor(QsciScintilla):
             
         self.setMarginsFont(QFont("Consolas", 13))
         self.setMarginsForegroundColor(QColor("#ff888888"))
-        self.setMarginsBackgroundColor(QColor("#161B21"))
+        self.setMarginsBackgroundColor(QColor("#282c34"))
         
         self.marker_image = QPixmap("./src/icons/warning.png").scaled(12, 12)
         self.setMarginType(1, self.SymbolMargin)
