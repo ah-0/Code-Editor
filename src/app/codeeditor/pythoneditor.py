@@ -86,8 +86,10 @@ class PythonEditor(QsciScintilla):
         self.lexerpython = PyCustomLexer(self)
         self.api = QsciAPIs(self.lexerpython)
         self.autocompleter = AutoC(self.api, self.path)
-        self.errorviewer = DisplaySyntaxErrors(self.path, self)
-        self.codeanalyzer = CodeAnalyzer(self.path, self)
+        if self.setting["Disply-Syntax-Errors"]:
+            self.errorviewer = DisplaySyntaxErrors(self.path, self)
+        if self.setting["Code-Analysis"]:
+            self.codeanalyzer = CodeAnalyzer(self.path, self)
 
         self.classicon = QPixmap("./src/icons/class.png").scaled(12, 12)
         self.registerImage(0, self.classicon)
@@ -120,8 +122,10 @@ class PythonEditor(QsciScintilla):
 
     def _cursorPositionChanged(self, line: int, index: int) -> None:
         self.autocompleter.get_completions(line + 1, index, self.text())
-        # self.errorviewer.display_errors(self.text())
-        # self.codeanalyzer.display_errors()
+        if self.setting["Disply-Syntax-Errors"]:
+            self.errorviewer.display_errors(self.text())
+        if self.setting["Code-Analysis"]:
+            self.codeanalyzer.display_errors()
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":

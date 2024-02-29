@@ -16,7 +16,7 @@
   "Matched-Brace-ForegroundColor": "#F2E3E3",
   "Selection-BackgroundColor": "#333a46",
   "IndicatorForegroundColor": "red",
-  "Code-Analysis": true,
-  "Disply-Syntax-Errors" : true
+  "Code-Analysis": false,
+  "Disply-Syntax-Errors" : false
   
 }
