@@ -178,11 +178,12 @@ class MyApp(QMainWindow):
                                 editor.setText(rr.read())
                                 self.tabwidget.addTab(editor,QIcon("./src/icons/python_icon.png") , os.path.basename(i))
                             elif pathlib.Path(i).suffix == ".html":
-                                    editor = HtmlEditor(path,self)
-                                    editor.setText(rr.read())
-                                    self.tabwidget.addTab(editor, QIcon("./src/icons/py.png"), os.path.basename(i))
+                                editor = HtmlEditor(path,self)
+                                editor.setText(rr.read())
+                                self.tabwidget.addTab(editor, QIcon("./src/icons/py.png"), os.path.basename(i))
                             elif pathlib.Path(i).suffix == ".css":
-                                editor = CssEditor(path,self)editor.setText(rr.read())
+                                editor = CssEditor(path,self)
+                                editor.setText(rr.read())
                                 self.tabwidget.addTab(editor, QIcon("./src/icons/css.png"), os.path.basename(i))
                     
                     
