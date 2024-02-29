@@ -47,6 +47,9 @@ class CloneReopWin(QDialog):
         
         """)
     def clone_reop_(self):
-        Repo.clone_from(self.repo_url.text() , self.to_path.text())
+        try:
+            Repo.clone_from(self.repo_url.text() , self.to_path.text())
+        except:
+            pass
         path = self.to_path.text()
         self.close()
