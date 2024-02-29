@@ -174,18 +174,16 @@ class MyApp(QMainWindow):
                     for i in setting["List-Of-Tab-Paths"]:
                         with open(i , "r") as rr:
                             if pathlib.Path(i).suffix == ".py":
-                                
                                 editor = PythonEditor(i , self)
                                 editor.setText(rr.read())
                                 self.tabwidget.addTab(editor,QIcon("./src/icons/python_icon.png") , os.path.basename(i))
                             elif pathlib.Path(i).suffix == ".html":
-                                        editor = HtmlEditor(path,self)
-                                           editor.setText(rr.read())
-                                           self.tabwidget.addTab(editor, QIcon("./src/icons/py.png"), os.path.basename(i))
+                                    editor = HtmlEditor(path,self)
+                                    editor.setText(rr.read())
+                                    self.tabwidget.addTab(editor, QIcon("./src/icons/py.png"), os.path.basename(i))
                             elif pathlib.Path(i).suffix == ".css":
-                editor = CssEditor(path,self)
-                editor.setText(rr.read())
-                self.tabwidget.addTab(editor, QIcon("./src/icons/css.png"), os.path.basename(i))
+                                editor = CssEditor(path,self)editor.setText(rr.read())
+                                self.tabwidget.addTab(editor, QIcon("./src/icons/css.png"), os.path.basename(i))
                     
                     
                     
