@@ -117,13 +117,11 @@ class MyApp(QMainWindow):
         self.menubar2 = self.menuBar()
         self.menubar2.setStyleSheet("""
         QMenuBar{
-            background-color: 161B21;
+            background-color: #161B21;
         }
         QMenuBar::item{
             padding: 10px;
-            
-            
-            padding-right: 20px;
+            padding-right: 15px;
         }
         QMenu{
             min-width : 300px;
@@ -138,10 +136,16 @@ class MyApp(QMainWindow):
         toolsmenu = self.menubar2.addMenu("Tools")
         gomenu = self.menubar2.addMenu("Go")
         Terminalmneu = self.menubar2.addMenu("Terminal")
+        
         filemenu.addAction("&New Project")
+        
         open_project_action = filemenu.addAction("&Open Project")
+        open_project_action.setShortcut("Ctrl+K")
+        
         filemenu.addAction("&Rename Project")
+        
         filemenu.addAction("&Save as")
+        
         filemenu.addAction("&Exit")
         
         open_project_action.triggered.connect(self.open_project)

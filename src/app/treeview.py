@@ -104,9 +104,9 @@ class FileManager(QTreeView):
         menu =  QMenu()
         menu.setStyleSheet("""
         QMenu {
-          min-width: 300px;
-          color: #DFE1E2;
-          background-color: #37414F;
+          min-width: 250px;
+          color: white;
+          background-color: #161B21;
           selection-background-color: #1A72BB;
         }
         
@@ -117,13 +117,14 @@ class FileManager(QTreeView):
         }
         
         QMenu::item {
+          height: 28px;
           background-color: #37414F;
           padding: 4px 24px 4px 28px;
           border: 1px transparent #455364;
         }
         
         QMenu::item:selected {
-          color: #DFE1E2;
+          color: white;
           background-color: #1A72BB;
         }
         
