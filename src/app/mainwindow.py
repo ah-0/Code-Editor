@@ -178,7 +178,7 @@ class MyApp(QMainWindow):
                                 editor = PythonEditor(i , self)
                                 editor.setText(rr.read())
                                 self.tabwidget.addTab(editor,QIcon("./src/icons/python_icon.png") , os.path.basename(i))
-                           elif pathlib.Path(i).suffix == ".html":
+                            elif pathlib.Path(i).suffix == ".html":
                                         editor = HtmlEditor(path,self)
                                            editor.setText(rr.read())
                                            self.tabwidget.addTab(editor, QIcon("./src/icons/py.png"), os.path.basename(i))
