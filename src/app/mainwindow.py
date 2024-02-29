@@ -125,26 +125,27 @@ class MyApp(QMainWindow):
         
         """)
 
-        filemenu = self.menubar2.addMenu("&File")
-        editmenu = self.menubar2.addMenu("Edit")
-  
-        viewmenu = self.menubar2.addMenu("View")
-        toolsmenu = self.menubar2.addMenu("Tools")
-        gomenu = self.menubar2.addMenu("Go")
-        Terminalmneu = self.menubar2.addMenu("Terminal")
+        file_menu = self.menubar2.addMenu("&File")
+        edit_menu = self.menubar2.addMenu("Edit")
+        view_menu = self.menubar2.addMenu("View")
+        run_menu = self.menubar2.addMenu("Run")
+        tools_menu = self.menubar2.addMenu("Tools")
+        github_menu = self.menubar2.addMenu("GitHub")
+        Terminal_menu = self.menubar2.addMenu("Terminal")
         
-        filemenu.addAction("&New Project")
+        file_menu.addAction("&New Project")
         
-        open_project_action = filemenu.addAction("&Open Project")
+        open_project_action = file_menu.addAction("&Open Project")
         open_project_action.setShortcut("Ctrl+K")
-        
-        filemenu.addAction("&Rename Project")
-        
-        filemenu.addAction("&Save as")
-        
-        filemenu.addAction("&Exit")
-        
         open_project_action.triggered.connect(self.open_project)
+        
+        file_menu.addAction("&Rename Project")
+        
+        file_menu.addAction("&Save as")
+        
+        file_menu.addAction("&Exit")
+        
+        
         
     def open_project(self):
         dialog = QFileDialog.getExistingDirectory(self , "Open a folder ","" ,options= QFileDialog.Options())
