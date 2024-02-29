@@ -177,14 +177,14 @@ class MyApp(QMainWindow):
                 if setting["List-Of-Tab-Paths"]:
                     for i in setting["List-Of-Tab-Paths"]:
                         with open(i , "r") as rr:
-                            editor = PythonEditor(i , self)
-                            editor.setText(rr.read())
-                            self.tabwidget.addTab(editor , os.path.basename(i))
+                            if pathlib.Path(i).suffix == ".py":
+                                
+                                editor = PythonEditor(i , self)
+                                editor.setText(rr.read())
+                                self.tabwidget.addTab(editor,QIcon("./src/icons/python_icon.png") , os.path.basename(i))
                             
-                            self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
+                    self.tabwidget.setCurrentIndex(setting["Current-Tab-Number"])
                             
-                    
-                    
                     self.tabwidget.widget(setting["Current-Tab-Number"]).SendScintilla(QsciScintilla.SCI_SCROLLTOSTART)
 
                             
