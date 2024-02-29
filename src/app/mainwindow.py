@@ -83,7 +83,7 @@ class MyApp(QMainWindow):
                 file_text = f.read()
             if pathlib.Path(path).suffix == ".py":
                 editor = PythonEditor(path, self)
-                editor.setText(file_text
+                editor.setText(file_text)
                 self.tabwidget.addTab(editor, QIcon("./src/icons/python_icon.png"), name)
                 self.tabwidget.setCurrentIndex(self.tabwidget.count() - 1)
                 
