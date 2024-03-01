@@ -18,7 +18,8 @@ import os
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        
+
+        self.resize(600,600)
         css_ = """
         QSplitter {
             background-color: #161B21;
