@@ -8,7 +8,6 @@ QTreeView::item{
     height: 27px;
 }
 
-
 QTreeView::item:!selected:hover{
     background-color: none;
 }
