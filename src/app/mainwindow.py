@@ -18,11 +18,10 @@ import os
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
+        
         css_ = """
         QSplitter {
-        
             background-color: #161B21;
-        
         }
         
         QSplitter::handle {
@@ -42,7 +41,28 @@ class MyApp(QMainWindow):
             min-width : 300px;
         }
         
-        
+        QTabWidget {
+            background-color: #161B21;
+            color: #d3d3d3;
+        }
+        QTabBar{
+            background-color: #161B21;
+        }
+
+        QTabBar::tab {
+            color: #d3d3d3;
+            min-width: 10ex;
+            padding: 7px 20px;
+            border-style: none;
+        }
+
+
+        QTabBar::tab::selected {
+            color: #d3d3d3;
+            border-style: none;
+            background-color: #2d2d2d;
+            border-bottom: 3px solid cornflowerblue;
+        }
         
         """
         self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5() + css_)
