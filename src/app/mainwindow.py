@@ -18,15 +18,7 @@ import os
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        
-        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
-
-        self.init_menubar()
-
-        self.layoutv = QVBoxLayout()
-
-        self.spliter = QSplitter()
-        self.spliter.setStyleSheet("""
+        css_ = """
         QSplitter {
         
             background-color: #161B21;
@@ -37,8 +29,30 @@ class MyApp(QMainWindow):
             background-color: #161B21;
         }
         
+        QMenuBar{
+            background-color: #161B21;
+        }
         
-        """)
+        QMenuBar::item{
+            padding: 10px;
+            padding-right: 15px;
+        }
+        
+        QMenu{
+            min-width : 300px;
+        }
+        
+        
+        
+        """
+        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5() + css_)
+
+        self.init_menubar()
+
+        self.layoutv = QVBoxLayout()
+
+        self.spliter = QSplitter()
+        
         self.spliter.setContentsMargins(0, 0, 0, 0)
         self.spliter.setOrientation(Qt.Horizontal)
 
@@ -111,19 +125,6 @@ class MyApp(QMainWindow):
     def init_menubar(self):
 
         self.menubar2 = self.menuBar()
-        self.menubar2.setStyleSheet("""
-        QMenuBar{
-            background-color: #161B21;
-        }
-        QMenuBar::item{
-            padding: 10px;
-            padding-right: 15px;
-        }
-        QMenu{
-            min-width : 300px;
-        }
-        
-        """)
 
         file_menu = self.menubar2.addMenu("&File")
         edit_menu = self.menubar2.addMenu("Edit")
