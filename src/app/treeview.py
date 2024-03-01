@@ -102,37 +102,15 @@ class FileManager(QTreeView):
         index = self.indexAt(pos)
         ix = self.proxy.mapToSource(index)
         menu =  QMenu()
-        menu.setStyleSheet("""
-        QMenu {
-          min-width: 250px;
-          color: white;
-          background-color: #161B21;
-          selection-background-color: #1A72BB;
-        }
-        
-        QMenu::separator {
-          height: 1px;
-          background-color: #60798B;
-          color: #DFE1E2;
-        }
-        
-        QMenu::item {
-          height: 28px;
-          background-color: #37414F;
-          padding: 4px 24px 4px 28px;
-          border: 1px transparent #455364;
-        }
-        
-        QMenu::item:selected {
-          color: white;
-          background-color: #1A72BB;
-        }
-        
-        QMenu::item:pressed {
-          background-color: #1A72BB;
-        }
-        
-        """)
+        menu.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5() + """
+             
+             QMenu:item{
+                min-width:250px;
+                height:26px;
+             
+             }
+             
+             """))
         if index.column() == 0:
             if self.Model.isDir(ix):
                 new_file_action = menu.addAction("New File")

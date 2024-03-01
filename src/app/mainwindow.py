@@ -38,8 +38,9 @@ class MyApp(QMainWindow):
             padding-right: 15px;
         }
         
-        QMenu{
-            min-width : 300px;
+        QMenu:item{
+            min-width : 250px;
+            height: 26px;
         }
         
         QTabWidget {
