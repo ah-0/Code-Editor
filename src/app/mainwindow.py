@@ -146,27 +146,28 @@ class MyApp(QMainWindow):
 
     def init_menubar(self):
 
-        self.menubar2 = self.menuBar()
+        self.menubar_ = self.menuBar()
 
-        file_menu = self.menubar2.addMenu("&File")
-        edit_menu = self.menubar2.addMenu("Edit")
-        view_menu = self.menubar2.addMenu("View")
-        run_menu = self.menubar2.addMenu("Run")
-        tools_menu = self.menubar2.addMenu("Tools")
-        github_menu = self.menubar2.addMenu("GitHub")
-        Terminal_menu = self.menubar2.addMenu("Terminal")
+        file_menu = self.menubar_.addMenu("&File")
+        edit_menu = self.menubar_.addMenu("Edit")
+        view_menu = self.menubar_.addMenu("View")
+        run_menu = self.menubar_.addMenu("Run")
+        tools_menu = self.menubar_.addMenu("Tools")
+        github_menu = self.menubar_.addMenu("GitHub")
+        Terminal_menu = self.menubar_.addMenu("Terminal")
         
-        file_menu.addAction("&New Project")
+        new_project_action = file_menu.addAction("&New Project")
         
         open_project_action = file_menu.addAction("&Open Project")
         open_project_action.setShortcut("Ctrl+K")
         open_project_action.triggered.connect(self.open_project)
         
-        file_menu.addAction("&Rename Project")
         
-        file_menu.addAction("&Save as")
+        sava_as_action = file_menu.addAction("&Save as")
         
-        file_menu.addAction("&Exit")
+        setting_action = file_menu.addAction("Setting")
+        
+        exit_action = file_menu.addAction("&Exit")
         
         
         
