@@ -130,9 +130,13 @@ class PythonEditor(QsciScintilla):
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
             line , index = self.getCursorPosition()
-            format = black.format_str(self.text() , mode=black.FileMode())
-            self.setText(format)
-            self.setCursorPosition(line , index)
+            try:
+                format = black.format_str(self.text() , mode=black.FileMode())
+                self.setText(format)
+                self.setCursorPosition(line , index)
+            except Exception as e:
+                pass
+            
             return
 
         if self.selectedText():
