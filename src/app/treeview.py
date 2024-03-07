@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from pathlib import Path
+import qdarkstyle
 import subprocess
 import pyperclip
 import shutil
@@ -110,7 +111,7 @@ class FileManager(QTreeView):
              
              }
              
-             """))
+             """)
         if index.column() == 0:
             if self.Model.isDir(ix):
                 new_file_action = menu.addAction("New File")
