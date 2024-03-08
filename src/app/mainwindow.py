@@ -179,8 +179,7 @@ class MyApp(QMainWindow):
             if setting["Last-Project"] != "":
                 parent_dir = os.path.abspath(os.path.join(setting["Last-Project"], os.pardir))
                 self.treeview.Model.setRootPath(setting["Last-Project"])
-                
-                
+                self.treeview.proxy.setIndexPath(QPersistentModelIndex(self.treeview.Model.index(setting["Last-Project"]))
                 self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
                 
                 if setting["List-Of-Tab-Paths"]:
