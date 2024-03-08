@@ -164,6 +164,7 @@ class MyApp(QMainWindow):
         if dialog:
             parent_dir = os.path.abspath(os.path.join(dialog, os.pardir))
             self.treeview.Model.setRootPath(dialog)
+            self.treeview.proxy.setIndexPath(QPersistentModelIndex(self.treeview.Model.index(dialog)))
             self.treeview.setRootIndex(self.treeview.proxy.mapFromSource(self.treeview.Model.index(parent_dir)))
             
             for i in range(self.tabwidget.count()):
