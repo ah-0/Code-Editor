@@ -21,7 +21,7 @@ class NeutronLexer(QsciLexerCustom):
         self.editor = editor
         self.language_name = language_name
         
-        self.theme = "./src/app/codeeditor/pythonlexerthemes/theme.json"
+        self.theme = "./src/app/codeeditor/pythonlexerthemes/theme2.json"
         
 
         self.token_list: list[str, str] = []
@@ -32,7 +32,7 @@ class NeutronLexer(QsciLexerCustom):
         if defaults is None:
             defaults: DefaultConfig = {}
             defaults["color"] = "#abb2bf"
-            defaults["paper"] = "#282c34"
+            defaults["paper"] = "#161B21"
             defaults["font"] = ("Consolas", 14)
 
 
