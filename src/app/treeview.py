@@ -108,6 +108,7 @@ class FileManager(QTreeView):
              QMenu:item{
                 min-width:250px;
                 height:26px;
+                background-color: #2c2d30
                 
              }
              
