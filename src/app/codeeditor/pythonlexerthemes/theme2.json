@@ -7,7 +7,7 @@
             {
                 "default": {
                     "color": "#abb2bf",
-                    "paper-color": "#161B21",
+                    "paper-color": "#1e1f22",
                     "font": { 
                         "family": "consolas",
                         "font-size": 14,
@@ -19,7 +19,7 @@
             {
                 "keyword": {
                     "color": "#EB827C",
-                    "paper-color": "#161B21",
+                    "paper-color": "#1e1f22",
                     "font": { 
                         "family": "consolas",
                         "font-size": 14,
@@ -31,7 +31,7 @@
             {
                 "classes": {
                     "color": "#C68F55",
-                    "paper-color": "#161B21",
+                    "paper-color": "#1e1f22",
                     "font": { 
                         "family": "consolas",
                         "font-size": 14,
@@ -43,7 +43,7 @@
             {
                 "functions": {
                     "color": "#B799DA",
-                    "paper-color": "#161B21",
+                    "paper-color": "#1e1f22",
                     "font": { 
                         "family": "consolas",
                         "font-size": 14,
@@ -55,7 +55,7 @@
             {
                 "function_def": {
                     "color": "#64D6E8",
-                    "paper-color": "#161B21",
+                    "paper-color": "#1e1f22",
                     "font": { 
                         "family": "consolas",
                         "font-size": 14,
@@ -67,37 +67,37 @@
             {
                 "string": {
                     "color": "#98c379",
-                    "paper-color": "#161B21"
+                    "paper-color": "#1e1f22"
                 }
             },
             {
                 "types": {
                     "color": "#56b6c2",
-                    "paper-color": "#161B21"
+                    "paper-color": "#1e1f22"
                 }
             },
             {
                 "keyargs": {
                     "color": "#c678dd",
-                    "paper-color": "#161B21"
+                    "paper-color": "#1e1f22"
                 }
             },
             {
                 "brackets": {
                     "color": "#c678dd",
-                    "paper-color": "#161B21"
+                    "paper-color": "#1e1f22"
                 }
             },
             {
                 "comments": {
                     "color": "#777777",
-                    "paper-color": "#161B21"
+                    "paper-color": "#1e1f22"
                 }
             },
             {
                 "constants": {
                     "color": "#C68F55",
-                    "paper-color": "#161B21"
+                    "paper-color": "#1e1f22"
                 }
             }
         ]
