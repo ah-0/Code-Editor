@@ -85,7 +85,7 @@ class FileManager(QTreeView):
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.show_context_menu)
 
-        # self.setIndentation(setting["File-Manager-Indentation"])
+        self.setIndentation(setting["File-Manager-Indentation"])
         # self.setAnimated(setting["File-Manager-Animated"])
 
         self.setHeaderHidden(setting["File-Manager-Header-Hidden"])
