@@ -43,20 +43,7 @@ class MyApp(QMainWindow):
             height: 26px;
         }
         
-        QTabWidget {
-            background-color: #161B21;
-            color: #d3d3d3;
-        }
-        QTabBar{
-            background-color: #161B21;
-        }
-
-        QTabBar::tab {
-            color: #d3d3d3;
-            min-width: 10ex;
-            padding: 7px 20px;
-            border-style: none;
-        }
+       
 
 
         QTabBar::tab::selected {

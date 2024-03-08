@@ -6,6 +6,32 @@ from PyQt5.QtCore import *
 class TabWidget(QTabWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setStyleSheet("""
+        QTabWidget {
+            background-color: #161B21;
+            color: #d3d3d3;
+        }
+        QTabBar{
+            background-color: #161B21;
+        }
+
+        QTabBar::tab {
+            background-color: #161B21;
+            color: #d3d3d3;
+            min-width: 10ex;
+            padding: 7px 20px;
+            border-style: none;
+        }
+                           
+        QTabBar::tab::selected {
+            color: #d3d3d3;
+            border-style: none;
+            background-color: #2d2d2d;
+            border-bottom: 3px solid cornflowerblue;
+        }
+                           
+                           
+                           """)
         
         self.setContentsMargins(0, 0, 0, 0)
         self.setMouseTracking(True)

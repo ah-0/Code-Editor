@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from pathlib import Path
-import qdarkstyle
 import subprocess
+import qdarkstyle
 import pyperclip
 import shutil
 import json
@@ -85,8 +85,8 @@ class FileManager(QTreeView):
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.show_context_menu)
 
-        self.setIndentation(setting["File-Manager-Indentation"])
-        self.setAnimated(setting["File-Manager-Animated"])
+        # self.setIndentation(setting["File-Manager-Indentation"])
+        # self.setAnimated(setting["File-Manager-Animated"])
 
         self.setHeaderHidden(setting["File-Manager-Header-Hidden"])
         self.setColumnHidden(1, True)
@@ -108,8 +108,9 @@ class FileManager(QTreeView):
              QMenu:item{
                 min-width:250px;
                 height:26px;
-             
+                
              }
+             
              
              """)
         if index.column() == 0:
