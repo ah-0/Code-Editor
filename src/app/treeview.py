@@ -179,11 +179,12 @@ class FileManager(QTreeView):
         _path = self.Model.filePath(index)
         
         _name, ok = QInputDialog.getText(self, 'Create file', 'Enter the file name:')
+        
         if ok:
             f = Path(_path) / _name
             count = 1
             while f.exists():
-                f = Path(f.parent / f"{_name}{count}")
+                f = Path(f.parent / f"{f.stem}{count}{f.suffix}")
                 count += 1
             f.touch()
             
