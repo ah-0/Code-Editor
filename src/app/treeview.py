@@ -232,9 +232,8 @@ class FileManager(QTreeView):
         newname , ok = QInputDialog.getText(self, 'Rename', 'Enter the new name:')
         
         if ok:
-            new_path = _path.split("/")[:-1]
-            new_path = new_path + [newname]
-            new_path = "/".join(new_path)
+            new_path = Path(_path).parent
+            new_path = new_path / newname
             os.rename(_path, new_path)
             
             _tabwidget = self.tabwidget
