@@ -183,7 +183,7 @@ class FileManager(QTreeView):
             f = Path(_path) / _name
             count = 1
             while f.exists():
-                f = Path(f.parent / f"{_name}{count}{f.suffix}")
+                f = Path(f.parent / f"{_name}{count}")
                 count += 1
             f.touch()
             
