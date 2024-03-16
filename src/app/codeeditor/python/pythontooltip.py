@@ -8,7 +8,7 @@ import os
 
 class ToolTip(QThread):
     def __init__(self, parent=None ,path=""):
-        super(AutoC, self).__init__(None)
+        super(ToolTip, self).__init__(None)
         
         self.parent = parent
         self.script: Script = None
