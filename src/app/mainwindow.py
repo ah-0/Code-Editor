@@ -59,9 +59,9 @@ class MyApp(QMainWindow):
         self.layoutv = QVBoxLayout()
 
         self.spliter = QSplitter()
-        
         self.spliter.setContentsMargins(0, 0, 0, 0)
         self.spliter.setOrientation(Qt.Horizontal)
+        self.spliter.setHandleWidth(0)
 
         
 
