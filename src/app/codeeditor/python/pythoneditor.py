@@ -5,6 +5,7 @@ from .pythonlexer import PyCustomLexer
 from .pythoncompleter import AutoC
 from .pythonsyntaxerrors import DisplaySyntaxErrors
 from .pythoncodeanalysis import CodeAnalyzer
+from pythontooltip import ToolTip
 from jedi import Script
 import black
 import json
@@ -86,6 +87,7 @@ class PythonEditor(QsciScintilla):
         self.lexerpython = PyCustomLexer(self)
         self.api = QsciAPIs(self.lexerpython)
         self.autocompleter = AutoC(self.api, self.path)
+        self.tol_tip = TolTip(self , self.path)
         if self.setting["Disply-Syntax-Errors"]:
             self.errorviewer = DisplaySyntaxErrors(self.path, self)
         if self.setting["Code-Analysis"]:
@@ -126,6 +128,7 @@ class PythonEditor(QsciScintilla):
             self.errorviewer.display_errors(self.text())
         if self.setting["Code-Analysis"]:
             self.codeanalyzer.display_errors()
+        self.tol_tip.start_threading(line+1 , index , self.text())
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
