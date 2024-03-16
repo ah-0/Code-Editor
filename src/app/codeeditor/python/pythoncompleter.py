@@ -34,7 +34,7 @@ class AutoC(QThread):
     def load_autocomplete(self, completions):
         self.api.clear()
         [self.api.add(f"{i.name}?0") for i in completions]
-        
+        # get the parameters using re.findall("(\w*):" , text)
         self.api.prepare() 
 
     def get_completions(self, line: int, index: int, text: str):
