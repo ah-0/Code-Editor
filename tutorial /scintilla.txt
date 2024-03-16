@@ -129,7 +129,8 @@ SendScintilla(SCI_POSITIONFROMPOINT ,x ,y)
 
 
 
-
+setFirstVisibleLine(line : int)
+يحدد اي سطر يظهر اعلى الشاشة 
 
 
 
