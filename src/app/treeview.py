@@ -16,7 +16,7 @@ class FileIconProvider(QFileIconProvider):
         if isinstance(parameter, QFileInfo):
             info : QFileInfo = parameter
             if info.isDir():
-                return QIcon("./src/icons/open-folder.png")
+                return QIcon("./src/icons/folder.png")
             if info.suffix() == "py":
                 return QIcon("./src/icons/python_icon.png")
             if info.suffix() == "css":
