@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from pathlib import Path
 from jedi import Script
 from jedi.api import Completion
+from jedi import settings
 import re
 import os
 
@@ -14,6 +15,8 @@ class AutoC(QThread):
         self.script: Script = None
         self.api: QListWidget = api
         self.completions: list[Completion] = None
+        
+        settings.add_bracket_after_function = True
         self.path = path
         self.line = 0
         self.index = 0
