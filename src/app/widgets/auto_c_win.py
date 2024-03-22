@@ -32,7 +32,12 @@ class AutoC(QThread):
 
     def load_autocomplete(self, completions):
         self.api.clear()
-        [self.api.addItem(f"{i.name}") for i in completions]
+        for i in completions:
+            item = QListWidgetItem(i.name)
+            item.setIcon(QIcon("./src/icons/svg/autocompletion.svg"))
+            item.setToolTip(i.docstring())
+            self.api.addItem(item)
+        
         # get the parameters using re.findall("(\w*):" , text)
         
 
@@ -59,6 +64,7 @@ class Completer(QListWidget):
         text = item.text()
         self.code_editor.SendScintilla(self.code_editor.SCI_DELWORDLEFT)
         self.code_editor.insert(text)
+        self.setHidden(True)
         self.code_editor.setFocus()
         
         

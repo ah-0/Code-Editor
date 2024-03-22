@@ -5,8 +5,8 @@ from codeeditor.python.pythoneditor import PythonEditor
 from codeeditor.html.htmleditor import HtmlEditor
 from codeeditor.css.csseditor import CssEditor
 from codeeditor.json.jsoneditor import JsonEditor
-from treeview import FileManager
-from tabwidget import TabWidget
+from widgets.treeview import FileManager
+from widgets.tabwidget import TabWidget
 from PyQt5.Qsci import QsciScintilla
 import pathlib
 import qdarkstyle
