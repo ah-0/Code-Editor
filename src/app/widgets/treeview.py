@@ -216,7 +216,12 @@ class FileManager(QTreeView):
     
     def copy(self, index):
         _path = self.Model.filePath(index)
-        
+        url = QUrl.fromLocalFile(_path)
+        data = QMimeData()
+        data.setUrls([url])
+
+        clipboard = QApplication.clipboard()
+        clipboard.setMimeData(data)
     def paste(self , index):
         pass
     
