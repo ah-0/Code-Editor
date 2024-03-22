@@ -118,9 +118,11 @@ class FileManager(QTreeView):
             if self.Model.isDir(ix):
                 new_file_action = menu.addAction("New File")
                 new_folder_action = menu.addAction("New Folder")
+                paste_action = menu.addAction("Paste")
             
                 new_file_action.triggered.connect(lambda : self.newfile(ix))
                 new_folder_action.triggered.connect(lambda : self.newfolder(ix))
+                paste_action.triggered.connect(lambda : self.paste(ix))
         
             elif self.Model.fileInfo(ix).isFile():
             
@@ -215,15 +217,40 @@ class FileManager(QTreeView):
     # drag and drop functionality
     
     def copy(self, index):
-        _path = self.Model.filePath(index)
-        url = QUrl.fromLocalFile(_path)
-        data = QMimeData()
-        data.setUrls([url])
+        if self.selectionModel().selectedRows():
+            urls_list = []
+            for i in self.selectionModel().selectedRows():
+                ixx = self.proxy.mapToSource(i)
+                _path = self.Model.filePath(ixx)
+                url = QUrl.fromLocalFile(_path)
+                urls_list.append(url)
+                
+        
+            data = QMimeData()
+            data.setUrls(urls_list)
 
-        clipboard = QApplication.clipboard()
-        clipboard.setMimeData(data)
+            clipboard = QApplication.clipboard()
+            clipboard.setMimeData(data)
+        
     def paste(self , index):
-        pass
+        _path = Path(self.Model.filePath(index))
+        
+        clipboard = QApplication.clipboard()
+        mimeData = clipboard.mimeData()
+        
+        if mimeDate.hasUrls():
+            pathlist = []
+            for url in mimeData.urls():
+                pathlist.append(url.toLocalFile())
+            
+            for u in pathlist:
+                if os.path.isDir(u):
+                    shutil.copytree(u , _path / Path(u).name)
+                elif os.path.isFile(u):
+                    shutil.copy(u , _path / Path(u).name)
+                else:
+                    pass
+                    
     
     def cut(self, index):
         _path = self.Model.filePath(index)
@@ -270,9 +297,6 @@ class FileManager(QTreeView):
                         self.Model.remove(ixx)
                       
                    
-                
-        
-        
             
     def runfile(self , index):
         _path = self.Model.filePath(index)
