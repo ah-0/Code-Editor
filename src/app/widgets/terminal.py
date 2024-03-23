@@ -42,9 +42,12 @@ class MainWindow(QMainWindow):
         self.message(stderr)
 
     def handle_stdout(self):
-        data = self.p.readAllStandardOutput()
-        stdout = bytes(data).decode("utf8")
-        self.message(stdout)
+        try:
+            data = self.p.readAllStandardOutput()
+            stdout = bytes(data).decode("utf8")
+            self.message(stdout)
+        except Exception as e:
+            pass
 
     def handle_state(self, state):
         states = {
