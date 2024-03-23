@@ -1,15 +1,18 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from PyQt5.Qsci import QsciScintilla
 from codeeditor.python.pythoneditor import PythonEditor
 from codeeditor.html.htmleditor import HtmlEditor
 from codeeditor.css.csseditor import CssEditor
 from codeeditor.json.jsoneditor import JsonEditor
 from widgets.treeview import FileManager
 from widgets.tabwidget import TabWidget
-from PyQt5.Qsci import QsciScintilla
-import pathlib
+from bs4 import BeautifulSoup
+import cssbeautifier
 import qdarkstyle
+import pathlib
+import black
 import json
 import sys
 import os
@@ -141,6 +144,8 @@ class MyApp(QMainWindow):
         github_menu = self.menubar_.addMenu("GitHub")
         Terminal_menu = self.menubar_.addMenu("Terminal")
         
+        
+        
         new_project_action = file_menu.addAction("&New Project")
         
         open_project_action = file_menu.addAction("&Open Project")
@@ -154,6 +159,40 @@ class MyApp(QMainWindow):
         
         exit_action = file_menu.addAction("&Exit")
         
+        code_order_action = tools_menu.addAction("Code order")
+        code_order_action.triggered.connect(self.code_order_fun)
+        
+    def code_order_fun(self):
+        widget = self.tabwidget.currentWidget()
+        if widget.language == "Python":
+            line , index = widget.getCursorPosition()
+            try:
+                format = black.format_str(widget.text() , mode=black.FileMode())
+                widget.setText(format)
+                widget.setCursorPosition(line , index)
+            except Exception as e:
+                pass
+        elif widget.language == "Html":
+            line , index = widget.getCursorPosition()
+            try:
+                soup = BeautifulSoup(widget.text(), 'html.parser')
+                format = soup.prettify()
+                widget.setText(format)
+                widget.setCursorPosition(line , index)
+            except Exception as e:
+                pass
+        elif widget.language == "Css":
+            line , index = widget.getCursorPosition()
+            try:
+                format = cssbeautifier.beautify(widget.text())
+                widget.setText(format)
+                widget.setCursorPosition(line , index)
+                
+            except Exception as e:
+                pass
+        else:
+            pass
+                
         
         
     def open_project(self):

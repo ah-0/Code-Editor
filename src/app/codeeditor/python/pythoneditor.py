@@ -15,7 +15,8 @@ import os
 class PythonEditor(QsciScintilla):
     def __init__(self, path="", parent=None):
         super().__init__(parent)
-
+        
+        self.language = "Python"
         self.path = path
         setting_file_path = "./src/setting/PythonEditor.json"
         
@@ -131,17 +132,6 @@ class PythonEditor(QsciScintilla):
         self.tol_tip.start_threading(line+1 , index , self.text())
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
-        if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
-            line , index = self.getCursorPosition()
-            try:
-                format = black.format_str(self.text() , mode=black.FileMode())
-                self.setText(format)
-                self.setCursorPosition(line , index)
-            except Exception as e:
-                pass
-            
-            return
-
         if self.selectedText():
             selection = list(self.getSelection())
             if e.key() == Qt.Key.Key_QuoteDbl:

@@ -7,6 +7,7 @@ class JsonEditor(QsciScintilla):
     def __init__(self, path , parent):
         super().__init__(parent)
         
+        self.language = "Json"
         self.path = path
 
         self.setMarginType(0, self.NumberMargin)

@@ -8,6 +8,7 @@ class HtmlEditor(QsciScintilla):
     def __init__(self, path, parent):
         super().__init__(parent)
         
+        self.language = "Html"
         self.path = path
 
         self.setMarginType(0, self.NumberMargin)
@@ -63,12 +64,6 @@ class HtmlEditor(QsciScintilla):
         self.setStyleSheet(open("./src/style/editor.css").read())
         
     def keyPressEvent(self, e: QKeyEvent) -> None:
-        if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
-            line , index = self.getCursorPosition()
-            soup = BeautifulSoup(self.text(), 'html.parser')
-            format = soup.prettify()
-            self.setText(format)
-            self.setCursorPosition(line , index)
-            return
+        
         return super().keyPressEvent(e)
 

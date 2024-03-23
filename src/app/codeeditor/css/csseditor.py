@@ -7,6 +7,7 @@ class CssEditor(QsciScintilla):
     def __init__(self, path , parent):
         super().__init__(parent)
         
+        self.language = "Css"
         self.path = path
 
         self.setMarginType(0, self.NumberMargin)
@@ -73,12 +74,6 @@ class CssEditor(QsciScintilla):
         self.setStyleSheet(open("./src/style/editor.css").read())
 
     def keyPressEvent(self, e: QKeyEvent) -> None:
-        if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "f":
-            line , index = self.getCursorPosition()
-            format = cssbeautifier.beautify(self.text())
-            self.setText(format)
-            self.setCursorPosition(line , index)
-            return
 
         if self.selectedText():
             selection = list(self.getSelection())
