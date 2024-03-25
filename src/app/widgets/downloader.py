@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import QNetworkReply, QNetworkRequest, QNetworkAccessManager
 import urllib.request
+import qdarkstyle
 import sys
 
 
@@ -10,7 +11,8 @@ import sys
 class DownloaderWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-
+        
+        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
         self.manager = QNetworkAccessManager(self)
         self.link_box = QLineEdit()
         self.dest_box = QLineEdit()

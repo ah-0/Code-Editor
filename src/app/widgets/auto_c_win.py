@@ -39,6 +39,7 @@ class AutoC(QThread):
             item = QListWidgetItem(i.name)
             item.setIcon(QIcon("./src/icons/svg/autocompletion.svg"))
             item.setToolTip(i.docstring())
+            item.setData(Qt.UserRole , QVariant(i.type))
             self.api.addItem(item)
         
         # get the parameters using re.findall("(\w*):" , text)

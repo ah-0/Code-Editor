@@ -33,13 +33,13 @@ class PythonEditor(QsciScintilla):
         self.setMarginsForegroundColor(QColor("#ff888888"))
         self.setMarginsBackgroundColor(QColor("#1e1f22"))
         
-        self.marker_image = QPixmap("./src/icons/warning.png").scaled(12, 12)
+        self.marker_image = QPixmap("./src/icons/svg/warning.svg").scaled(12, 12)
         self.setMarginType(1, self.SymbolMargin)
         self.markerDefine(self.marker_image, 0)
         self.setMarginSensitivity(1, True)
         self.setMarginMarkerMask(1, 0b1111)
         self.setMarginWidth(1, "0000")
-        self.marginClicked.connect(self.clickedmargins)
+        self.marginClicked.connect(self._margin_clicked)
 
         self.indicatorDefine(QsciScintilla.PlainIndicator, 1)
         self.setIndicatorForegroundColor(QColor("red"), 1)
@@ -116,8 +116,26 @@ class PythonEditor(QsciScintilla):
         self.SendScintilla(self.SCI_SETADDITIONALSELECTIONTYPING, True)
         self.zoomTo(3)
         
+    def commentSelection(self):
+        start, srow, end, erow = self.getSelection()
+        self.setSelection(start, 0, end, self.lineLength(end) - 1)
 
-    def clickedmargins(self, margin, line, key):
+        lines = self.selectedText()
+        lines = lines.split("\n")
+
+        comment_list = []
+        for i in lines:
+            if i.startswith("#"):
+                comment_list.append(i[1:])
+            else:
+                comment_list.append(f"#{i}")
+
+        self.replaceSelectedText("\n".join(commint_list))
+        self.setSelection(start, srow, end, erow)
+        
+        
+
+    def _margin_clicked(self, margin, line, key):
         if self.markersAtLine(line) == 0:
             self.markerAdd(line, 0)
         else:
