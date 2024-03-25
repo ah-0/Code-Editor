@@ -61,6 +61,7 @@ class Completer(QListWidget):
         self.code_editor = parent
         self.setHidden(True)
         self.code_editor.cursorPositionChanged.connect(self._cursorPositionChanged)
+        self.code_editor.textChanged.connect(self._textChanged)
         self.itemClicked.connect(self._itemClicked)
         self.completer = AutoC(self, self.code_editor.path)
         
@@ -70,14 +71,18 @@ class Completer(QListWidget):
         self.code_editor.insert(text)
         self.setHidden(True)
         self.code_editor.setFocus()
-        
+      
+      
+    def _textChanged(self):
+        line , index = self.code_editor.getCurrentPosition()
+        word = self.code_editor.wordAtLineIndex(line , index)
+        if len(word) >= 1:
+           self.setHidden(False)
         
         
     def _cursorPositionChanged(self , line:int , index:int):
         self.completer.get_completions(line+1, index , self.code_editor.text())
-        word = self.code_editor.wordAtLineIndex(line , index)
-        if len(word) >= 1:
-            self.setHidden(False)
+        
         pos = self.code_editor.SendScintilla(self.code_editor.SCI_GETCURRENTPOS)
         x = self.code_editor.SendScintilla(self.code_editor.SCI_POINTXFROMPOSITION , 0 , pos)
         y = self.code_editor.SendScintilla(self.code_editor.SCI_POINTYFROMPOSITION , 0 , pos)

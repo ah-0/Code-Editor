@@ -24,10 +24,51 @@ class PythonEditor(QsciScintilla):
             self.setting = json.load(f)
         
         
-        if self.setting["Margin-Line-Number"]:
-            self.setMarginType(0, self.NumberMargin)
-            self.setMarginLineNumbers(0, True)
-            self.setMarginWidth(0, "0000")
+        
+        self.initMargins()
+        self.initIndicator()
+        self.initAutoCompletion()
+        self.initIndention()
+        self.callTips()
+
+
+        self.lexerpython = PyCustomLexer(self)
+        
+        self.api = QsciAPIs(self.lexerpython)
+        
+        self.autocompleter = AutoC(self.api, self.path)
+        
+        self.tol_tip = TolTip(self , self.path)
+        
+        if self.setting["Disply-Syntax-Errors"]:
+            self.errorviewer = DisplaySyntaxErrors(self.path, self)
+            
+        if self.setting["Code-Analysis"]:
+            self.codeanalyzer = CodeAnalyzer(self.path, self)
+
+        self.classicon = QPixmap("./src/icons/class.png").scaled(12, 12)
+        self.registerImage(0, self.classicon)
+
+        self.setStyleSheet(open("./src/style/editor.css").read())
+
+        self.setLexer(self.lexerpython)
+
+        self.cursorPositionChanged.connect(self._cursorPositionChanged)
+
+
+        
+        
+    def initAutoCompletion(self):
+        self.setAutoCompletionSource(QsciScintilla.AcsAPIs)
+        self.setAutoCompletionThreshold(1)
+        self.setAutoCompletionCaseSensitivity(False)
+        self.setAutoCompletionUseSingle(QsciScintilla.AcusNever)
+        
+        
+    def initMargins(self):
+        self.setMarginType(0, self.NumberMargin)
+        self.setMarginLineNumbers(0, True)
+        self.setMarginWidth(0, "0000")
             
         self.setMarginsFont(QFont("Consolas", 13))
         self.setMarginsForegroundColor(QColor("#ff888888"))
@@ -40,81 +81,71 @@ class PythonEditor(QsciScintilla):
         self.setMarginMarkerMask(1, 0b1111)
         self.setMarginWidth(1, "0000")
         self.marginClicked.connect(self._margin_clicked)
-
+        
+        
+    def initIndicator(self):
         self.indicatorDefine(QsciScintilla.PlainIndicator, 1)
         self.setIndicatorForegroundColor(QColor("red"), 1)
-
-        self.setCaretForegroundColor(QColor(self.setting["Caret-ForegroundColor"]))
-        self.setCaretLineBackgroundColor(QColor(self.setting["Caret-Line-BackgroundColor"]))
-        self.setCaretLineVisible(self.setting["Caret-Line-Visible"])
-        self.setCaretWidth(self.setting["Caret-Width"])
         
-        if self.setting["Auto-Completion-visible"]:
-            self.setAutoCompletionSource(QsciScintilla.AcsAPIs)
-            self.setAutoCompletionThreshold(1)
-            self.setAutoCompletionCaseSensitivity(False)
-            self.setAutoCompletionUseSingle(QsciScintilla.AcusNever)
-            
-
+        
+        
+        
+    def initIndentation(self):
         self.setIndentationGuides(self.setting["Indentation-Guides"])
         self.setTabWidth(self.setting["Tab-Width"])
         self.setIndentationsUseTabs(False)
         self.setAutoIndent(self.setting["Auto-Indent"])
         self.setBackspaceUnindents(True)
         
+        
+    def callTips(self):
         self.setCallTipsStyle(QsciScintilla.CallTipsNoContext)
         self.setCallTipsVisible(0)
         self.setCallTipsPosition(QsciScintilla.CallTipsAboveText)
         self.setCallTipsBackgroundColor(QColor(0xFF, 0xFF, 0xFF, 0xFF))
         self.setCallTipsForegroundColor(QColor(0x50, 0x50, 0x50, 0xFF))
         self.setCallTipsHighlightColor(QColor(0xFF, 0x00, 0x00, 0xFF))
-
-        self.setEolMode(QsciScintilla.EolWindows)
-        self.setEolVisibility(self.setting["Eol-Visibility"])
-
+        
+    def initEditor(self):
+        self.setCaretForegroundColor(QColor(self.setting["Caret-ForegroundColor"]))
+        self.setCaretLineBackgroundColor(QColor(self.setting["Caret-Line-BackgroundColor"]))
+        self.setCaretLineVisible(self.setting["Caret-Line-Visible"])
+        self.setCaretWidth(self.setting["Caret-Width"])
+        
+        
+        
         self.setBraceMatching(QsciScintilla.StrictBraceMatch)
         self.setMatchedBraceBackgroundColor(QColor("#c678dd"))
         self.setMatchedBraceForegroundColor(QColor("#F2E3E3"))
+        
+        
+        self.setEolMode(QsciScintilla.EolWindows)
+        self.setEolVisibility(self.setting["Eol-Visibility"])
 
+        
         self.setEdgeColor(QColor("#2c313c"))
         self.setEdgeMode(QsciScintilla.EdgeLine)
-
+        
+        
         self.setWhitespaceBackgroundColor(QColor("#2c313c"))
         self.setWhitespaceForegroundColor(QColor("#ffffff"))
         self.setContentsMargins(0, 0, 0, 0)
 
+
         self.setSelectionBackgroundColor(QColor("#333a46"))
-
-        self.lexerpython = PyCustomLexer(self)
-        self.api = QsciAPIs(self.lexerpython)
-        self.autocompleter = AutoC(self.api, self.path)
-        self.tol_tip = TolTip(self , self.path)
-        if self.setting["Disply-Syntax-Errors"]:
-            self.errorviewer = DisplaySyntaxErrors(self.path, self)
-        if self.setting["Code-Analysis"]:
-            self.codeanalyzer = CodeAnalyzer(self.path, self)
-
-        self.classicon = QPixmap("./src/icons/class.png").scaled(12, 12)
-        self.registerImage(0, self.classicon)
-
-
-
-        self.setStyleSheet(open("./src/style/editor.css").read())
-
-        self.setLexer(self.lexerpython)
-
-        self.cursorPositionChanged.connect(self._cursorPositionChanged)
-
-
-        self.setAnnotationDisplay(self.AnnotationIndented)
         
-
+        
+        self.setAnnotationDisplay(self.AnnotationIndented)
+                
+        
         self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT, 7)
         self.SendScintilla(self.SCI_AUTOCSETIGNORECASE , False)
         self.SendScintilla(self.SCI_SETMULTIPLESELECTION, True)
         self.SendScintilla(self.SCI_SETMULTIPASTE, 1)
         self.SendScintilla(self.SCI_SETADDITIONALSELECTIONTYPING, True)
         self.zoomTo(3)
+                
+
         
     def commentSelection(self):
         startLine, startIndex, endLine, endIndex = self.getSelection()
@@ -169,43 +200,43 @@ class PythonEditor(QsciScintilla):
         
     def lineCopy(self):
         """
-        Method to line copy
+        Method to copy the current line
         """
         self.SendScintilla(self.SCI_LINECOPY)
         
     def lineCut(self):
         """
-        Method to line cut
+        Method to cut the current line 
         """
         self.SendScintilla(self.SCI_LINECUT)
         
     def lineEnd(self):
         """
-        Method to line end
+        Method to move the cursor to the end of the current line
         """
         self.SendScintilla(self.SCI_LINEEND)
         
     def lineDelete(self):
         """
-        Method to line delete
+        Method to delete the current line
         """
         self.SendScintilla(self.SCI_LINEDELETE)
         
     def selectWordLeft(self):
         """
-        Method to select word left
+        Method to select the  word on the  left
         """
         self.SendScintilla(self.SCI_WORDLEFTEXTEND)
        
     def selectWordRight(self):
         """
-        Method to select word right
+        Method to select the word on the right
         """
         self.SendScintilla(self.SCI_WORDRIGHTEXTEND)
         
     def LineDuplicate(self):
         """
-        Method to Line duplicate
+        Method to duplicate the current line
         """
         self.SendScintilla(self.SCI_LINEDUPLICATE)
         
@@ -213,30 +244,30 @@ class PythonEditor(QsciScintilla):
         
     def lineDown(self):
         """
-        Method to Line down
+        Method to down the current line
         """
         self.SendScintilla(self.SCI_LINEDOWN)
         
     def lineUp(self):
         """
-        Method to Line up
+        Method to up the current line
         """
         self.SendScintilla(self.SCI_LINEUP)
         
-    def getCurrentPosition(self):
+    def _getCurrentPosition(self):
         """
-        Method to get current Position
+        Method to get the  current Position
         """
         return self.SendScintilla(self.SCI_GETCURRENTPOS)
         
-    def LineFromPosition(self , pos):
+    def lineFromPosition(self , pos):
         """
         Method to get the  line from position
         
         param -> position (type: int)
         """
         return self.SendScintilla(self.SCI_LINEFROMPOSITION , pos)
-    def PointFromPosition(self, pos):
+    def pointFromPosition(self, pos):
         """
         Method to get the  point from position
         
@@ -284,7 +315,6 @@ class PythonEditor(QsciScintilla):
         
     
             
-    
         
         
     def keyPressEvent(self, e: QKeyEvent) -> None:
