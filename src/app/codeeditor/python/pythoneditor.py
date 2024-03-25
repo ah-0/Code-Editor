@@ -117,8 +117,8 @@ class PythonEditor(QsciScintilla):
         self.zoomTo(3)
         
     def commentSelection(self):
-        start, srow, end, erow = self.getSelection()
-        self.setSelection(start, 0, end, self.lineLength(end) - 1)
+        startLine, startIndex, endLine, endIndex = self.getSelection()
+        self.setSelection(startLine, 0, endLine, self.lineLength(endLine) - 1)
 
         lines = self.selectedText()
         lines = lines.split("\n")
@@ -131,7 +131,7 @@ class PythonEditor(QsciScintilla):
                 comment_list.append(f"#{i}")
 
         self.replaceSelectedText("\n".join(commint_list))
-        self.setSelection(start, srow, end, erow)
+        self.setSelection(startLine, startIndex, endLine, endIndex)
         
         
 
@@ -148,7 +148,145 @@ class PythonEditor(QsciScintilla):
         if self.setting["Code-Analysis"]:
             self.codeanalyzer.display_errors()
         self.tol_tip.start_threading(line+1 , index , self.text())
-
+        
+    def newLine(self):
+        """
+        Method to new line
+        """
+        self.SendScintilla(self.SCI_NEWLINE)
+        
+    def deleteWordLeft(self):
+        """
+        Method to delete word left
+        """
+        self.SendScintilla(self.SCI_DELWORDLEFT)
+        
+    def deleteWordRight(self):
+        """
+        Method to delete word right
+        """
+        self.SendScintilla(self.SCI_DELWORDRIGHT)
+        
+    def lineCopy(self):
+        """
+        Method to line copy
+        """
+        self.SendScintilla(self.SCI_LINECOPY)
+        
+    def lineCut(self):
+        """
+        Method to line cut
+        """
+        self.SendScintilla(self.SCI_LINECUT)
+        
+    def lineEnd(self):
+        """
+        Method to line end
+        """
+        self.SendScintilla(self.SCI_LINEEND)
+        
+    def lineDelete(self):
+        """
+        Method to line delete
+        """
+        self.SendScintilla(self.SCI_LINEDELETE)
+        
+    def selectWordLeft(self):
+        """
+        Method to select word left
+        """
+        self.SendScintilla(self.SCI_WORDLEFTEXTEND)
+       
+    def selectWordRight(self):
+        """
+        Method to select word right
+        """
+        self.SendScintilla(self.SCI_WORDRIGHTEXTEND)
+        
+    def LineDuplicate(self):
+        """
+        Method to Line duplicate
+        """
+        self.SendScintilla(self.SCI_LINEDUPLICATE)
+        
+    
+        
+    def lineDown(self):
+        """
+        Method to Line down
+        """
+        self.SendScintilla(self.SCI_LINEDOWN)
+        
+    def lineUp(self):
+        """
+        Method to Line up
+        """
+        self.SendScintilla(self.SCI_LINEUP)
+        
+    def getCurrentPosition(self):
+        """
+        Method to get current Position
+        """
+        return self.SendScintilla(self.SCI_GETCURRENTPOS)
+        
+    def LineFromPosition(self , pos):
+        """
+        Method to get the  line from position
+        
+        param -> position (type: int)
+        """
+        return self.SendScintilla(self.SCI_LINEFROMPOSITION , pos)
+    def PointFromPosition(self, pos):
+        """
+        Method to get the  point from position
+        
+        param -> position (type: int)
+        """
+        x = self.SendScintilla(self.SCI_POINTXFROMPOSITION , 0 , pos)
+        y = self.SendScintilla(self.SCI_POINTYFROMPOSITION , 0 , pos)
+        
+        return QPoint(x , y)
+        
+    def lineIndexFromPoint(self , point:QPoint):
+        """
+        Method to get the Line and  index from point
+        
+        param -> PyQt5.QtCore.QPoint
+        """
+        
+        pos = self.SendScintilla(self.SCI_POSITIONFROMPOINT , point.x() , point.y())
+        line , index = self.lineIndexFromPosition(pos)
+        
+        return line , index
+        
+    def positionFromPoint(self, point:QPoint):
+        """
+        Method to get the Position from point
+        
+        param -> PyQt5.QtCore.QPoint
+        """
+        
+        pos = self.SendScintilla(self.SCI_POSITIONFROMPOINT , point.x() , point.y())
+        
+        return pos
+        
+    def moveCursorLeft(self):
+        """
+        Method to move the cursor left one word
+        """
+        self.SendScintilla(self.SCI_CHARLEFT)
+        
+   def moveCursorRight(self):
+        """
+        Method to move the cursor right one word
+        """
+        self.SendScintilla(self.SCI_CHARRIGHT)
+        
+    
+            
+    
+        
+        
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if self.selectedText():
             selection = list(self.getSelection())
@@ -223,32 +361,32 @@ class PythonEditor(QsciScintilla):
                 super().keyPressEvent(e)
 
         if not self.selectedText():
-            line, index = self.getCursorPosition()
+            
 
             if e.text() == "(":
                 self.insert("()")
-                self.setCursorPosition(line, index + 1)
+                self.moveCursorRight()
                 self.callTip()
                 return
 
             elif e.text() == "'":
                 self.insert("''")
-                self.setCursorPosition(line, index + 1)
+                self.moveCursorRight()
                 return
 
             elif e.text() == '"':
                 self.insert('""')
-                self.setCursorPosition(line, index + 1)
+                self.moveCursorRight()
                 return
 
             elif e.text() == "{":
                 self.insert("{}")
-                self.setCursorPosition(line, index + 1)
+                self.moveCursorRight()
                 return
 
             elif e.text() == "[":
                 self.insert("[]")
-                self.setCursorPosition(line, index + 1)
+                self.moveCursorRight()
                 return
 
             return super().keyPressEvent(e)
