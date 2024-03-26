@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.Qsci import QsciScintilla
-from codeeditor.python.pythoneditor import PythonEditor
+from codeeditor.python.py_editor import PythonEditor
 from codeeditor.html.htmleditor import HtmlEditor
 from codeeditor.css.csseditor import CssEditor
 from codeeditor.json.jsoneditor import JsonEditor

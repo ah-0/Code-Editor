@@ -1,11 +1,11 @@
 from PyQt5.QtGui import *
 from PyQt5.Qsci import *
 from PyQt5.QtCore import *
-from .pythonlexer import PyCustomLexer
-from .pythoncompleter import AutoC
-from .pythonsyntaxerrors import DisplaySyntaxErrors
-from .pythoncodeanalysis import CodeAnalyzer
-from pythontooltip import ToolTip
+from .py_lexer import PyCustomLexer
+from .py_completer import AutoC
+from .py_syntax_errors import DisplaySyntaxErrors
+from .py_code_analysis import CodeAnalyzer
+from .py_tooltip import ToolTip
 from jedi import Script
 import black
 import json
