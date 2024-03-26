@@ -67,27 +67,26 @@ class Completer(QListWidget):
         
     def _itemClicked(self , item):
         text = item.text()
-        self.code_editor.SendScintilla(self.code_editor.SCI_DELWORDLEFT)
+        self.code_editor.deleteWordLeft()
         self.code_editor.insert(text)
         self.setHidden(True)
         self.code_editor.setFocus()
       
       
     def _textChanged(self):
-        line , index = self.code_editor.getCurrentPosition()
+        line , index = self.code_editor.getCursorPosition()
         word = self.code_editor.wordAtLineIndex(line , index)
         if len(word) >= 1:
            self.setHidden(False)
         
         
     def _cursorPositionChanged(self , line:int , index:int):
+        
         self.completer.get_completions(line+1, index , self.code_editor.text())
-        
-        pos = self.code_editor.SendScintilla(self.code_editor.SCI_GETCURRENTPOS)
-        x = self.code_editor.SendScintilla(self.code_editor.SCI_POINTXFROMPOSITION , 0 , pos)
-        y = self.code_editor.SendScintilla(self.code_editor.SCI_POINTYFROMPOSITION , 0 , pos)
-        
-        self.move(x , y)
+        pos = self.code_editor.getCurrentPosition()
+        point = self.code_editor.pointFromPosition(pos)
+        self.move(point)
+        self.setCurrentRow(0)
         
         if self.count() <= 10:
            self.resize(400, self.count() * 30)

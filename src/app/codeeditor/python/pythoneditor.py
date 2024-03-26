@@ -240,21 +240,26 @@ class PythonEditor(QsciScintilla):
         """
         self.SendScintilla(self.SCI_LINEDUPLICATE)
         
-    
+    def duplicateSelection(self):
+        """
+        Method to Duplicate the selection.
+        """
+        self.SendScintilla(QsciScintilla.SCI_SELECTIONDUPLICATE)
+        
         
     def lineDown(self):
         """
-        Method to down the current line
+        Method to move down the current line
         """
         self.SendScintilla(self.SCI_LINEDOWN)
         
     def lineUp(self):
         """
-        Method to up the current line
+        Method to move up the current line
         """
         self.SendScintilla(self.SCI_LINEUP)
         
-    def _getCurrentPosition(self):
+    def getCurrentPosition(self):
         """
         Method to get the  current Position
         """
@@ -312,9 +317,9 @@ class PythonEditor(QsciScintilla):
         Method to move the cursor right one word
         """
         self.SendScintilla(self.SCI_CHARRIGHT)
-        
     
-            
+    def clearAllIndicators(self, indicator):
+        self.clearIndicatorRange(0, 0, self.lines(), 0, indicator)         
         
         
     def keyPressEvent(self, e: QKeyEvent) -> None:
