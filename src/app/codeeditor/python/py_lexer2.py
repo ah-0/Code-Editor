@@ -25,7 +25,7 @@ class PythonLexer(QsciLexerPython):
         self.setColor(QColor("#C68F55") , QsciLexerPython.ClassName)
         self.setColor(QColor("#61afd1") , QsciLexerPython.FunctionMethodName)
         self.setColor(QColor("#B799DA") , QsciLexerPython.HighlightedIdentifier)
-        self.setColor(QColor("#c678dd") , QsciLexerPython.Operator)
+        #self.setColor(QColor("#c678dd") , QsciLexerPython.Operator)
         
         self.setFont(QFont("Consolas",13))
         self.setPaper(QColor("#1e1f22"))
