@@ -319,8 +319,19 @@ class PythonEditor(QsciScintilla):
         self.SendScintilla(self.SCI_CHARRIGHT)
     
     def clearAllIndicators(self, indicator):
-        self.clearIndicatorRange(0, 0, self.lines(), 0, indicator)         
+        self.clearIndicatorRange(0, 0, self.lines(), 0, indicator)    
         
+    def setAutoCMaxWidth(self , width:int):
+        self.SendScintilla(self.SCI_AUTOCSETMAXWIDTH , width)
+        
+    def setAutoCMaxHeight(self , height:int):
+        self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT , height)
+    
+    def getAutoCMaxWidth(self):
+        return self.SendScintilla(self.SCI_AUTOCGETMAXWIDTH)
+        
+    def getAutoCMaxHeight(self):
+            return self.SendScintilla(self.SCI_AUTOCGETMAXHEIGHT)
         
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if self.selectedText():
