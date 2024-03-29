@@ -17,14 +17,22 @@ class PythonLexer(QsciLexerPython):
         self.setColor(QColor("#abb2bf") , QsciLexerPython.Default)
         self.setColor(QColor("#EB827C") , QsciLexerPython.Keyword)
         self.setColor(QColor("#777777") , QsciLexerPython.Comment)
+        self.setColor(QColor("#777777") , QsciLexerPython.CommentBlock)
         self.setColor(QColor("#56b6c2") , QsciLexerPython.Number)
         self.setColor(QColor("#98c379") , QsciLexerPython.DoubleQuotedString)
         self.setColor(QColor("#98c379") , QsciLexerPython.SingleQuotedString)
+        
+        
+        self.setColor(QColor("#98c379") , QsciLexerPython.DoubleQuotedFString)
+        self.setColor(QColor("#98c379") , QsciLexerPython.SingleQuotedFString)
         self.setColor(QColor("#98c379") , QsciLexerPython.TripleSingleQuotedString)
         self.setColor(QColor("#98c379") , QsciLexerPython.TripleDoubleQuotedString)
+        self.setColor(QColor("#98c379") , QsciLexerPython.TripleSingleQuotedFString)
+        self.setColor(QColor("#98c379") , QsciLexerPython.TripleDoubleQuotedFString)
         self.setColor(QColor("#C68F55") , QsciLexerPython.ClassName)
         self.setColor(QColor("#61afd1") , QsciLexerPython.FunctionMethodName)
         self.setColor(QColor("#B799DA") , QsciLexerPython.HighlightedIdentifier)
+        self.setColor(QColor("#98c379") , QsciLexerPython.UnclosedString)
         #self.setColor(QColor("#c678dd") , QsciLexerPython.Operator)
         
         self.setFont(QFont("Consolas",13))

@@ -63,6 +63,7 @@ class PythonEditor(QsciScintilla):
         self.setAutoCompletionThreshold(1)
         self.setAutoCompletionCaseSensitivity(False)
         self.setAutoCompletionUseSingle(QsciScintilla.AcusNever)
+        self.setAutoCMaxHeight(7)
         
         
     def initMargins(self):
@@ -86,8 +87,6 @@ class PythonEditor(QsciScintilla):
     def initIndicator(self):
         self.indicatorDefine(QsciScintilla.PlainIndicator, 1)
         self.setIndicatorForegroundColor(QColor("red"), 1)
-        
-        
         
         
     def initIndentation(self):
@@ -137,8 +136,8 @@ class PythonEditor(QsciScintilla):
         
         self.setAnnotationDisplay(self.AnnotationIndented)
                 
+        self.setMouseTracking(True)
         
-        self.SendScintilla(self.SCI_AUTOCSETMAXHEIGHT, 7)
         self.SendScintilla(self.SCI_AUTOCSETIGNORECASE , False)
         self.SendScintilla(self.SCI_SETMULTIPLESELECTION, True)
         self.SendScintilla(self.SCI_SETMULTIPASTE, 1)
@@ -332,6 +331,15 @@ class PythonEditor(QsciScintilla):
         
     def getAutoCMaxHeight(self):
             return self.SendScintilla(self.SCI_AUTOCGETMAXHEIGHT)
+            
+            
+    def mouseMoveEvent(self, event):
+        line , index = self.lineIndexFromPoint(event.pos())
+        word = self.wordAtLineIndex(line , index)
+        
+        if len(word) >=1:
+            pass
+            
         
     def keyPressEvent(self, e: QKeyEvent) -> None:
         if self.selectedText():
@@ -387,24 +395,11 @@ class PythonEditor(QsciScintilla):
             elif (
                 e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.text() == "/"
             ):
-
-                start, srow, end, erow = self.getSelection()
-                self.setSelection(start, 0, end, self.lineLength(end) - 1)
-
-                lines = self.selectedText()
-                lines = lines.split("\n")
-
-                finally_ = []
-                for i in lines:
-                    if i.startswith("#"):
-                        finally_.append(i[1:])
-                    else:
-                        finally_.append(f"#{i}")
-
-                self.replaceSelectedText("\n".join(finally_))
-                self.setSelection(start, srow, end, erow)
+                self.commentSelection()
+                return
+                
             else:
-                super().keyPressEvent(e)
+                return super().keyPressEvent(e)
 
         if not self.selectedText():
             
