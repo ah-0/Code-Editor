@@ -12,7 +12,7 @@ class CssEditor(QsciScintilla):
 
         self.setMarginType(0, self.NumberMargin)
         self.setMarginsForegroundColor(QColor("#ff888888"))
-        self.setMarginsBackgroundColor(QColor("#161B21"))
+        self.setMarginsBackgroundColor(QColor("#1e1f22"))
         self.setMarginLineNumbers(0, True)
         self.setMarginsFont(QFont("Consolas", 13))
         self.setMarginWidth(0, "0000")
