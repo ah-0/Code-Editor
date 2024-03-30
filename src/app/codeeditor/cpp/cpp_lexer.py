@@ -11,9 +11,6 @@ class CPP_Lexer(QsciLexerCPP):
         self.setDefaultPaper(QColor("#1e1f22"))
         
         self.setColor(QColor("#abb2bf"))
-        self.setColor(QColor("#D4D4D4"))
-        self.setDefaultColor(QColor("#D4D4D4"))
-
         self.setColor(QColor("#C586C0"), self.PreProcessor)
         self.setColor(QColor("#C586C0"), self.InactivePreProcessor)
 
