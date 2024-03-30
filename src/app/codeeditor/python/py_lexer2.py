@@ -31,7 +31,7 @@ class PythonLexer(QsciLexerPython):
         self.setColor(QColor("#98c379") , QsciLexerPython.TripleDoubleQuotedFString)
         self.setColor(QColor("#C68F55") , QsciLexerPython.ClassName)
         self.setColor(QColor("#61afd1") , QsciLexerPython.FunctionMethodName)
-        self.setColor(QColor("#B799DA") , QsciLexerPython.HighlightedIdentifier)
+        self.setColor(QColor(142,182,255) , QsciLexerPython.HighlightedIdentifier)
         self.setColor(QColor("#98c379") , QsciLexerPython.UnclosedString)
         #self.setColor(QColor("#c678dd") , QsciLexerPython.Operator)
         
@@ -41,9 +41,9 @@ class PythonLexer(QsciLexerPython):
 
     def keywords(self, flag):
         if flag == 1:
-            kws = keyword.kwlist + ["self", "cls"]
+            kws = keyword.kwlist
         elif flag == 2:
-            kws = dir(__builtins__)
+            kws = dir(__builtins__) + ["self"]
         else:
             return None
         return " ".join(kws)

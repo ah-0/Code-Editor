@@ -135,6 +135,17 @@ class MyApp(QMainWindow):
     def init_menubar(self):
 
         self.menubar_ = self.menuBar()
+        setting_btn = QPushButton("", self)
+        setting_btn.setIcon(QIcon("./src/icons/svg/setting.svg"))
+
+        run_btn = QPushButton("", self)
+        run_btn.setIcon(QIcon("./src/icons/svg/run.svg"))
+        
+        setting_btn.clicked.connect(self.open_setting_window)
+        run_btn.clicked.connect(self.run_file)
+        
+        self.menubar_.setCornerWidget(setting_btn, Qt.TopRightCorner)
+        self.menubar_.setCornerWidget(run_btn, Qt.TopRightCorner)
 
         file_menu = self.menubar_.addMenu("&File")
         edit_menu = self.menubar_.addMenu("Edit")
@@ -279,7 +290,14 @@ class MyApp(QMainWindow):
         
         
         event.accept()
+        
+        
+    def run_file(self):
+        pass
 
+
+    def open_setting_window(self):
+        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
