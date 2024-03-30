@@ -33,7 +33,8 @@ class Css_Lexer(QsciLexerCSS):
 		self.setColor(QColor(142,142,142), QsciLexerCSS.Operator)
 		self.setPaper(QColor(33,33,33))
 		self.setDefaultPaper(QColor(33,33,33))
-		
+
+	
 	    self.setPaper(QColor("#1e1f22"))
         self.setFont(QFont("Consolas" , 14))
 	
