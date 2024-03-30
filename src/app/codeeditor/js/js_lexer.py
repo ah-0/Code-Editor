@@ -53,6 +53,6 @@ class Js_lexer(QsciLexerJavaScript):
 		self.setColor(QColor(48,96,160), QsciLexerJavaScript.CommentDocKeyword)
 		
 				
-	    self.setPaper(QColor("#1e1f22"))
-        self.setFont(QFont("Consolas" , 14))
+	        self.setPaper(QColor("#1e1f22"))
+                self.setFont(QFont("Consolas" , 14))
 	
