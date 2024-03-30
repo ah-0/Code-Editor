@@ -120,7 +120,7 @@ class Html_Lexer(QsciLexerHTML):
 		self.setColor(QColor(0,0,255), QsciLexerHTML.XMLEnd)
 		self.setColor(QColor(51,102,255), QsciLexerHTML.SGMLSpecial)
 		
-		self.setPaper(QColor("#1e1f22"))
+	self.setPaper(QColor("#1e1f22"))
 		self.setFont(QFont("Consolas" , 14))
 		
 		
