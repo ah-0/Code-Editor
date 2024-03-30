@@ -53,4 +53,4 @@ class Java_Lexer(QsciLexerJava):
 		self.setColor(QColor(48,96,160), QsciLexerJava.CommentDocKeyword)
 		
 		self.setPaper(QColor("#1e1f22"))
-	    self.setFont(QFont("Consolas" , 14))
+	        self.setFont(QFont("Consolas" , 14))
