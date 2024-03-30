@@ -57,6 +57,6 @@ class CPP_Lexer(QsciLexerCPP):
         self.setColor(QColor("#6A9955"), self.PreProcessorCommentLineDoc)
         self.setColor(QColor("#6A9955"), self.InactivePreProcessorCommentLineDoc)
 
-	    self.setPaper(QColor("#1e1f22"))
+	self.setPaper(QColor("#1e1f22"))
         self.setFont(QFont("Consolas" , 14))
 	
