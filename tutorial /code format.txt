@@ -1,5 +1,6 @@
 python :
 
+ibrahim
 
 black.format_str(code: str, mode)
 code : نمرر الكود الذي نرغب بترتيبه
